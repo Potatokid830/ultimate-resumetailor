@@ -1,5 +1,5 @@
-"""Insert an ID photo (top-right, next to the name). Usage: python3 addphoto.py path/to/photo.jpg
-build.sh calls this when you pass `photo` and profile.json has "photo" set."""
+"""Insert an ID photo (top-right, next to the name). Usage: python addphoto.py path/to/photo.jpg
+build.py calls this when you pass `photo` and profile.json has "photo" set."""
 import os
 import re
 import shutil

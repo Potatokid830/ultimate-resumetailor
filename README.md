@@ -8,7 +8,7 @@
 
 `不编造` · `一页写满` · `按行业翻译经历` · `先写后学 + 速成清单` · `机筛自检 + HR 挑刺` · `⚡ 快投模式`
 
-Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，[安装](#安装)只要把一句话发给你的 AI。
+Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，Windows、macOS、Linux 都支持，[安装](#安装)只要把一句话发给你的 AI。
 
 <p align="center">
   <img src="docs/example_cn.png" width="45%" alt="中文示例(虚构人物)">
@@ -58,13 +58,13 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，[
 1. 点页面上方绿色的 **Code → Download ZIP**，下载后解压，把文件夹名改成 `resume-tailor`。
 2. 把文件夹交给你用的 AI：
    - **Claude.ai / Claude 桌面版**：在 Settings → Capabilities → Skills 上传这个 zip。ChatGPT 等其他应用按 [agentskills.io 名单](https://agentskills.io/clients) 里该应用的 "Setup instructions" 操作。
-   - **Claude Code、Codex、Copilot、Cursor、Gemini CLI 等编程工具**：放进它的 skills 文件夹。Claude Code 是 `~/.claude/skills/`；很多工具也认通用位置 `~/.agents/skills/`；各工具的具体位置见 [agentskills.io 名单](https://agentskills.io/clients) 里的 "Setup instructions"。
+   - **Claude Code、Codex、Copilot、Cursor、Gemini CLI 等编程工具**：放进它的 skills 文件夹。Claude Code 是 `~/.claude/skills/`（Windows 上是 `C:\Users\你的用户名\.claude\skills\`）；很多工具也认通用位置 `~/.agents/skills/`；各工具的具体位置见 [agentskills.io 名单](https://agentskills.io/clients) 里的 "Setup instructions"。
    - **其他 AI**（不支持 skill 的）：把文件夹放在 AI 能读到的地方，对它说"读 `resume-tailor/SKILL.md`，按里面的流程帮我改简历"。
 3. 对 AI 说："用 resume-tailor 帮我改简历"。
 
 ### 第一次用：不用对着空白模版填
 
-第一次使用时，AI 会检查你的电脑还缺什么，征得你同意后帮你装好。然后你只要**把手头的材料一股脑发给它**：旧简历（写得再烂也行）、LinkedIn、实习周报、课程报告、项目文档。它会拆成素材库初稿，每条标好"能写 / 有限制 / 不能写"，你只需逐条确认，再回答几个它追问的细节。如果它有记忆功能，还会把记忆里你提过的经历一起整理进来给你确认。你不需要自己敲任何命令。
+第一次使用时，AI 会检查你的电脑还缺什么（Python，以及 Word / WPS / LibreOffice 其中一个用来转 PDF），征得你同意后帮你装好。然后你只要**把手头的材料一股脑发给它**：旧简历（写得再烂也行）、LinkedIn、实习周报、课程报告、项目文档。它会拆成素材库初稿，每条标好"能写 / 有限制 / 不能写"，你只需逐条确认，再回答几个它追问的细节。如果它有记忆功能，还会把记忆里你提过的经历一起整理进来给你确认。你不需要自己敲任何命令。
 
 > 出 docx / pdf 需要 AI 能在你电脑上（或它自己的沙盒里）运行命令。只能聊天、不能运行命令的 AI 也能走完整个流程（资格核查、选材、改写、HR 挑刺、速查卡、网申纯文本），只是最后要你自己把文字贴进 `assets/` 里的空白模版。
 
@@ -127,7 +127,8 @@ resume-tailor/
 │   ├── template_cn.docx     # 中文空白模版(占位符)
 │   └── template_en.docx     # 英文空白模版(占位符)
 ├── scripts/
-│   ├── build.sh             # 一条命令:docx → pdf → 预览图 → 机筛自检
+│   ├── build.py             # 一条命令:docx → pdf → 预览图 → 机筛自检(Windows / macOS / Linux 通用)
+│   ├── build.sh             # 旧用法的转发脚本
 │   ├── core.py              # 读模版和 profile.json,finish() 写文档属性
 │   ├── helpers_cn.py        # 中文积木:header / section / entry / sub / bullet
 │   ├── helpers_en.py        # 英文积木(Calibri,标题大写)
@@ -160,7 +161,7 @@ Give **resume-tailor** a job description. It picks material from **your entire r
 
 `No fabrication` · `One full page` · `Rewritten for each industry` · `List now, learn fast + crash course` · `ATS check + recruiter critique` · `⚡ Quick mode`
 
-Works with Claude, ChatGPT / Codex, Cursor, GitHub Copilot, Gemini CLI and more. To [install](#install), send one sentence to your AI.
+Works with Claude, ChatGPT / Codex, Cursor, GitHub Copilot, Gemini CLI and more, on Windows, macOS and Linux. To [install](#install), send one sentence to your AI.
 
 The examples above use a fictional person; every school, company and number in them is made up.
 
@@ -206,13 +207,13 @@ It downloads the skill, puts it in the right place, installs Python and a PDF co
 1. Click the green **Code → Download ZIP** button above, unzip it, and rename the folder to `resume-tailor`.
 2. Give the folder to your AI:
    - **Claude.ai / Claude desktop**: upload the zip under Settings → Capabilities → Skills. For ChatGPT and other apps, follow that app's "Setup instructions" on the [client list](https://agentskills.io/clients).
-   - **Claude Code, Codex, Copilot, Cursor, Gemini CLI and other coding agents**: put the folder in the agent's skills folder. For Claude Code that is `~/.claude/skills/`; many agents also read the shared location `~/.agents/skills/`.
+   - **Claude Code, Codex, Copilot, Cursor, Gemini CLI and other coding agents**: put the folder in the agent's skills folder. For Claude Code that is `~/.claude/skills/` (on Windows, `C:\Users\<you>\.claude\skills\`); many agents also read the shared location `~/.agents/skills/`.
    - **Any other AI** without skill support: put the folder somewhere it can read and say "Read `resume-tailor/SKILL.md` and follow it to tailor my resume".
 3. Say: "Use resume-tailor to tailor my resume."
 
 #### First use: no blank template to fill in
 
-On first use the AI checks what your computer is missing and installs it with your permission. Then just **send it everything you have**: old resumes (however rough), your LinkedIn, internship reports, coursework, project documents. It turns them into a draft experience bank, marks each item "OK to use / use with limits / never use", and you only confirm item by item and answer a few follow-up questions. If it has memory, it also pulls in what you've already told it, for you to confirm. You don't need to type any commands yourself.
+On first use the AI checks what your computer is missing (Python, plus Word, WPS or LibreOffice to make the PDF) and installs it with your permission. Then just **send it everything you have**: old resumes (however rough), your LinkedIn, internship reports, coursework, project documents. It turns them into a draft experience bank, marks each item "OK to use / use with limits / never use", and you only confirm item by item and answer a few follow-up questions. If it has memory, it also pulls in what you've already told it, for you to confirm. You don't need to type any commands yourself.
 
 > Producing the docx / pdf requires an AI that can run commands on your computer (or in its own sandbox). A chat-only AI can still run the whole process (eligibility check, selection, rewriting, recruiter critique, cheat sheet, form text); you then paste the text into the blank template in `assets/` yourself.
 

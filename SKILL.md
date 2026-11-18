@@ -21,11 +21,16 @@ description: 按 JD 给用户定制能过机筛（ATS / AI 筛简历）的一页
 用户只负责下载这个文件夹，**其余都由你来做**，不要让用户自己敲命令。第一次用（或出稿前发现缺东西）时：
 
 1. **检查依赖**，缺什么就说清楚要装什么、为什么，**征得用户同意后再装**：
-   - `python3`（必需）：macOS 一般自带；没有时引导用户从 python.org 安装，或用系统包管理器。
-   - `zip` / `unzip`（必需）：macOS、Linux 一般自带。
-   - PyMuPDF（推荐，用来数页数、出预览图、检查 PDF）：`python3 -m pip install --user pymupdf`。
-   - PDF 转换（二选一）：已装 Microsoft Word（macOS）就直接用；否则装 LibreOffice（有 Homebrew 时 `brew install --cask libreoffice`，没有就引导用户到 libreoffice.org 下载）。Claude.ai 的沙盒里一般已有 `soffice`。
-   - 装完跑一次示例，确认能出一页 PDF：在一个工作目录里运行 `bash <skill>/scripts/build.sh <skill>/examples/example_cn.py 示例 cn`。
+   - **先确认系统**（Windows / macOS / Linux），下面的命令按系统选。所有脚本都是 Python，**三个系统都能用，不需要 bash、zip**。
+   - **Python 3.8+**（必需）。下文的 `python` 指本机能用的那个命令：macOS / Linux 一般是 `python3`；Windows 一般是 `python` 或 `py`。
+     - Windows：如果 `python` 打开了 Microsoft Store 或报"找不到"，说明没装。征得同意后用 `winget install Python.Python.3.12` 安装，或引导用户从 python.org 下载，安装时**勾选"Add python.exe to PATH"**，装完重开终端。
+     - macOS：一般自带 `python3`；没有就从 python.org 安装，或 `brew install python`。
+   - PyMuPDF（推荐，用来数页数、出预览图、检查 PDF）：`python -m pip install --user pymupdf`。
+   - PDF 转换（有一个就行）：
+     - Windows：装了 Microsoft Word 就直接用（脚本通过 PowerShell 调用 Word 导出，不弹窗）；只有 WPS 时会尝试用 WPS；都不行就装 LibreOffice（`winget install TheDocumentFoundation.LibreOffice`，或到 libreoffice.org 下载）。
+     - macOS：已装 Microsoft Word 就直接用；否则装 LibreOffice（有 Homebrew 时 `brew install --cask libreoffice`，没有就到 libreoffice.org 下载）。
+     - Linux / Claude.ai 沙盒：用 LibreOffice（`soffice`），沙盒里一般已有。
+   - 装完跑一次示例，确认能出一页 PDF：在一个工作文件夹里运行 `python <skill>/scripts/build.py <skill>/examples/example_cn.py 示例 cn`。
 2. **建 `profile.json`**：按 `profile.example.json` 的字段逐项问用户（没有的字段删掉），写好后给用户确认。旧简历里已有的姓名、电话、邮箱等直接取出来，只问缺的。
 3. **建 `materials.md`（不要让用户对着空白模版填空）**：
    - 先请用户**把手头的材料一股脑发过来**：旧简历（任何版本，写得再烂也行）、LinkedIn 页面、实习周报和总结、课程报告、项目文档、比赛材料、证书截图。什么都没有就让用户口述。
@@ -58,8 +63,8 @@ description: 按 JD 给用户定制能过机筛（ATS / AI 筛简历）的一页
 - 第 0 步从记忆里查到、还没经用户确认的内容，这一版不用；交付时列出来，用户确认后再并入素材库。
 - 第 6–8 步照常：一页写满、机筛自检、HR 挑刺、交付（包括面试速查卡和网申纯文本）。
 - 一次多个 JD（2 个及以上）时：
-  - **一份做完再做下一份**：生成 build 脚本 → 出稿 → 机筛自检 → 写 `.notes.md`，全部完成后才开始下一份。不要并行跑 `build.sh`。
-  - **每份放在自己的子文件夹里**（例：`投递/公司_岗位/`），build 脚本、JD 关键词文件（`jd_公司_岗位.txt`）、docx、pdf、预览图、`.notes.md` 都放在里面，在这个子文件夹里跑 `build.sh`。PDF 默认用 profile 里的同一个文件名，放在同一个文件夹里会互相覆盖。
+  - **一份做完再做下一份**：生成 build 脚本 → 出稿 → 机筛自检 → 写 `.notes.md`，全部完成后才开始下一份。不要并行跑 `build.py`。
+  - **每份放在自己的子文件夹里**（例：`投递/公司_岗位/`），build 脚本、JD 关键词文件（`jd_公司_岗位.txt`）、docx、pdf、预览图、`.notes.md` 都放在里面，在这个子文件夹里跑 `build.py`。PDF 默认用 profile 里的同一个文件名，放在同一个文件夹里会互相覆盖。
   - 同方向的可以共用选材，但 JD 关键词要逐份对齐。
   - **对话里只给精简汇总**，避免回复太长被截断：一张汇总表（公司、岗位、按哪个方向做的、文件夹、资格是否通过、关键词覆盖率、需要用户处理的事），加上每份最多两三行要点。完整的面试速查卡和网申纯文本只写进各自的 `.notes.md`，告诉用户在哪。
   - 中途被打断或出错时，告诉用户做完了哪几份、哪份停在哪一步，下次从那一份接着做。
@@ -85,7 +90,7 @@ description: 按 JD 给用户定制能过机筛（ATS / AI 筛简历）的一页
 5. **技能对齐 JD（先上车后补票）**：按第 2 节规则，把 JD 要求、用户短期能学会的技能写上，**同时给出速成清单**。
 6. **出稿**：用第 3 节的模版和流水线做成一页 docx 和 pdf，**一页写满、底部不留白**。主线经历之外如果还有空间，就补用户真实、相关的经历，并告诉用户补了什么。
 7. **HR 挑刺 + 机筛自检**：
-   - 先跑 `ats_check.py`（build.sh 会自动跑），所有 ❌ 改完，⚠️ 逐条看。
+   - 先跑 `ats_check.py`（build.py 会自动跑），所有 ❌ 改完，⚠️ 逐条看。
    - 再站在招聘方角度对着 JD 挑毛病：JD 关键词有没有覆盖到；第一屏能不能看出匹配度；每条有没有结果和数字；有没有经不起追问的句子；时间线有没有冲突；是不是用了目标行业的语言；每条有没有写到判断和落地，而不是只描述过去（见第 1.5 节）。
 
    - 有旧简历时，把新旧两版并排逐项比：岗位针对性、核心经历含金量、方法论和思考深度、定级信息、排版。**任何一项新版不如旧版，都要改到不输再交付**。
@@ -186,12 +191,12 @@ description: 按 JD 给用户定制能过机筛（ATS / AI 筛简历）的一页
 ### 文件
 - `assets/template_cn.docx`、`assets/template_en.docx`：空白模版，提供页面、字体、样式、项目符号（内容全是占位符，直接用 Word 打开也能手填）。
 - `scripts/helpers_cn.py`、`scripts/helpers_en.py`：简历积木 `header()`、`section()`、`entry()`、`sub()`、`bullet()`、`finish()`。
-- `scripts/build.sh`：一条命令出 docx、pdf、预览图，并跑机筛自检。
+- `scripts/build.py`：一条命令出 docx、pdf、预览图，并跑机筛自检（Windows / macOS / Linux 通用；`build.sh` 只是为旧用法保留的转发脚本）。
 - `scripts/ats_check.py`、`scripts/ats_fix.py`、`scripts/addphoto.py`、`scripts/pdf_tools.py`、`scripts/core.py`。
 - `examples/example_cn.py`、`examples/example_en.py`：虚构人物的完整 build 脚本，参考写法用。
 
 ### 写法
-每投一个岗位，就在工作目录下建一个子文件夹（例 `投递/公司_岗位/`），在里面新建 build 脚本（例 `build_公司_岗位.py`）并在里面跑 `build.sh`。PDF 默认用 profile 里固定的文件名，几份放在同一个文件夹会互相覆盖。
+每投一个岗位，就在工作目录下建一个子文件夹（例 `投递/公司_岗位/`），在里面新建 build 脚本（例 `build_公司_岗位.py`）并在里面跑 `build.py`。PDF 默认用 profile 里固定的文件名，几份放在同一个文件夹会互相覆盖。
 
 ```python
 from helpers_cn import *          # 英文版:from helpers_en import *
@@ -216,13 +221,15 @@ finish(body)
 出文件（在工作目录里跑）：
 
 ```bash
-bash <skill>/scripts/build.sh build_xx.py 张三_简历_XX版 cn photo        # 中文,带照片
-bash <skill>/scripts/build.sh build_xx.py Zhang_San_Resume_XX en         # 英文,不带照片
-PHONE="+65 8000 0000" bash <skill>/scripts/build.sh ...                 # 临时换电话(比如投海外岗位)
-JD=jd_keywords.txt bash <skill>/scripts/build.sh ...                    # 同时检查 JD 关键词覆盖
+python <skill>/scripts/build.py build_xx.py 张三_简历_XX版 cn photo              # 中文,带照片
+python <skill>/scripts/build.py build_xx.py Zhang_San_Resume_XX en               # 英文,不带照片
+python <skill>/scripts/build.py build_xx.py ... --phone "+65 8000 0000"          # 临时换电话(比如投海外岗位)
+python <skill>/scripts/build.py build_xx.py ... --jd jd_公司_岗位.txt            # 同时检查 JD 关键词覆盖
 ```
 
-- PDF 转换：优先 LibreOffice（`soffice`）；macOS 上没有时自动用 Microsoft Word（Word 有沙盒，工作目录放在 ~/Documents 或 ~/Desktop 下最稳）。
+- `python` 换成本机的命令（macOS / Linux 一般是 `python3`，Windows 是 `python` 或 `py`）；Windows 路径用 `\` 或 `/` 都行，含空格的路径加引号。
+- PDF 转换：Windows 依次试 Microsoft Word → WPS → LibreOffice；macOS / Linux 依次试 LibreOffice → Microsoft Word for Mac（Word for Mac 有沙盒，工作目录放在 ~/Documents 或 ~/Desktop 下最稳）。都失败时，让用户用 Word / WPS 打开 docx 另存为 PDF，再单独跑 `python <skill>/scripts/ats_check.py xx.docx xx.pdf`。
+- 文本文件（JD 关键词、profile.json）按 UTF-8 读，Windows 记事本存的带 BOM 文件也能读。
 - 页数、预览图、PDF 文本检查用 PyMuPDF（`pip install pymupdf`）或 poppler。
 - **检查**：页数必须是 **1**；看 `preview_*.png`，底部不能留白，也不能溢出到第 2 页。溢出就删字，留白就补用户真实的内容（`ats_check.py` 在底部空白超过约 2 cm 时会报 ⚠️，这条要当成必须改）。优先补定级信息和与 JD 相关的内容：相关课程、编程语言、竞赛奖项、校园经历。
 - **JD 关键词文件**：每行一个词，`必须:` 开头是硬性要求，同义词用 `/` 隔开（例 `必须:SQL`、`数据分析/data analysis`）。

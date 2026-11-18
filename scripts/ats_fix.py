@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""build.sh 在 build 脚本之后自动调用:
+"""build.py 在 build 脚本之后自动调用:
 - 毕业时间后补"(预计)" / "(Expected)"(读 profile 的 graduation_cn / graduation_en,还没毕业才填)
 - 页边距不小于 1.1 cm(太窄部分系统会裁切)
 """

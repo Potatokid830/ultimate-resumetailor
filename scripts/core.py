@@ -1,6 +1,6 @@
 """Shared plumbing for helpers_cn.py / helpers_en.py.
 
-- Loads the unzipped template from ./un/ (build.sh unzips it there).
+- Loads the unzipped template from ./un/ (build.py unzips it there).
 - Loads the user's profile (name, contact, optional photo) from JSON.
 - Provides finish(body) which writes document.xml and clean docProps.
 
@@ -32,8 +32,8 @@ def _find_profile():
 
 
 PROFILE_PATH = _find_profile()
-P = json.load(open(PROFILE_PATH, encoding='utf-8'))
-# phone override, e.g. PHONE="+65 8000 0000" bash scripts/build.sh ...
+P = json.load(open(PROFILE_PATH, encoding='utf-8-sig'))
+# phone override: build.py --phone "+65 8000 0000" (or env PHONE=...)
 if os.environ.get('PHONE'):
     P['phone'] = os.environ['PHONE']
 

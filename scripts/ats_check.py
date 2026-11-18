@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """简历机筛(ATS / AI 筛简历)自检。
 
-    python3 scripts/ats_check.py 简历.docx [简历.pdf] [--jd jd_keywords.txt]
+    python scripts/ats_check.py 简历.docx [简历.pdf] [--jd jd_keywords.txt]
 
 jd_keywords.txt:每行一个关键词;以"必须:"开头的是必须项,其余是加分项;同义词用 / 隔开(任一命中即算)。
 个人红线词:写在 profile.json 的 "banned_words" 里(例如你确认过"不能这么写"的说法),命中即 ❌。
@@ -17,6 +17,12 @@ import subprocess
 import sys
 import zipfile
 
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 os.environ.setdefault('SKILL_DIR', os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -26,7 +32,7 @@ def load_profile():
     sd = os.environ['SKILL_DIR']
     for c in (os.environ.get('RESUME_PROFILE'), 'profile.json', os.path.join(sd, 'profile.json'), os.path.join(sd, 'profile.example.json')):
         if c and os.path.isfile(c):
-            return json.load(open(c, encoding='utf-8'))
+            return json.load(open(c, encoding='utf-8-sig'))
     return {}
 
 
@@ -214,7 +220,7 @@ if jd:
     src_low = (norm(pdf_txt) if pdf_txt else norm(full)).lower()
     skill_txt = norm('\n'.join(tx for tx, s in zip(texts, sec_of) if '技能' in s or 'SKILL' in s.upper())).lower()
     rows, miss_must, miss_plus, only_skill = [], [], [], []
-    for line in open(jd, encoding='utf-8'):
+    for line in open(jd, encoding='utf-8-sig'):
         line = line.strip()
         if not line or line.startswith('#'): continue
         must = bool(re.match(r'^(必须|must)[:：]', line, re.I))
