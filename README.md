@@ -47,6 +47,20 @@
 
 > 出 docx / pdf 需要 AI 能在你电脑上（或它自己的沙盒里）运行命令。只能聊天、不能运行命令的 AI 也能走完整个流程（资格核查、选材、改写、HR 挑刺），只是最后要你自己把文字贴进 `assets/` 里的空白模版。
 
+## 更新到新版本
+
+最简单：直接对你的 AI 说
+
+> 帮我把 resume-tailor 这个 skill 更新到 https://github.com/Potatokid830/ultimate-resumetailor 的最新版，保留我的 profile.json、materials.md 和照片。
+
+自己更新的话，按当初的安装方式：
+
+- **下载 ZIP 放进文件夹的**（Claude Code、Codex、Cursor 等）：重新 **Code → Download ZIP** 并解压，把新文件复制进旧的 `resume-tailor` 文件夹、覆盖同名文件。新压缩包里不含 `profile.json`、`materials.md` 和照片，所以覆盖是安全的；**不要先删掉整个旧文件夹**，否则个人文件会一起丢。
+- **用 git clone 下载的**：在 skill 文件夹里运行 `git pull`。个人文件不受 git 管理，不会被动到。
+- **在 Claude.ai / 桌面版设置里上传 zip 的**：在 Settings → Capabilities → Skills 里删掉旧版，重新上传新 zip。如果当初把 `materials.md` 打包进了 zip，上传前先把它放进新 zip。
+
+新版本会沿用你原来的 `profile.json` 和 `materials.md`，不需要重新填。
+
 ## 使用流程
 
 对 AI 说："用 resume-tailor 帮我按这个 JD 改简历"，并贴上 JD。它会按顺序：
@@ -138,6 +152,20 @@ The list keeps growing; check the website for the latest. Agents without skill s
 That's it. On first use the AI reads the skill, checks what your computer is missing (Python, a PDF converter and so on), installs it with your permission. If it has memory, it first pulls together what you have already told it about your experience for you to confirm, then interviews you to fill the gaps and build your profile and experience bank. You don't need to type any commands yourself.
 
 > Producing the docx / pdf requires an AI that can run commands on your computer (or in its own sandbox). A chat-only AI can still run the whole process (eligibility check, selection, rewriting, recruiter critique); you then paste the text into the blank template in `assets/` yourself.
+
+### Updating to a new version
+
+Easiest: ask your AI
+
+> Update the resume-tailor skill to the latest version from https://github.com/Potatokid830/ultimate-resumetailor, and keep my profile.json, materials.md and photo.
+
+To update by hand, follow the way you installed it:
+
+- **Downloaded the ZIP into a skills folder** (Claude Code, Codex, Cursor and so on): download and unzip the new ZIP, then copy the new files into your existing `resume-tailor` folder, overwriting files with the same name. The new ZIP doesn't contain `profile.json`, `materials.md` or your photo, so overwriting is safe. **Don't delete the old folder first**, or your personal files go with it.
+- **Cloned with git**: run `git pull` inside the skill folder. Your personal files aren't tracked by git, so they stay untouched.
+- **Uploaded the zip in Claude.ai / desktop settings**: remove the old version under Settings → Capabilities → Skills and upload the new zip. If you had packed `materials.md` into your zip, add it to the new zip before uploading.
+
+New versions keep using your existing `profile.json` and `materials.md`; you don't need to fill them in again.
 
 ### How a session goes
 
