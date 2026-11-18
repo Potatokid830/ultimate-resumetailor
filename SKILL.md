@@ -30,7 +30,7 @@ description: 按 JD 给用户定制能过机筛（ATS / AI 筛简历）的一页
        4. **装完当前终端可能还找不到**：Windows 只在新开的终端里刷新 PATH，所以装完立刻跑 `python` 报"找不到"不代表没装好。按顺序试：`py --version` → 完整路径 `"%LOCALAPPDATA%\Programs\Python\Python312\python.exe" --version`（PowerShell 里写 `& "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe" --version`）→ 让用户重启这个 AI 工具或终端后再试。找到能用的命令后，本次后面都用它（包括 `-m pip install`）。
        5. 都不行（公司电脑禁止安装等）：告诉用户原因，改走不出文件的方式：照常完成选材、改写、HR 挑刺、速查卡和网申纯文本，最后由用户把文字贴进 `assets/` 里的空白模版，用 Word / WPS 另存为 PDF。
      - macOS：一般自带 `python3`；没有就从 python.org 安装，或 `brew install python`。
-   - PyMuPDF（推荐，用来数页数、出预览图、检查 PDF）：`python -m pip install --user pymupdf`。
+   - PyMuPDF（**要装**：页数、底部留白检查、预览图、PDF 文本检查都靠它；没有它只能退回 poppler，很多检查会跳过）：`python -m pip install --user pymupdf`。
    - PDF 转换（有一个就行）：
      - Windows：装了 Microsoft Word 就直接用（脚本通过 PowerShell 调用 Word 导出，不弹窗）；只有 WPS 时会尝试用 WPS；都不行就装 LibreOffice（`winget install -e --id TheDocumentFoundation.LibreOffice --accept-package-agreements --accept-source-agreements`，或到 libreoffice.org 下载；装完不用改 PATH，脚本会到 Program Files 里找）。
      - macOS：已装 Microsoft Word 就直接用；否则装 LibreOffice（有 Homebrew 时 `brew install --cask libreoffice`，没有就到 libreoffice.org 下载）。

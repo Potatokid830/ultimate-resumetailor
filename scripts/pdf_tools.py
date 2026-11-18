@@ -128,6 +128,21 @@ def convert(src, out):
     return False
 
 
+def run_text(cmd):
+    """Run a command and return its output as text, whatever encoding it printed in.
+    poppler on Chinese Windows prints in the ANSI code page (GBK), not UTF-8."""
+    try:
+        raw = subprocess.run(cmd, capture_output=True, timeout=60).stdout or b''
+    except (OSError, subprocess.TimeoutExpired):
+        return ''
+    for enc in ('utf-8', 'mbcs', 'gbk'):
+        try:
+            return raw.decode(enc)
+        except (UnicodeDecodeError, LookupError):
+            pass
+    return raw.decode('latin-1')
+
+
 def _fz():
     try:
         import pymupdf as fz
@@ -144,7 +159,7 @@ def pages(pdf):
     if fz:
         return fz.open(pdf).page_count
     if shutil.which('pdfinfo'):
-        o = subprocess.run(['pdfinfo', pdf], capture_output=True, text=True).stdout
+        o = run_text(['pdfinfo', '-enc', 'UTF-8', pdf])
         m = re.search(r'Pages:\s+(\d+)', o)
         return int(m.group(1)) if m else 0
     return -1

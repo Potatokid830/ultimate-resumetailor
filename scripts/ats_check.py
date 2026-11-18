@@ -186,20 +186,28 @@ def pdf_probe(path):
         fonts = ' '.join(f[3] for pg in d for f in pg.get_fonts())
         return d.page_count, txt, fonts, (d.metadata or {}).get('author', '')
     if shutil.which('pdfinfo'):
-        info = subprocess.run(['pdfinfo', path], capture_output=True, text=True).stdout
+        from pdf_tools import run_text
+        info = run_text(['pdfinfo', '-enc', 'UTF-8', path])
         pg = re.search(r'Pages:\s+(\d+)', info)
+        if not pg:
+            raise RuntimeError('pdfinfo 没有输出页数')
         au = re.search(r'Author:\s+(.*)', info)
-        txt = subprocess.run(['pdftotext', path, '-'], capture_output=True, text=True).stdout
-        fonts = subprocess.run(['pdffonts', path], capture_output=True, text=True).stdout
-        return int(pg.group(1)) if pg else 0, txt, fonts, au.group(1).strip() if au else ''
+        txt = run_text(['pdftotext', '-enc', 'UTF-8', path, '-'])
+        fonts = run_text(['pdffonts', path])
+        return int(pg.group(1)), txt, fonts, au.group(1).strip() if au else ''
     return None
 
 
 pdf_txt = None
 if pdf_path:
-    r = pdf_probe(pdf_path)
+    try:
+        r = pdf_probe(pdf_path)
+    except Exception as e:  # never let the PDF probe crash the whole check
+        r = None
+        W('PDF 检查出错,已跳过(%s: %s)。装 PyMuPDF 最稳:python -m pip install --user pymupdf' % (type(e).__name__, e))
     if r is None:
-        W('没装 PyMuPDF / poppler,跳过 PDF 检查(pip install pymupdf)')
+        if not any(m.startswith('PDF 检查出错') for m in warns):
+            W('没装 PyMuPDF / poppler,跳过 PDF 检查(python -m pip install --user pymupdf)')
     else:
         pages, pdf_txt, fonts, pdf_author = r
         if pages != 1: F('PDF 不是 1 页(%s 页)' % pages)
