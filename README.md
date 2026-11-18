@@ -67,7 +67,7 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 
 ### 第一次用：不用对着空白模版填
 
-第一次使用时，AI 会检查你的电脑还缺什么（Python，以及 Word / WPS / LibreOffice 其中一个用来转 PDF），征得你同意后帮你装好。然后你只要**把手头的材料一股脑发给它**：旧简历（写得再烂也行）、LinkedIn、实习周报、课程报告、项目文档。它会拆成素材库初稿，每条标好"能写 / 有限制 / 不能写"，你只需逐条确认，再回答几个它追问的细节。只想先体检一份简历的话，这一步可以跳过。如果它有记忆功能，还会把记忆里你提过的经历一起整理进来给你确认。你不需要自己敲任何命令。
+第一次使用时，AI 会检查你的电脑还缺什么（Python，以及 Word / WPS / LibreOffice 其中一个用来转 PDF），征得你同意后帮你装好。然后你只要**把手头的材料一股脑发给它**：旧简历（写得再烂也行）、LinkedIn、实习周报、课程报告、项目文档。它会全部读一遍、拆成素材库初稿。你带着 JD 来的话，它只让你确认这份 JD 要用的那几条（一般不超过 10 条），其余先标成"待确认"存着，等哪份 JD 用到再问你；只想建库的话才逐条确认。只想先体检一份简历的话，这一步可以跳过。如果它有记忆功能，还会把记忆里你提过的经历一起整理进来给你确认。你不需要自己敲任何命令。
 
 > 出 docx / pdf 需要 AI 能在你电脑上（或它自己的沙盒里）运行命令。只能聊天、不能运行命令的 AI 也能走完整个流程（资格核查、选材、改写、HR 挑刺、速查卡、网申纯文本），只是最后要你自己把文字贴进 `assets/` 里的空白模版。
 
@@ -108,7 +108,7 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 完整流程：
 
 1. **资格核查**：届别、地点、到岗时间、签证、成绩门槛、投递数量限制，并查你的投递记录：这家公司有没有正在走的流程、有没有冷却期。有不过的先告诉你。
-2. **回顾全部经历**：把 `materials.md` 整份过一遍，按 JD 挑出最相关的。如果你的 AI 有记忆功能，它会先查记忆里有没有素材库还没收录的经历、数字或更正，列给你确认后再并入素材库。
+2. **回顾全部经历**：把 `materials.md` 整份过一遍，按 JD 挑出最相关的。整份读、按需确认：只有这份 JD 要用、还没确认过的条目才问你。如果你的 AI 有记忆功能，它也会查记忆里有没有素材库还没收录的经历、数字或更正，这份 JD 要用的给你确认，其余存成待确认。
 3. **先问再写**：列出"放哪些、每段写什么角度、哪些不放及原因"，等你确认（快投模式跳过）。
 4. **缺细节就追问**：只有你知道的数字和反馈，直接问你（快投模式不问，缺的不写，交付时列出来）。
 5. **技能对齐 JD**：短期能学会的先写上，附速成清单。
@@ -221,7 +221,7 @@ It downloads the skill, puts it in the right place, installs Python and a PDF co
 
 #### First use: no blank template to fill in
 
-On first use the AI checks what your computer is missing (Python, plus Word, WPS or LibreOffice to make the PDF) and installs it with your permission. Then just **send it everything you have**: old resumes (however rough), your LinkedIn, internship reports, coursework, project documents. It turns them into a draft experience bank, marks each item "OK to use / use with limits / never use", and you only confirm item by item and answer a few follow-up questions. If you only want a check-up first, you can skip this. If it has memory, it also pulls in what you've already told it, for you to confirm. You don't need to type any commands yourself.
+On first use the AI checks what your computer is missing (Python, plus Word, WPS or LibreOffice to make the PDF) and installs it with your permission. Then just **send it everything you have**: old resumes (however rough), your LinkedIn, internship reports, coursework, project documents. It reads everything and turns it into a draft experience bank. If you came with a JD, you only confirm the items that JD needs (usually no more than 10); the rest are saved as "to confirm" and asked about when a later JD needs them. Only if you just want to build the bank does it go through every item. If you only want a check-up first, you can skip this. If it has memory, it also pulls in what you've already told it, for you to confirm. You don't need to type any commands yourself.
 
 > Producing the docx / pdf requires an AI that can run commands on your computer (or in its own sandbox). A chat-only AI can still run the whole process (eligibility check, selection, rewriting, recruiter critique, cheat sheet, form text); you then paste the text into the blank template in `assets/` yourself.
 
@@ -262,7 +262,7 @@ Say "Use resume-tailor to tailor my resume for this JD" and paste the job descri
 The full process:
 
 1. **Checks eligibility**: graduation year, location, start date and duration, visa, GPA cut-offs, application limits, plus your application log: any process already running at this company, or a cooling-off period. Anything that fails is raised first.
-2. **Reviews your whole experience bank** in `materials.md` and picks what fits the JD best. If your AI has memory, it first checks memory for experiences, numbers or corrections the bank is missing, shows them to you, and adds them only after you confirm.
+2. **Reviews your whole experience bank** in `materials.md` and picks what fits the JD best. It reads everything but only asks about unconfirmed items this JD needs. If your AI has memory, it also checks memory for experiences, numbers or corrections the bank is missing; the ones this JD needs go to you for confirmation, the rest are saved as "to confirm".
 3. **Asks before writing**: lists what goes in, the angle for each item, and what stays out and why, then waits for your OK (skipped in quick mode).
 4. **Asks for missing details**: numbers and feedback only you know; it never guesses (in quick mode it leaves them out and lists them at delivery).
 5. **Aligns skills with the JD**: adds skills you can learn quickly, each with a crash-course plan.
