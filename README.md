@@ -1,8 +1,14 @@
-# resume-tailor · 按 JD 定制一页简历的 AI Agent Skill
+# resume-tailor · 按 JD 定制一页简历的 AI Skill
 
 [English](#english) · 中文
 
-一个简历定制 skill，采用开放的 [Agent Skills](https://agentskills.io) 格式，Claude、ChatGPT / Codex、GitHub Copilot、Cursor、Gemini CLI 等都能用：你给一份 JD，它帮你从**自己的全部真实经历**里挑材料，按目标行业的逻辑改写，做成**一页中文或英文简历**（docx + pdf），并在交付前跑一遍**机筛（ATS / AI 筛简历）自检**和**HR 挑刺**。
+**海投几十家没回音？用 AI 改简历，满篇"赋能、抓手"，面试一问就露馅？**
+
+把 JD 丢给它：它从你**全部的真实经历**里重新挑材料，用目标行业的语言重写，做成**刚好一页**的 Word + PDF，交付前先过一遍机筛（ATS / AI 筛简历）自检和 HR 挑刺。每一版还附**面试速查卡**和**网申纯文本**，投完不忘写过什么，填网申表直接复制。
+
+`不编造` · `一页写满` · `按行业翻译经历` · `先写后学 + 速成清单` · `机筛自检 + HR 挑刺` · `⚡ 快投模式`
+
+Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，[安装](#安装)只要把一句话发给你的 AI。
 
 <p align="center">
   <img src="docs/example_cn.png" width="45%" alt="中文示例(虚构人物)">
@@ -12,15 +18,55 @@
 
 ## 和"让 AI 帮我改简历"有什么不一样
 
-| 普通 AI 改简历 | resume-tailor |
+| ❌ 普通 AI 改简历 | ✅ resume-tailor |
 |---|---|
 | 只看你这次贴进来的那版简历 | 先把你的**全部经历素材库**过一遍，按 JD 重新选材；AI 有记忆时，会把记忆里的新经历经你确认后补进素材库 |
 | 拿到就写，缺数字就编一个 | **先问再写**：先列"放什么、不放什么、为什么"，你确认后才动手；缺细节就追问，不猜 |
-| 润色措辞，"负责""协助""参与" | **按目标行业翻译经历**：分析 → 判断 → 建议 → 结果，用券商 / 互联网 / 咨询各自的语言写 |
+| 润色措辞，"负责""协助""参与" | **按目标行业翻译经历**：分析 → 判断 → 建议 → 结果，用券商 / 互联网 / 咨询各自的语言写（见下面的例子） |
 | 要么不敢写 JD 技能，要么乱写"精通" | **先写后学**：只写 1 天到 1 周能上手的技能，用词实诚，并附**速成清单**（学习路线、练手项目、面试题） |
 | 包装和编造没有边界 | 明确的**红线**：GPA、经历、结果、证书必须真实；你标过 ❌ 的内容任何版本都不写 |
 | 不在乎排版 | 固定模版，**一页写满**，不溢出、不留白 |
 | 交付就结束 | 先查**资格**（届别、地点、到岗时间、签证），交付前跑 **ATS 自检** + **JD 关键词覆盖**，再站在 HR 角度挑刺 |
+| 投了十几个版本，面试时忘了这家写的是什么 | 每版附**面试速查卡**：写了哪些数字、依据是什么、结论怎么来的、新技能怎么答 |
+| 网申还要一格一格从 PDF 里复制 | 每版附**网申纯文本**：按北森、Moka、Workday 等表单的字段排好，日期统一，直接粘贴 |
+| 每投一家都要聊好几轮 | **⚡ 快投模式**：同方向已经精修过一版后，说"快投"就直接出稿，取舍在交付时说明 |
+
+## 同一段经历，投不同岗位怎么写
+
+素材库里的一段真实经历（虚构示例）：*在券商研究所互联网传媒组实习，跟踪 8 家平台 20 个季度的月活和广告收入，写了短视频广告行业报告的一章。*
+
+| | 写法 |
+|---|---|
+| ❌ 普通 AI | 负责行业研究工作，协助撰写行业报告，赋能团队决策，大幅提升工作效率。 |
+| ✅ 投券商 / 投研 | 搭建 8 家平台、20 个季度的月活与广告收入跟踪表，发现某平台广告收入增速连续两个季度低于用户增速，提示商业化效率下滑，支持组内调低盈利预测。 |
+| ✅ 投互联网商分 / 战略 | 拆解短视频平台广告变现链路（日活 × 广告加载率 × 单价），判断信息流广告增速将放缓、本地生活佣金成为新增量，观点被组长采纳进对外路演材料。 |
+
+两版的数字和结论都来自同一段经历的真实细节，只是换成了对方行业看重的逻辑：券商看**判断和预测**，互联网看**变现和增长**。素材库里没有的数字和结论，它会先问你，不会替你编。
+
+## 安装
+
+### ⚡ 最省事：把这句话发给你的 AI（推荐）
+
+适用于能在你电脑上运行命令的 AI：Claude Code、Codex、Cursor、GitHub Copilot、Gemini CLI 等。
+
+> 帮我安装这个 skill：https://github.com/Potatokid830/ultimate-resumetailor 。把它下载到你的 skills 文件夹里，文件夹命名为 resume-tailor，装好它需要的依赖，然后用它帮我建简历素材库。
+
+它会自己下载、放到正确的位置、装好 Python 和 PDF 转换工具（装之前会问你），然后开始帮你建素材库。
+
+### 手动安装
+
+1. 点页面上方绿色的 **Code → Download ZIP**，下载后解压，把文件夹名改成 `resume-tailor`。
+2. 把文件夹交给你用的 AI：
+   - **Claude.ai / Claude 桌面版**：在 Settings → Capabilities → Skills 上传这个 zip。ChatGPT 等其他应用按 [agentskills.io 名单](https://agentskills.io/clients) 里该应用的 "Setup instructions" 操作。
+   - **Claude Code、Codex、Copilot、Cursor、Gemini CLI 等编程工具**：放进它的 skills 文件夹。Claude Code 是 `~/.claude/skills/`；很多工具也认通用位置 `~/.agents/skills/`；各工具的具体位置见 [agentskills.io 名单](https://agentskills.io/clients) 里的 "Setup instructions"。
+   - **其他 AI**（不支持 skill 的）：把文件夹放在 AI 能读到的地方，对它说"读 `resume-tailor/SKILL.md`，按里面的流程帮我改简历"。
+3. 对 AI 说："用 resume-tailor 帮我改简历"。
+
+### 第一次用：不用对着空白模版填
+
+第一次使用时，AI 会检查你的电脑还缺什么，征得你同意后帮你装好。然后你只要**把手头的材料一股脑发给它**：旧简历（写得再烂也行）、LinkedIn、实习周报、课程报告、项目文档。它会拆成素材库初稿，每条标好"能写 / 有限制 / 不能写"，你只需逐条确认，再回答几个它追问的细节。如果它有记忆功能，还会把记忆里你提过的经历一起整理进来给你确认。你不需要自己敲任何命令。
+
+> 出 docx / pdf 需要 AI 能在你电脑上（或它自己的沙盒里）运行命令。只能聊天、不能运行命令的 AI 也能走完整个流程（资格核查、选材、改写、HR 挑刺、速查卡、网申纯文本），只是最后要你自己把文字贴进 `assets/` 里的空白模版。
 
 ## 支持哪些 AI 工具
 
@@ -32,20 +78,7 @@
 - **编程工具**：Cursor、TRAE、Kiro、Roo Code、JetBrains Junie、Amp、OpenCode、Goose、OpenHands、Factory、Tabnine 等
 - **Google Gemini CLI**、**Mistral Vibe**、**Letta**、**OpenClaw**
 
-名单在持续增加，以官网为准。不在名单上的 AI 也能用，见下面"其他 AI"。
-
-## 安装
-
-1. 点页面上方绿色的 **Code → Download ZIP**，下载后解压，把文件夹名改成 `resume-tailor`。
-2. 把文件夹交给你用的 AI：
-   - **Claude.ai / Claude 桌面版**：在 Settings → Capabilities → Skills 上传这个 zip。ChatGPT 等其他应用按 [agentskills.io 名单](https://agentskills.io/clients) 里该应用的 "Setup instructions" 操作。
-   - **Claude Code、Codex、Copilot、Cursor、Gemini CLI 等编程工具**：放进它的 skills 文件夹。Claude Code 是 `~/.claude/skills/`；很多工具也认通用位置 `~/.agents/skills/`；各工具的具体位置见 [agentskills.io 名单](https://agentskills.io/clients) 里的 "Setup instructions"。不确定的话，直接对 AI 说"把这个文件夹安装成 skill"，让它帮你放。
-   - **其他 AI**（不支持 skill 的）：把文件夹放在 AI 能读到的地方，对它说"读 `resume-tailor/SKILL.md`，按里面的流程帮我改简历"。
-3. 对 AI 说："用 resume-tailor 帮我改简历"。
-
-就这样。第一次使用时，AI 会读完 skill，检查你的电脑还缺什么（Python、PDF 转换工具等），征得你同意后帮你装好。如果它有记忆功能，会先把记忆里你提过的经历整理出来给你确认，再一段段问你补全，帮你建好个人信息和素材库。你不需要自己敲任何命令。
-
-> 出 docx / pdf 需要 AI 能在你电脑上（或它自己的沙盒里）运行命令。只能聊天、不能运行命令的 AI 也能走完整个流程（资格核查、选材、改写、HR 挑刺），只是最后要你自己把文字贴进 `assets/` 里的空白模版。
+名单在持续增加，以官网为准。不在名单上的 AI 也能用，见上面手动安装里的"其他 AI"。
 
 ## 更新到新版本
 
@@ -63,22 +96,31 @@
 
 ## 使用流程
 
-对 AI 说："用 resume-tailor 帮我按这个 JD 改简历"，并贴上 JD。它会按顺序：
+对 AI 说："用 resume-tailor 帮我按这个 JD 改简历"，并贴上 JD。有两种模式：
+
+- **精修模式**（默认）：第一次投某个方向、冲刺最想去的公司时用。选材和缺的细节都会先问你。
+- **⚡ 快投模式**：说"快投""海投""直接出稿"，或一次贴好几个 JD。不再等你确认选材，直接按素材库出稿，交付时说明自动做了哪些取舍。它只用你标了 ✅ 的内容，不编数字、不加你没同意过的新技能；资格核查照做，不过的会单独停下来问你。建议同一个方向先精修一版，之后同类岗位用快投。
+
+完整流程：
 
 1. **资格核查**：届别、地点、到岗时间、签证、成绩门槛、投递数量限制。有不过的先告诉你。
 2. **回顾全部经历**：把 `materials.md` 整份过一遍，按 JD 挑出最相关的。如果你的 AI 有记忆功能，它会先查记忆里有没有素材库还没收录的经历、数字或更正，列给你确认后再并入素材库。
-3. **先问再写**：列出"放哪些、每段写什么角度、哪些不放及原因"，等你确认。
-4. **缺细节就追问**：只有你知道的数字和反馈，直接问你。
+3. **先问再写**：列出"放哪些、每段写什么角度、哪些不放及原因"，等你确认（快投模式跳过）。
+4. **缺细节就追问**：只有你知道的数字和反馈，直接问你（快投模式不问，缺的不写，交付时列出来）。
 5. **技能对齐 JD**：短期能学会的先写上，附速成清单。
 6. **出稿**：一页 docx + pdf，一页写满。
 7. **HR 挑刺 + 机筛自检**：`ats_check.py` 检查板块标题、联系方式、字号、页边距、表格/文本框、文档属性、PDF 可解析性和 JD 关键词覆盖。
-8. **交付**：附文件，并说明选了什么、没选什么、哪些技能要补、能不能拿面试的坦白评价。
+8. **交付**：
+   - docx + pdf，并说明选了什么、没选什么、哪些技能要补、能不能拿面试的坦白评价
+   - **面试速查卡**：这一版写的每个数字和依据、每个结论是怎么分析出来的、"先写后学"技能怎么如实回答、和其他版本差在哪
+   - **网申纯文本**：按网申表字段排好的教育、经历、项目、技能，日期统一成 `2025-07` 格式，没有项目符号和粗体，直接粘贴
+   - 速查卡和网申纯文本会同时存成和简历同名的 `.notes.md`，以后接到面试电话翻出来就行
 
 ## 目录结构
 
 ```
 resume-tailor/
-├── SKILL.md                 # skill 本体:流程、包装与编造的边界、行业翻译、先写后学、模版规则
+├── SKILL.md                 # skill 本体:流程、两种模式、包装与编造的边界、行业翻译、先写后学、模版规则
 ├── profile.example.json     # 个人信息配置示例(虚构)→ 复制成 profile.json
 ├── materials.example.md     # 经历素材库模版 + 填写说明 → 复制成 materials.md
 ├── assets/
@@ -102,7 +144,7 @@ resume-tailor/
 
 ## 隐私
 
-你的 `profile.json`、`materials.md`、照片和生成的简历都在 `.gitignore` 里。个人内容只放这两份文件，不要写进 `SKILL.md`，这样 skill 可以放心更新和分享。
+你的 `profile.json`、`materials.md`、照片、生成的简历和 `.notes.md` 都在 `.gitignore` 里。个人内容只放这两份文件，不要写进 `SKILL.md`，这样 skill 可以放心更新和分享。
 
 ## License
 
@@ -112,25 +154,71 @@ resume-tailor/
 
 ## English
 
-**resume-tailor** is a resume-tailoring skill in the open [Agent Skills](https://agentskills.io) format. Give it a job description and it picks material from **your entire real experience**, rewrites it in the logic of the target industry, and produces a **one-page resume in English or Chinese** (docx + pdf). Before handing it over, it runs an **ATS / AI-screening self-check** and critiques the draft the way a recruiter would.
+**Sent out dozens of applications and heard nothing back? Asked an AI to fix your resume and got buzzwords that fall apart the moment an interviewer asks a follow-up?**
+
+Give **resume-tailor** a job description. It picks material from **your entire real experience**, rewrites it in the language of the target industry, and builds a resume that fills **exactly one page** (Word + PDF). Before handing it over, it runs an ATS / AI-screening self-check and critiques the draft the way a recruiter would. Every version also comes with an **interview cheat sheet** and **plain text for online application forms**, so you remember what you sent and can paste straight into the form.
+
+`No fabrication` · `One full page` · `Rewritten for each industry` · `List now, learn fast + crash course` · `ATS check + recruiter critique` · `⚡ Quick mode`
+
+Works with Claude, ChatGPT / Codex, Cursor, GitHub Copilot, Gemini CLI and more. To [install](#install), send one sentence to your AI.
 
 The examples above use a fictional person; every school, company and number in them is made up.
 
 ### How it differs from "AI, polish my resume"
 
-| Typical AI resume edit | resume-tailor |
+| ❌ Typical AI resume edit | ✅ resume-tailor |
 |---|---|
 | Only looks at the resume you pasted this time | Reviews your **whole experience bank** (`materials.md`) and re-selects for each JD; if your AI has memory, new facts from memory are added to the bank after you confirm |
 | Writes straight away and invents numbers it doesn't have | **Asks before writing**: proposes what goes in, what stays out and why, and waits for your OK; asks for missing details instead of guessing |
-| Polishes wording ("responsible for", "assisted with") | **Translates each experience into the target industry's logic**: analysis → judgement → recommendation → result, in the language of banking, tech, consulting and so on |
+| Polishes wording ("responsible for", "assisted with") | **Translates each experience into the target industry's logic**: analysis → judgement → recommendation → result, in the language of banking, tech, consulting and so on (example below) |
 | Either skips JD skills you lack or claims "expert" | **List now, learn fast**: only skills you can pick up in a day to a week, worded honestly ("familiar with"), each with a **crash-course plan** (learning route, small portfolio project, likely interview questions) |
 | No line between framing and fabrication | Clear **red lines**: grades, roles, results and certificates must be real; anything you mark ❌ never appears in any version |
 | Ignores layout | Fixed template, **one full page**: no overflow, no empty space at the bottom |
 | Done once the text is written | Checks **eligibility** first (graduation year, location, start date, visa), then runs the **ATS self-check** and **JD keyword coverage**, then a recruiter-style critique |
+| Fifteen versions later, you can't remember what you told this company | Each version comes with an **interview cheat sheet**: every number and where it came from, how each conclusion was reached, how to answer honestly about new skills |
+| Online forms mean copying from your PDF box by box | Each version comes with **form-ready plain text** laid out by the usual fields (Workday, company career sites and so on), with consistent dates and no bullets |
+| Several rounds of back-and-forth for every application | **⚡ Quick mode**: once you have polished one version for a direction, say "quick mode" and it builds straight away, explaining its choices at delivery |
+
+### One experience, written for two different jobs
+
+A real experience from the bank (fictional example): *intern in a brokerage research team covering internet and media; tracked monthly users and ad revenue for 8 platforms over 20 quarters; wrote one chapter of a short-video advertising report.*
+
+| | Bullet |
+|---|---|
+| ❌ Typical AI | Responsible for industry research, assisted with industry reports, empowered team decision-making and greatly improved efficiency. |
+| ✅ For equity research / banking | Built a tracker of monthly users and ad revenue for 8 platforms over 20 quarters; flagged one platform whose ad revenue grew slower than its user base for two straight quarters, supporting the team's cut to its earnings forecast. |
+| ✅ For tech strategy / business analysis | Broke down short-video ad monetisation (DAU × ad load × price); concluded feed-ad growth would slow and local-services commission would be the next driver, a view the team lead adopted for client roadshow materials. |
+
+Both versions use the same real numbers and conclusions; only the logic changes to what each industry values: research cares about **calls and forecasts**, tech cares about **monetisation and growth**. If a number or conclusion isn't in your bank, it asks you instead of making one up.
+
+### Install
+
+#### ⚡ Easiest: send this to your AI (recommended)
+
+For AIs that can run commands on your computer: Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI and others.
+
+> Install this skill for me: https://github.com/Potatokid830/ultimate-resumetailor. Download it into your skills folder as a folder named resume-tailor, install whatever it needs, then use it to help me build my resume experience bank.
+
+It downloads the skill, puts it in the right place, installs Python and a PDF converter (asking you first), and starts building your experience bank.
+
+#### Manual install
+
+1. Click the green **Code → Download ZIP** button above, unzip it, and rename the folder to `resume-tailor`.
+2. Give the folder to your AI:
+   - **Claude.ai / Claude desktop**: upload the zip under Settings → Capabilities → Skills. For ChatGPT and other apps, follow that app's "Setup instructions" on the [client list](https://agentskills.io/clients).
+   - **Claude Code, Codex, Copilot, Cursor, Gemini CLI and other coding agents**: put the folder in the agent's skills folder. For Claude Code that is `~/.claude/skills/`; many agents also read the shared location `~/.agents/skills/`.
+   - **Any other AI** without skill support: put the folder somewhere it can read and say "Read `resume-tailor/SKILL.md` and follow it to tailor my resume".
+3. Say: "Use resume-tailor to tailor my resume."
+
+#### First use: no blank template to fill in
+
+On first use the AI checks what your computer is missing and installs it with your permission. Then just **send it everything you have**: old resumes (however rough), your LinkedIn, internship reports, coursework, project documents. It turns them into a draft experience bank, marks each item "OK to use / use with limits / never use", and you only confirm item by item and answer a few follow-up questions. If it has memory, it also pulls in what you've already told it, for you to confirm. You don't need to type any commands yourself.
+
+> Producing the docx / pdf requires an AI that can run commands on your computer (or in its own sandbox). A chat-only AI can still run the whole process (eligibility check, selection, rewriting, recruiter critique, cheat sheet, form text); you then paste the text into the blank template in `assets/` yourself.
 
 ### Supported AI tools
 
-Any agent that supports the Agent Skills format can use it. According to the [official client list](https://agentskills.io/clients), that includes:
+Any agent that supports the open [Agent Skills](https://agentskills.io) format (a folder with `SKILL.md` and scripts) can use it. According to the [official client list](https://agentskills.io/clients), that includes:
 
 - **Claude**: Claude.ai, Claude desktop, Claude Code
 - **OpenAI**: ChatGPT, Codex
@@ -138,20 +226,7 @@ Any agent that supports the Agent Skills format can use it. According to the [of
 - **Coding agents**: Cursor, TRAE, Kiro, Roo Code, JetBrains Junie, Amp, OpenCode, Goose, OpenHands, Factory, Tabnine and more
 - **Others**: Google Gemini CLI, Mistral Vibe, Letta, OpenClaw
 
-The list keeps growing; check the website for the latest. Agents without skill support can still use it (see step 2 below).
-
-### Install
-
-1. Click the green **Code → Download ZIP** button above, unzip it, and rename the folder to `resume-tailor`.
-2. Give the folder to your AI:
-   - **Claude.ai / Claude desktop**: upload the zip under Settings → Capabilities → Skills. For ChatGPT and other apps, follow that app's "Setup instructions" on the [client list](https://agentskills.io/clients).
-   - **Claude Code, Codex, Copilot, Cursor, Gemini CLI and other coding agents**: put the folder in the agent's skills folder. For Claude Code that is `~/.claude/skills/`; many agents also read the shared location `~/.agents/skills/`. If you're not sure, just ask the agent to "install this folder as a skill".
-   - **Any other AI** without skill support: put the folder somewhere it can read and say "Read `resume-tailor/SKILL.md` and follow it to tailor my resume".
-3. Say: "Use resume-tailor to tailor my resume."
-
-That's it. On first use the AI reads the skill, checks what your computer is missing (Python, a PDF converter and so on), installs it with your permission. If it has memory, it first pulls together what you have already told it about your experience for you to confirm, then interviews you to fill the gaps and build your profile and experience bank. You don't need to type any commands yourself.
-
-> Producing the docx / pdf requires an AI that can run commands on your computer (or in its own sandbox). A chat-only AI can still run the whole process (eligibility check, selection, rewriting, recruiter critique); you then paste the text into the blank template in `assets/` yourself.
+The list keeps growing; check the website for the latest. Agents without skill support can still use it (see "Any other AI" under Manual install).
 
 ### Updating to a new version
 
@@ -169,20 +244,29 @@ New versions keep using your existing `profile.json` and `materials.md`; you don
 
 ### How a session goes
 
-Say "Use resume-tailor to tailor my resume for this JD" and paste the job description. The AI then:
+Say "Use resume-tailor to tailor my resume for this JD" and paste the job description. There are two modes:
+
+- **Polish mode** (default): for the first application in a direction or a company you really want. It asks you about selection and missing details first.
+- **⚡ Quick mode**: say "quick mode", "mass apply" or "just build it", or paste several JDs at once. It skips waiting for your OK on selection, builds from your bank, and explains its choices at delivery. It only uses items you marked ✅, never invents numbers and never adds new skills you haven't approved; the eligibility check still runs, and any JD that fails it is paused for you. Polish one version per direction first, then use quick mode for similar roles.
+
+The full process:
 
 1. **Checks eligibility**: graduation year, location, start date and duration, visa, GPA cut-offs, application limits. Anything that fails is raised first.
 2. **Reviews your whole experience bank** in `materials.md` and picks what fits the JD best. If your AI has memory, it first checks memory for experiences, numbers or corrections the bank is missing, shows them to you, and adds them only after you confirm.
-3. **Asks before writing**: lists what goes in, the angle for each item, and what stays out and why, then waits for your OK.
-4. **Asks for missing details**: numbers and feedback only you know; it never guesses.
+3. **Asks before writing**: lists what goes in, the angle for each item, and what stays out and why, then waits for your OK (skipped in quick mode).
+4. **Asks for missing details**: numbers and feedback only you know; it never guesses (in quick mode it leaves them out and lists them at delivery).
 5. **Aligns skills with the JD**: adds skills you can learn quickly, each with a crash-course plan.
 6. **Builds the resume**: one full page, docx + pdf.
 7. **Recruiter critique + ATS self-check**: `ats_check.py` checks section headings, contact details, font sizes, margins, tables/text boxes, document properties, PDF text extraction and JD keyword coverage.
-8. **Delivers** the files with a short note: what was included, what was left out, which skills to learn, and an honest view of your interview chances.
+8. **Delivers**:
+   - docx + pdf, with what was included, what was left out, which skills to learn, and an honest view of your interview chances
+   - **Interview cheat sheet**: every number in this version and its basis, how each conclusion was reached, honest answers for "list now, learn fast" skills, and how this version differs from your others
+   - **Form-ready plain text**: education, experience, projects and skills laid out by the usual form fields, dates as `2025-07`, no bullets or bold, ready to paste
+   - The cheat sheet and form text are also saved next to the resume as `<file name>.notes.md`, so you can pull them up when an interviewer calls
 
 ### Your data
 
-Your personal details live in `profile.json` (name, phone, email, links, optional photo) and your experiences in `materials.md`. Both files, your photo and every generated resume are in `.gitignore`, so they are never committed. Keep personal content out of `SKILL.md`, so the skill itself can be updated and shared safely.
+Your personal details live in `profile.json` (name, phone, email, links, optional photo) and your experiences in `materials.md`. Both files, your photo, every generated resume and the `.notes.md` files are in `.gitignore`, so they are never committed. Keep personal content out of `SKILL.md`, so the skill itself can be updated and shared safely.
 
 ### Folder structure
 

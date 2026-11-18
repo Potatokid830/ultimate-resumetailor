@@ -12,6 +12,7 @@ out/
 !docs/*.pdf
 preview_*.png
 /*.docx
+*.notes.md
 ~$*.docx
 __pycache__/
 .DS_Store
