@@ -1,0 +1,17 @@
+# your personal data — never commit
+profile.json
+materials.md
+photo.*
+!examples/photo_example.jpg
+
+# build outputs / scratch
+un/
+_try/
+out/
+*.pdf
+!docs/*.pdf
+preview_*.png
+/*.docx
+~$*.docx
+__pycache__/
+.DS_Store

@@ -1,0 +1,20 @@
+{
+  "_说明": "虚构示例人物。复制成 profile.json 后改成你自己的信息;profile.json 已在 .gitignore 里,不会被提交。没有的字段删掉或留空即可。",
+  "name_cn": "李明远",
+  "name_en": "Mingyuan Li",
+  "display_name_cn": "李明远  Alex Li",
+  "display_name_en": "Mingyuan (Alex) Li",
+  "author": "Alex Li",
+  "location_cn": "现居上海",
+  "location_en": "Shanghai, China",
+  "phone": "+86 138 0000 0000",
+  "email": "alex.li@example.com",
+  "linkedin": "linkedin.com/in/alex-li-example",
+  "website": "alexli.example.com",
+  "photo": "examples/photo_example.jpg",
+  "graduation_cn": "2027.06",
+  "graduation_en": "Jun 2027",
+  "pdf_name_cn": "李明远_简历",
+  "pdf_name_en": "Mingyuan_Li_Resume",
+  "banned_words": ["负责客户关系", "CFA candidate"]
+}
