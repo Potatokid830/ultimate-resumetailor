@@ -14,7 +14,7 @@
 
 | 普通 AI 改简历 | resume-tailor |
 |---|---|
-| 只看你这次贴进来的那版简历 | 先把你的**全部经历素材库**过一遍，按 JD 重新选材 |
+| 只看你这次贴进来的那版简历 | 先把你的**全部经历素材库**过一遍，按 JD 重新选材；AI 有记忆时，会把记忆里的新经历经你确认后补进素材库 |
 | 拿到就写，缺数字就编一个 | **先问再写**：先列"放什么、不放什么、为什么"，你确认后才动手；缺细节就追问，不猜 |
 | 润色措辞，"负责""协助""参与" | **按目标行业翻译经历**：分析 → 判断 → 建议 → 结果，用券商 / 互联网 / 咨询各自的语言写 |
 | 要么不敢写 JD 技能，要么乱写"精通" | **先写后学**：只写 1 天到 1 周能上手的技能，用词实诚，并附**速成清单**（学习路线、练手项目、面试题） |
@@ -43,7 +43,7 @@
    - **其他 AI**（不支持 skill 的）：把文件夹放在 AI 能读到的地方，对它说"读 `resume-tailor/SKILL.md`，按里面的流程帮我改简历"。
 3. 对 AI 说："用 resume-tailor 帮我改简历"。
 
-就这样。第一次使用时，AI 会读完 skill，检查你的电脑还缺什么（Python、PDF 转换工具等），征得你同意后帮你装好，再一段段问你的经历，帮你建好个人信息和素材库。你不需要自己敲任何命令。
+就这样。第一次使用时，AI 会读完 skill，检查你的电脑还缺什么（Python、PDF 转换工具等），征得你同意后帮你装好。如果它有记忆功能，会先把记忆里你提过的经历整理出来给你确认，再一段段问你补全，帮你建好个人信息和素材库。你不需要自己敲任何命令。
 
 > 出 docx / pdf 需要 AI 能在你电脑上（或它自己的沙盒里）运行命令。只能聊天、不能运行命令的 AI 也能走完整个流程（资格核查、选材、改写、HR 挑刺），只是最后要你自己把文字贴进 `assets/` 里的空白模版。
 
@@ -52,7 +52,7 @@
 对 AI 说："用 resume-tailor 帮我按这个 JD 改简历"，并贴上 JD。它会按顺序：
 
 1. **资格核查**：届别、地点、到岗时间、签证、成绩门槛、投递数量限制。有不过的先告诉你。
-2. **回顾全部经历**：把 `materials.md` 整份过一遍，按 JD 挑出最相关的。
+2. **回顾全部经历**：把 `materials.md` 整份过一遍，按 JD 挑出最相关的。如果你的 AI 有记忆功能，它会先查记忆里有没有素材库还没收录的经历、数字或更正，列给你确认后再并入素材库。
 3. **先问再写**：列出"放哪些、每段写什么角度、哪些不放及原因"，等你确认。
 4. **缺细节就追问**：只有你知道的数字和反馈，直接问你。
 5. **技能对齐 JD**：短期能学会的先写上，附速成清单。
@@ -106,7 +106,7 @@ The examples above use a fictional person; every school, company and number in t
 
 | Typical AI resume edit | resume-tailor |
 |---|---|
-| Only looks at the resume you pasted this time | Reviews your **whole experience bank** (`materials.md`) and re-selects for each JD |
+| Only looks at the resume you pasted this time | Reviews your **whole experience bank** (`materials.md`) and re-selects for each JD; if your AI has memory, new facts from memory are added to the bank after you confirm |
 | Writes straight away and invents numbers it doesn't have | **Asks before writing**: proposes what goes in, what stays out and why, and waits for your OK; asks for missing details instead of guessing |
 | Polishes wording ("responsible for", "assisted with") | **Translates each experience into the target industry's logic**: analysis → judgement → recommendation → result, in the language of banking, tech, consulting and so on |
 | Either skips JD skills you lack or claims "expert" | **List now, learn fast**: only skills you can pick up in a day to a week, worded honestly ("familiar with"), each with a **crash-course plan** (learning route, small portfolio project, likely interview questions) |
@@ -135,7 +135,7 @@ The list keeps growing; check the website for the latest. Agents without skill s
    - **Any other AI** without skill support: put the folder somewhere it can read and say "Read `resume-tailor/SKILL.md` and follow it to tailor my resume".
 3. Say: "Use resume-tailor to tailor my resume."
 
-That's it. On first use the AI reads the skill, checks what your computer is missing (Python, a PDF converter and so on), installs it with your permission, and then interviews you to build your profile and experience bank. You don't need to type any commands yourself.
+That's it. On first use the AI reads the skill, checks what your computer is missing (Python, a PDF converter and so on), installs it with your permission. If it has memory, it first pulls together what you have already told it about your experience for you to confirm, then interviews you to fill the gaps and build your profile and experience bank. You don't need to type any commands yourself.
 
 > Producing the docx / pdf requires an AI that can run commands on your computer (or in its own sandbox). A chat-only AI can still run the whole process (eligibility check, selection, rewriting, recruiter critique); you then paste the text into the blank template in `assets/` yourself.
 
@@ -144,7 +144,7 @@ That's it. On first use the AI reads the skill, checks what your computer is mis
 Say "Use resume-tailor to tailor my resume for this JD" and paste the job description. The AI then:
 
 1. **Checks eligibility**: graduation year, location, start date and duration, visa, GPA cut-offs, application limits. Anything that fails is raised first.
-2. **Reviews your whole experience bank** in `materials.md` and picks what fits the JD best.
+2. **Reviews your whole experience bank** in `materials.md` and picks what fits the JD best. If your AI has memory, it first checks memory for experiences, numbers or corrections the bank is missing, shows them to you, and adds them only after you confirm.
 3. **Asks before writing**: lists what goes in, the angle for each item, and what stays out and why, then waits for your OK.
 4. **Asks for missing details**: numbers and feedback only you know; it never guesses.
 5. **Aligns skills with the JD**: adds skills you can learn quickly, each with a crash-course plan.
