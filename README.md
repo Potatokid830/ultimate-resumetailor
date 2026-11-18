@@ -1,4 +1,4 @@
-# resume-tailor · 把你的 AI 变成专属求职顾问
+# 土豆简历顾问 · 把你的 AI 变成专属求职顾问
 
 [English](#english) · 中文
 
@@ -6,7 +6,7 @@
 
 > 我是一个正在找实习的大学生，自己用这套流程改了 50 多份简历。之前做过一个 AI 改简历网站，后来发现连我自己都不用：它每次都从零开始，不记得我是谁。所以做了这个。
 
-Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，Windows、macOS、Linux 都支持，[安装](#安装)只要把一句话发给你的 AI。
+Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，Windows、macOS、Linux 都支持，[安装](#安装)只要把一句话发给你的 AI。装好后的 skill 名是 `resume-tailor`，对 AI 说“用土豆简历顾问”或“用 resume-tailor”都行。
 
 <p align="center">
   <img src="docs/example_cn.png" width="45%" alt="中文示例(虚构人物)">
@@ -189,13 +189,13 @@ resume-tailor/
 
 ## English
 
-**resume-tailor: turn your AI into your own career consultant**
+**Potato Resume Consultant: turn your AI into your own career consultant**
 
 Using AI on your resume usually means explaining who you are all over again, getting back vague filler, and sometimes a number it simply made up, which falls apart the first time an interviewer asks about it. Paid career coaching costs a lot, and a coach juggling many clients may not remember the details of every role you've had. This skill takes a different route: build your experience file once, and the AI you already use becomes a consultant that works only for you and knows you better every time.
 
 > I'm a university student looking for internships, and I've tailored more than 50 resumes with this process. I once built an AI resume website, then realised I didn't use it myself: it started from zero every time and never remembered who I was. So I built this instead.
 
-Works with Claude, ChatGPT / Codex, Cursor, GitHub Copilot, Gemini CLI and more, on Windows, macOS and Linux. To [install](#install), send one sentence to your AI. The example resumes above use a fictional person; every school, company and number in them is made up.
+Works with Claude, ChatGPT / Codex, Cursor, GitHub Copilot, Gemini CLI and more, on Windows, macOS and Linux. To [install](#install), send one sentence to your AI; once installed, the skill is called `resume-tailor`, and "use Potato Resume Consultant" or "use resume-tailor" both work. The example resumes above use a fictional person; every school, company and number in them is made up.
 
 ### A consultant, not a tool
 

@@ -31,8 +31,8 @@ for _s in (sys.stdout, sys.stderr):
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 FIELDS = {
-    'display_name': '简历定制（过机筛版）',
-    'display_name_en': 'Resume Tailor',
+    'display_name': '土豆简历顾问',
+    'display_name_en': 'Potato Resume Consultant',
     'description_zh': ('按 JD 定制能过机筛的一页中英文简历：资格核查、从全部真实经历里重新选材、按目标行业改写、'
                        'JD 技能先写后学并附速成清单、机筛自检和 HR 挑刺，一页 Word 和 PDF 直接交付，'
                        '附面试速查卡和网申纯文本；不想建素材库也能先做简历体检，逐句拆解夸大风险。不编造经历，每句话都能在你的素材库里找到出处。'),
