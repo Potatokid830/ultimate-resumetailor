@@ -317,7 +317,8 @@ python <skill>/scripts/build.py build_xx.py ... --jd jd_公司_岗位.txt       
 ### 固定规则
 - **文件名**：Word 用"姓名_简历_公司岗位"，PDF 用 `profile.json` 里的 `pdf_name_cn` / `pdf_name_en`（投递时 PDF 只带人名）。docx 和 pdf 都给。
 - **照片**：国内岗位一般带（`photo` 参数 + profile 里的 `photo`）；外企、海外岗位一般不带。
-- **板块标题**只用标准名称（教育背景、实习经历、工作经历、项目经历、校园经历、技能与证书 / Education、Experience、Projects、Leadership & Activities、Skills），机筛才认得出。
+- **板块标题**只用标准名称（教育背景、实习经历、工作经历、项目经历、校园经历、活动经历、其他经历、技能与证书 / Education、Experience、Projects、Leadership & Activities、Other Experience、Skills），机筛才认得出。不是学校组织的活动放"活动经历"或"项目经历"，不要放"校园经历"。
+- **时间**：还没结束的经历写"至今 / Present"，不要写未来的结束月份（`ats_check.py` 会报 ❌）；中文简历用全角标点（，；：（）""），数字里的逗号（1,600）不改。
 - **不用表格、文本框、页眉页脚放内容**；页边距不小于 1.1 cm；正文不小于 10 磅。
 - **毕业时间**：还没毕业的写"(预计)"/"(Expected)"（`ats_fix.py` 按 profile 的 `graduation_cn/en` 自动补）。
 - **文档属性**：作者、最后修改者设为 profile 的 `author`；不能出现 python、docx 等生成痕迹（`finish()` 会改，`ats_check.py` 会查）。

@@ -63,11 +63,11 @@ full = '\n'.join(texts)
 is_cn = bool(re.search(r'[一-鿿]{6,}', full))
 
 # ---------- 1. 板块标题 ----------
-OK_CN = {'教育背景', '实习经历', '工作经历', '项目经历', '校园经历', '社团经历', '校园与社团经历', '专业技能', '技能', '技能与证书',
+OK_CN = {'教育背景', '实习经历', '工作经历', '项目经历', '校园经历', '社团经历', '校园与社团经历', '活动经历', '其他经历', '专业技能', '技能', '技能与证书',
          '技能与兴趣', '证书', '荣誉奖项', '个人总结', '研究经历', '科研经历'}
 OK_EN = {'EDUCATION', 'EXPERIENCE', 'WORK EXPERIENCE', 'PROFESSIONAL EXPERIENCE', 'INTERNSHIP EXPERIENCE', 'PROJECTS', 'LEADERSHIP',
          'LEADERSHIP & ACTIVITIES', 'ACTIVITIES', 'SKILLS', 'SKILLS & CERTIFICATIONS', 'SKILLS & INTERESTS', 'CERTIFICATIONS',
-         'AWARDS', 'SUMMARY', 'RESEARCH EXPERIENCE', 'PUBLICATIONS'}
+         'AWARDS', 'SUMMARY', 'RESEARCH EXPERIENCE', 'PUBLICATIONS', 'OTHER EXPERIENCE'}
 sections, sec_of = [], []
 cur = '(页首)'
 for p, tx in zip(paras, texts):
@@ -113,6 +113,30 @@ for p_, tx, sec in zip(paras, texts, sec_of):
         (lab_b if re.search(r'[:：]\s*$', rt) else emph_b).append(rt[:14])
 if lab_b: W('经历要点里有"粗体标签:"%d 处(像套模板,关键词最好在句子里自然出现),例:%s' % (len(lab_b), ' / '.join(lab_b[:3])))
 if len(emph_b) > 6: W('经历要点里加粗 %d 处,太多会稀释重点,例:%s' % (len(emph_b), ' / '.join(emph_b[:3])))
+
+# 中文正文里的半角标点(网址、邮箱、数字里的逗号不算)
+if is_cn:
+    hw = []
+    for tx in texts:
+        t = re.sub(r'https?://\S+|[\w.+-]+@[\w-]+\.[\w.]+|(?:www\.|linkedin\.com/)\S*', ' ', tx)
+        for m_ in re.finditer(r'(?<=[一-鿿])[,;:()"]|[,;:()"](?=[一-鿿])', t):
+            hw.append(t[max(m_.start() - 6, 0):m_.end() + 6].strip())
+    if hw:
+        W('中文正文里有半角标点 %d 处(中文简历用全角,:;"" 等),例:%s' % (len(hw), ' / '.join(hw[:3])))
+
+# 经历的结束时间不能晚于今天(教育背景、写了"预计 / Expected / 至今 / Present"的不算)
+import datetime as _dt
+_today = _dt.date.today()
+_now = _today.year * 12 + _today.month
+for tx, sec in zip(texts, sec_of):
+    if sec == '教育背景' or sec.upper() == 'EDUCATION' or re.search(r'预计|Expected|至今|Present|Now', tx, re.I):
+        continue
+    for m_ in re.finditer(r'(\d{4})[.\-/年](\d{1,2})月?\s*[–—\-~～至到]+\s*(\d{4})[.\-/年](\d{1,2})', tx):
+        end = int(m_.group(3)) * 12 + int(m_.group(4))
+        if end > _now:
+            F('经历结束时间晚于今天:%s——还没结束的经历写"至今 / Present"' % m_.group(0))
+        elif end == _now:
+            W('经历结束时间就是这个月:%s——确认是否已经结束,没结束就写"至今 / Present"' % m_.group(0))
 
 # ---------- 4. 必备信息 ----------
 if not re.search(r'[\w.+-]+@[\w-]+\.[\w.]+', full): F('读不到邮箱')
