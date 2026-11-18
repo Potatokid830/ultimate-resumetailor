@@ -121,6 +121,7 @@ pdf = pdf_name + '.pdf'
 if not pdf_tools.convert(docx, pdf):
     print('⚠️ 没能转 PDF(装 LibreOffice,或用 Microsoft Word 打开 docx 另存为 PDF)')
     sys.exit(0)
+pdf_tools.clean_metadata(pdf, P.get('author') or P.get('name_en') or P.get('name_cn') or '')
 print('%s -> %s  pages: %s   # 必须是 1' % (docx, pdf, pdf_tools.pages(pdf)))
 pdf_tools.png(pdf, 'preview_' + pdf_name)  # 看图:底部不能留白,也不能溢出
 py(os.path.join(HERE, 'fit_report.py'), pdf, '--docx', docx, '--auto', quiet=False)  # 溢出或留白时才输出

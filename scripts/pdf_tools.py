@@ -165,6 +165,31 @@ def pages(pdf):
     return -1
 
 
+# PDF 里"用什么软件生成"的信息(creator / producer)统一写成这个值;留空 = 不透露是 WPS、LibreOffice 还是 Word
+PDF_TOOL_NAME = ''
+
+
+def clean_metadata(pdf, author=''):
+    """清掉生成软件信息,作者写成 profile 的 author。需要 PyMuPDF;没有就跳过,返回 False。"""
+    fz = _fz()
+    if not fz:
+        return False
+    d = fz.open(pdf)
+    meta = dict(d.metadata or {})
+    meta.update(creator=PDF_TOOL_NAME, producer=PDF_TOOL_NAME, author=author or '')
+    d.set_metadata({k: v for k, v in meta.items() if k in (
+        'author', 'creator', 'producer', 'title', 'subject', 'keywords', 'creationDate', 'modDate')})
+    try:
+        d.del_xml_metadata()  # XMP 里也会记生成软件
+    except Exception:
+        pass
+    tmp = pdf + '.tmp'
+    d.save(tmp, garbage=3, deflate=True)  # 整份重写,不留旧版本的元数据
+    d.close()
+    os.replace(tmp, pdf)
+    return True
+
+
 def png(pdf, prefix):
     fz = _fz()
     if fz:
