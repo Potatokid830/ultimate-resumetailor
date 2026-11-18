@@ -98,18 +98,68 @@ resume-tailor/
 
 ## English
 
-**resume-tailor** is an [Agent Skills](https://agentskills.io)-format skill that tailors a **one-page Chinese or English resume** to a specific job description and checks it against ATS / AI screening before handing it over.
+**resume-tailor** is a resume-tailoring skill in the open [Agent Skills](https://agentskills.io) format. Give it a job description and it picks material from **your entire real experience**, rewrites it in the logic of the target industry, and produces a **one-page resume in English or Chinese** (docx + pdf). Before handing it over, it runs an **ATS / AI-screening self-check** and critiques the draft the way a recruiter would.
 
-What makes it different from asking an AI to "polish my resume":
+The examples above use a fictional person; every school, company and number in them is made up.
 
-- **Eligibility check first**: graduation year, location, start date and duration, visa, GPA cut-offs, application limits.
-- **Reviews your whole experience bank** (`materials.md`), not just the resume you pasted, and picks what fits the JD.
-- **Asks before writing**: proposes what goes in, what stays out and why, and waits for your OK; asks for missing numbers instead of inventing them.
-- **Translates experience into the target industry's logic**: analysis → judgement → recommendation → result.
-- **"List now, learn fast"** for JD skills you can pick up in a day to a week, worded honestly ("familiar with"), each with a crash-course plan and likely interview questions.
-- **Clear line between framing and fabrication**: grades, roles, results and certificates must be real.
-- **One full page**, fixed template, docx + pdf, then an **ATS self-check** (section headings, contact info, font sizes, margins, tables/text boxes, document properties, PDF text extraction, JD keyword coverage) and an **HR-style critique**.
+### How it differs from "AI, polish my resume"
 
-Works with any agent that supports the open Agent Skills format: Claude (Claude.ai, desktop, Claude Code), ChatGPT & Codex, GitHub Copilot / VS Code, Cursor, Gemini CLI, TRAE, Kiro, Roo Code, JetBrains Junie, Amp, OpenCode, Goose, OpenHands and more; see the [official client list](https://agentskills.io/clients). Agents without skill support can still use it: ask them to read `SKILL.md` and follow it.
+| Typical AI resume edit | resume-tailor |
+|---|---|
+| Only looks at the resume you pasted this time | Reviews your **whole experience bank** (`materials.md`) and re-selects for each JD |
+| Writes straight away and invents numbers it doesn't have | **Asks before writing**: proposes what goes in, what stays out and why, and waits for your OK; asks for missing details instead of guessing |
+| Polishes wording ("responsible for", "assisted with") | **Translates each experience into the target industry's logic**: analysis → judgement → recommendation → result, in the language of banking, tech, consulting and so on |
+| Either skips JD skills you lack or claims "expert" | **List now, learn fast**: only skills you can pick up in a day to a week, worded honestly ("familiar with"), each with a **crash-course plan** (learning route, small portfolio project, likely interview questions) |
+| No line between framing and fabrication | Clear **red lines**: grades, roles, results and certificates must be real; anything you mark ❌ never appears in any version |
+| Ignores layout | Fixed template, **one full page**: no overflow, no empty space at the bottom |
+| Done once the text is written | Checks **eligibility** first (graduation year, location, start date, visa), then runs the **ATS self-check** and **JD keyword coverage**, then a recruiter-style critique |
 
-Setup: click **Code → Download ZIP**, rename the folder to `resume-tailor`, then upload the zip in your app's Skills settings or drop the folder into your agent's skills folder (`~/.claude/skills/` for Claude Code; many agents also read `~/.agents/skills/`). Then ask it to tailor your resume. On first use the agent checks for missing tools (Python, a PDF converter), installs them with your OK, and interviews you to build your profile and experience bank. The example people, schools, companies and numbers are fictional.
+### Supported AI tools
+
+Any agent that supports the Agent Skills format can use it. According to the [official client list](https://agentskills.io/clients), that includes:
+
+- **Claude**: Claude.ai, Claude desktop, Claude Code
+- **OpenAI**: ChatGPT, Codex
+- **GitHub Copilot / VS Code**
+- **Coding agents**: Cursor, TRAE, Kiro, Roo Code, JetBrains Junie, Amp, OpenCode, Goose, OpenHands, Factory, Tabnine and more
+- **Others**: Google Gemini CLI, Mistral Vibe, Letta, OpenClaw
+
+The list keeps growing; check the website for the latest. Agents without skill support can still use it (see step 2 below).
+
+### Install
+
+1. Click the green **Code → Download ZIP** button above, unzip it, and rename the folder to `resume-tailor`.
+2. Give the folder to your AI:
+   - **Claude.ai / Claude desktop**: upload the zip under Settings → Capabilities → Skills. For ChatGPT and other apps, follow that app's "Setup instructions" on the [client list](https://agentskills.io/clients).
+   - **Claude Code, Codex, Copilot, Cursor, Gemini CLI and other coding agents**: put the folder in the agent's skills folder. For Claude Code that is `~/.claude/skills/`; many agents also read the shared location `~/.agents/skills/`. If you're not sure, just ask the agent to "install this folder as a skill".
+   - **Any other AI** without skill support: put the folder somewhere it can read and say "Read `resume-tailor/SKILL.md` and follow it to tailor my resume".
+3. Say: "Use resume-tailor to tailor my resume."
+
+That's it. On first use the AI reads the skill, checks what your computer is missing (Python, a PDF converter and so on), installs it with your permission, and then interviews you to build your profile and experience bank. You don't need to type any commands yourself.
+
+> Producing the docx / pdf requires an AI that can run commands on your computer (or in its own sandbox). A chat-only AI can still run the whole process (eligibility check, selection, rewriting, recruiter critique); you then paste the text into the blank template in `assets/` yourself.
+
+### How a session goes
+
+Say "Use resume-tailor to tailor my resume for this JD" and paste the job description. The AI then:
+
+1. **Checks eligibility**: graduation year, location, start date and duration, visa, GPA cut-offs, application limits. Anything that fails is raised first.
+2. **Reviews your whole experience bank** in `materials.md` and picks what fits the JD best.
+3. **Asks before writing**: lists what goes in, the angle for each item, and what stays out and why, then waits for your OK.
+4. **Asks for missing details**: numbers and feedback only you know; it never guesses.
+5. **Aligns skills with the JD**: adds skills you can learn quickly, each with a crash-course plan.
+6. **Builds the resume**: one full page, docx + pdf.
+7. **Recruiter critique + ATS self-check**: `ats_check.py` checks section headings, contact details, font sizes, margins, tables/text boxes, document properties, PDF text extraction and JD keyword coverage.
+8. **Delivers** the files with a short note: what was included, what was left out, which skills to learn, and an honest view of your interview chances.
+
+### Your data
+
+Your personal details live in `profile.json` (name, phone, email, links, optional photo) and your experiences in `materials.md`. Both files, your photo and every generated resume are in `.gitignore`, so they are never committed. Keep personal content out of `SKILL.md`, so the skill itself can be updated and shared safely.
+
+### Folder structure
+
+See the [directory tree above](#目录结构): `SKILL.md` (the workflow), `profile.example.json` and `materials.example.md` (templates you copy), `assets/` (blank Chinese and English templates), `scripts/` (build, ATS check, PDF export) and `examples/` (fictional sample builds).
+
+### License
+
+[MIT](LICENSE)
