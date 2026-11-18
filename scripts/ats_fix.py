@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """build.py 在 build 脚本之后自动调用:
-- 毕业时间后补"(预计)" / "(Expected)"(读 profile 的 graduation_cn / graduation_en,还没毕业才填)
+- 毕业时间后补"（预计）" / " (Expected)"(读 profile 的 graduation_cn / graduation_en,还没毕业才填)
 - 页边距不小于 1.1 cm(太窄部分系统会裁切)
 """
 import re
@@ -14,7 +14,8 @@ d = open(p, encoding='utf-8').read()
 
 g_cn, g_en = P.get('graduation_cn'), P.get('graduation_en')
 if g_cn and '预计' not in d and g_cn in d:
-    d = re.sub(re.escape(g_cn) + r'(?!\s*[(（]预计)', g_cn + '(预计)', d, count=1)
+    # 中文版用全角括号;上一行已同时认全角和半角,不会重复补
+    d = re.sub(re.escape(g_cn) + r'(?!\s*[(（]预计)', g_cn + '（预计）', d, count=1)
 if g_en and 'Expected' not in d and g_en in d:
     d = re.sub(re.escape(g_en) + r'(?! \(Expected\))', g_en + ' (Expected)', d, count=1)
 

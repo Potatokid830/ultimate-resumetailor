@@ -320,7 +320,7 @@ python <skill>/scripts/build.py build_xx.py ... --jd jd_公司_岗位.txt       
 - **板块标题**只用标准名称（教育背景、实习经历、工作经历、项目经历、校园经历、活动经历、其他经历、技能与证书 / Education、Experience、Projects、Leadership & Activities、Other Experience、Skills），机筛才认得出。不是学校组织的活动放"活动经历"或"项目经历"，不要放"校园经历"。
 - **时间**：还没结束的经历写"至今 / Present"，不要写未来的结束月份（`ats_check.py` 会报 ❌）；中文简历用全角标点（，；：（）""），数字里的逗号（1,600）不改。
 - **不用表格、文本框、页眉页脚放内容**；页边距不小于 1.1 cm；正文不小于 10 磅。
-- **毕业时间**：还没毕业的写"(预计)"/"(Expected)"（`ats_fix.py` 按 profile 的 `graduation_cn/en` 自动补）。
+- **毕业时间**：还没毕业的写"（预计）"/"(Expected)"（`ats_fix.py` 按 profile 的 `graduation_cn/en` 自动补）。
 - **文档属性**：作者、最后修改者设为 profile 的 `author`；不能出现 python、docx 等生成痕迹（`finish()` 会改，`ats_check.py` 会查）。
 - **定级信息**（让 HR 一眼判断你是哪一届、什么背景）：中文校招和实习简历在 `header(info_line=...)` 写清届别和学历（例："2026 届本科 · 可到岗：2026.03 起"）；出生年月、政治面貌等是否写，问用户、按目标公司惯例。教育背景下的相关课程、编程语言、竞赛奖项，只要真实、和 JD 沾边就放。
 - **语气**：像真实学生 / 求职者写的，具体、接地气；不要 AI 腔，不用第一人称，不要空洞的形容词。
