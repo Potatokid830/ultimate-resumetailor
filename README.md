@@ -1,8 +1,8 @@
-# resume-tailor · 按 JD 定制一页简历的 Claude Skill
+# resume-tailor · 按 JD 定制一页简历的 AI Agent Skill
 
 [English](#english) · 中文
 
-一个给 Claude（Claude Code / Claude.ai Skills）用的简历定制 skill：你给一份 JD，它帮你从**自己的全部真实经历**里挑材料，按目标行业的逻辑改写，做成**一页中文或英文简历**（docx + pdf），并在交付前跑一遍**机筛（ATS / AI 筛简历）自检**和**HR 挑刺**。
+一个简历定制 skill，采用开放的 [Agent Skills](https://agentskills.io) 格式，Claude、ChatGPT / Codex、GitHub Copilot、Cursor、Gemini CLI 等都能用：你给一份 JD，它帮你从**自己的全部真实经历**里挑材料，按目标行业的逻辑改写，做成**一页中文或英文简历**（docx + pdf），并在交付前跑一遍**机筛（ATS / AI 筛简历）自检**和**HR 挑刺**。
 
 <p align="center">
   <img src="docs/example_cn.png" width="45%" alt="中文示例(虚构人物)">
@@ -22,19 +22,34 @@
 | 不在乎排版 | 固定模版，**一页写满**，不溢出、不留白 |
 | 交付就结束 | 先查**资格**（届别、地点、到岗时间、签证），交付前跑 **ATS 自检** + **JD 关键词覆盖**，再站在 HR 角度挑刺 |
 
+## 支持哪些 AI 工具
+
+这个 skill 用的是 [Agent Skills](https://agentskills.io) 开放格式（一个文件夹，里面有 `SKILL.md` 和脚本），不只 Claude 能用。按 [agentskills.io 官方名单](https://agentskills.io/clients)，支持这个格式的常见工具有：
+
+- **Claude**：Claude.ai、Claude 桌面版、Claude Code
+- **OpenAI**：ChatGPT、Codex
+- **GitHub Copilot / VS Code**
+- **编程工具**：Cursor、TRAE、Kiro、Roo Code、JetBrains Junie、Amp、OpenCode、Goose、OpenHands、Factory、Tabnine 等
+- **Google Gemini CLI**、**Mistral Vibe**、**Letta**、**OpenClaw**
+
+名单在持续增加，以官网为准。不在名单上的 AI 也能用，见下面"其他 AI"。
+
 ## 安装
 
-1. 点页面上方绿色的 **Code → Download ZIP**，下载后解压。
-2. 把解压出来的文件夹交给 Claude：
-   - **Claude Code**：放进 `~/.claude/skills/`（文件夹名改成 `resume-tailor`）。
-   - **Claude.ai / Claude 桌面版**：在 Settings → Capabilities → Skills 里上传这个 zip。
-3. 对 Claude 说："用 resume-tailor 帮我改简历"。
+1. 点页面上方绿色的 **Code → Download ZIP**，下载后解压，把文件夹名改成 `resume-tailor`。
+2. 把文件夹交给你用的 AI：
+   - **Claude.ai / Claude 桌面版**：在 Settings → Capabilities → Skills 上传这个 zip。ChatGPT 等其他应用按 [agentskills.io 名单](https://agentskills.io/clients) 里该应用的 "Setup instructions" 操作。
+   - **Claude Code、Codex、Copilot、Cursor、Gemini CLI 等编程工具**：放进它的 skills 文件夹。Claude Code 是 `~/.claude/skills/`；很多工具也认通用位置 `~/.agents/skills/`；各工具的具体位置见 [agentskills.io 名单](https://agentskills.io/clients) 里的 "Setup instructions"。不确定的话，直接对 AI 说"把这个文件夹安装成 skill"，让它帮你放。
+   - **其他 AI**（不支持 skill 的）：把文件夹放在 AI 能读到的地方，对它说"读 `resume-tailor/SKILL.md`，按里面的流程帮我改简历"。
+3. 对 AI 说："用 resume-tailor 帮我改简历"。
 
-就这样。第一次使用时，Claude 会读完 skill，检查你的电脑还缺什么（Python、PDF 转换工具等），征得你同意后帮你装好，再一段段问你的经历，帮你建好个人信息和素材库。你不需要自己敲任何命令。
+就这样。第一次使用时，AI 会读完 skill，检查你的电脑还缺什么（Python、PDF 转换工具等），征得你同意后帮你装好，再一段段问你的经历，帮你建好个人信息和素材库。你不需要自己敲任何命令。
+
+> 出 docx / pdf 需要 AI 能在你电脑上（或它自己的沙盒里）运行命令。只能聊天、不能运行命令的 AI 也能走完整个流程（资格核查、选材、改写、HR 挑刺），只是最后要你自己把文字贴进 `assets/` 里的空白模版。
 
 ## 使用流程
 
-对 Claude 说："用 resume-tailor 帮我按这个 JD 改简历"，并贴上 JD。它会按顺序：
+对 AI 说："用 resume-tailor 帮我按这个 JD 改简历"，并贴上 JD。它会按顺序：
 
 1. **资格核查**：届别、地点、到岗时间、签证、成绩门槛、投递数量限制。有不过的先告诉你。
 2. **回顾全部经历**：把 `materials.md` 整份过一遍，按 JD 挑出最相关的。
@@ -83,7 +98,7 @@ resume-tailor/
 
 ## English
 
-**resume-tailor** is a Claude skill that tailors a **one-page Chinese or English resume** to a specific job description and checks it against ATS / AI screening before handing it over.
+**resume-tailor** is an [Agent Skills](https://agentskills.io)-format skill that tailors a **one-page Chinese or English resume** to a specific job description and checks it against ATS / AI screening before handing it over.
 
 What makes it different from asking an AI to "polish my resume":
 
@@ -95,4 +110,6 @@ What makes it different from asking an AI to "polish my resume":
 - **Clear line between framing and fabrication**: grades, roles, results and certificates must be real.
 - **One full page**, fixed template, docx + pdf, then an **ATS self-check** (section headings, contact info, font sizes, margins, tables/text boxes, document properties, PDF text extraction, JD keyword coverage) and an **HR-style critique**.
 
-Setup: click **Code → Download ZIP**, put the folder in your Claude skills folder (or upload the zip in Claude.ai Settings → Skills), and ask Claude to tailor your resume. On first use Claude checks for missing tools (Python, a PDF converter), installs them with your OK, and interviews you to build your profile and experience bank. The example people, schools, companies and numbers are fictional.
+Works with any agent that supports the open Agent Skills format: Claude (Claude.ai, desktop, Claude Code), ChatGPT & Codex, GitHub Copilot / VS Code, Cursor, Gemini CLI, TRAE, Kiro, Roo Code, JetBrains Junie, Amp, OpenCode, Goose, OpenHands and more; see the [official client list](https://agentskills.io/clients). Agents without skill support can still use it: ask them to read `SKILL.md` and follow it.
+
+Setup: click **Code → Download ZIP**, rename the folder to `resume-tailor`, then upload the zip in your app's Skills settings or drop the folder into your agent's skills folder (`~/.claude/skills/` for Claude Code; many agents also read `~/.agents/skills/`). Then ask it to tailor your resume. On first use the agent checks for missing tools (Python, a PDF converter), installs them with your OK, and interviews you to build your profile and experience bank. The example people, schools, companies and numbers are fictional.
