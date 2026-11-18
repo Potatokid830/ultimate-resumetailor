@@ -18,3 +18,4 @@ preview_*.png
 ~$*.docx
 __pycache__/
 .DS_Store
+dist/
