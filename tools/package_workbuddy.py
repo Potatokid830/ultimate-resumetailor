@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """把这个 skill 打包成上传 WorkBuddy 开放平台用的 zip。
 
-    python tools/package_workbuddy.py                    # 输出 dist/resume-tailor-workbuddy-<版本>.zip
+    python tools/package_workbuddy.py                    # 输出 dist/ultimate-resume-tailor-workbuddy-<版本>.zip
+    python tools/package_workbuddy.py --name resume-tailor-ats   # 名字被占时换一个
     python tools/package_workbuddy.py --version 1.1.0 --author 你的名字
 
 为什么单独打包,而不是直接压缩文件夹:
@@ -60,6 +61,8 @@ def add_fields(skill_md, extra):
     if not m:
         sys.exit('SKILL.md 开头没有 --- 包起来的头部')
     head = m.group(1)
+    if 'name' in extra:  # 覆盖仓库里的 name(WorkBuddy 上 resume-tailor 已被别人注册)
+        head = re.sub(r'^name: .*$', 'name: ' + extra['name'], head, count=1, flags=re.M)
     have = set(re.findall(r'^([A-Za-z_]+):', head, re.M))
     lines = [head] + ['%s: %s' % (k, q(v)) for k, v in extra.items() if k not in have]
     return '---\n' + '\n'.join(lines) + '\n---\n' + skill_md[m.end():]
@@ -77,11 +80,16 @@ def check_head(skill_md):
               'category', 'version', 'author'):
         if not re.search(r'^%s: ' % k, head, re.M):
             errs.append('缺字段 ' + k)
+    nm = re.search(r'^name: (.*)$', head, re.M)
+    if nm and not re.fullmatch(r'[a-z0-9]+(-[a-z0-9]+)*', nm.group(1)):
+        errs.append('name 只能用小写字母、数字和连字符:' + nm.group(1))
     return errs
 
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument('--name', default='ultimate-resume-tailor',
+                    help='WorkBuddy 上的唯一标识;仓库和其他 AI 工具里仍叫 resume-tailor')
     ap.add_argument('--version', default='1.0.0')
     ap.add_argument('--author', default='Potatokid830')
     ap.add_argument('--category', default=FIELDS['category'])
@@ -91,8 +99,8 @@ def main():
     files = subprocess.run(['git', 'ls-files'], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split()
     files = [f for f in files if not f.startswith(EXCLUDE)]
 
-    extra = dict(FIELDS, category=a.category, version=a.version, author=a.author)
-    out = a.out or os.path.join(ROOT, 'dist', 'resume-tailor-workbuddy-%s.zip' % a.version)
+    extra = dict(FIELDS, name=a.name, category=a.category, version=a.version, author=a.author)
+    out = a.out or os.path.join(ROOT, 'dist', '%s-workbuddy-%s.zip' % (a.name, a.version))
     os.makedirs(os.path.dirname(out), exist_ok=True)
 
     problems = []
@@ -126,7 +134,7 @@ def main():
         sys.exit(1)
     open(out, 'wb').write(buf.getvalue())
     print('已生成 %s(%d 个文件,%.0f KB)' % (os.path.relpath(out, ROOT), len(files), size / 1024))
-    print('头部字段:version=%s author=%s category=%s' % (a.version, a.author, a.category))
+    print('头部字段:name=%s version=%s author=%s category=%s' % (a.name, a.version, a.author, a.category))
     print('上传前再解压看一遍;分类以后台下拉框为准,不一致就在后台改。')
 
 
