@@ -192,7 +192,8 @@ def pdf_probe(path):
         if not pg:
             raise RuntimeError('pdfinfo 没有输出页数')
         au = re.search(r'Author:\s+(.*)', info)
-        txt = run_text(['pdftotext', '-enc', 'UTF-8', path, '-'])
+        # -layout:否则右对齐的日期会和岗位名拆成两行,误报"丢了 N 段"
+        txt = run_text(['pdftotext', '-layout', '-enc', 'UTF-8', path, '-'])
         fonts = run_text(['pdffonts', path])
         return int(pg.group(1)), txt, fonts, au.group(1).strip() if au else ''
     return None
