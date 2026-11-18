@@ -91,6 +91,9 @@ for sym, nm in [('→', '箭头'), ('←', '箭头'), ('⇒', '箭头'), ('～',
 lab = [tx[:20] for tx in texts if re.match(r'\s*[一-鿿A-Za-z ]{1,12}\s?\+\s?[一-鿿A-Za-z ]{1,12}([\s+一-鿿A-Za-z]*)[:：]', tx)]
 if lab: F('"标签 + 标签:"套模板写法 %d 处,例:%s' % (len(lab), ' / '.join(lab[:3])))
 if re.search(r'\*\*', full): F('残留 Markdown 星号 **')
+# 小写 L 冒充大写 I:"Al Agent"、"Al 产品"
+al = re.findall(r'(?<![A-Za-z])Al(?![a-z])\s*[A-Za-z一-鿿]{0,4}', full)
+if al: W('疑似把 AI 打成了 Al(小写 L)%d 处,例:%s' % (len(al), ' / '.join(al[:3])))
 # 经历要点里的"粗体 + 冒号"标签 → 像模板;技能栏里可以用
 lab_b, emph_b = [], []
 for p_, tx, sec in zip(paras, texts, sec_of):
@@ -145,6 +148,23 @@ for tag in ['dc:creator', 'cp:lastModifiedBy']:
 norm = lambda s: re.sub(r'\s+', '', s)
 
 
+def pdf_fill_gap(path):
+    """第 1 页最后一行文字到下边距之间的空白(磅);没有 PyMuPDF 时返回 None"""
+    try:
+        import pymupdf as fz
+    except ImportError:
+        try:
+            import fitz as fz
+        except ImportError:
+            return None
+    pg = fz.open(path)[0]
+    ys = [b[3] for b in pg.get_text('blocks') if b[4].strip()]
+    if not ys: return None
+    mb = re.search(r'<w:pgMar [^>]*w:bottom="(\d+)"', xml)
+    bottom = int(mb.group(1)) / 20 if mb else 36
+    return pg.rect.height - bottom - max(ys)
+
+
 def pdf_probe(path):
     """returns (pages, text, fonts_str, author)"""
     try:
@@ -177,6 +197,9 @@ if pdf_path:
     else:
         pages, pdf_txt, fonts, pdf_author = r
         if pages != 1: F('PDF 不是 1 页(%s 页)' % pages)
+        gap = pdf_fill_gap(pdf_path) if pages == 1 else None
+        if gap is not None and gap > 60:
+            W('页面底部留白约 %.1f cm(约 %d 行):一页没写满,补用户真实、相关的内容(课程、技能、奖项、校园经历等)' % (gap / 28.35, gap // 14))
         if '�' in pdf_txt: F('PDF 转文本出现乱码 %d 处' % pdf_txt.count('�'))
         PT = norm(pdf_txt).lower()
         lost = [tx.strip()[:16] for tx in texts if len(norm(tx)) >= 6 and norm(tx)[:12].lower() not in PT]

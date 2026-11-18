@@ -109,7 +109,7 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，[
 4. **缺细节就追问**：只有你知道的数字和反馈，直接问你（快投模式不问，缺的不写，交付时列出来）。
 5. **技能对齐 JD**：短期能学会的先写上，附速成清单。
 6. **出稿**：一页 docx + pdf，一页写满。
-7. **HR 挑刺 + 机筛自检**：`ats_check.py` 检查板块标题、联系方式、字号、页边距、表格/文本框、文档属性、PDF 可解析性和 JD 关键词覆盖。
+7. **HR 挑刺 + 机筛自检**：`ats_check.py` 检查板块标题、联系方式、字号、页边距、表格/文本框、文档属性、PDF 可解析性、底部留白、AI/Al 这类拼写和 JD 关键词覆盖；有旧简历时，新旧两版逐项对比，新版不能在任何一项上输给旧版。
 8. **交付**：
    - docx + pdf，并说明选了什么、没选什么、哪些技能要补、能不能拿面试的坦白评价
    - **面试速查卡**：这一版写的每个数字和依据、每个结论是怎么分析出来的、"先写后学"技能怎么如实回答、和其他版本差在哪
@@ -257,7 +257,7 @@ The full process:
 4. **Asks for missing details**: numbers and feedback only you know; it never guesses (in quick mode it leaves them out and lists them at delivery).
 5. **Aligns skills with the JD**: adds skills you can learn quickly, each with a crash-course plan.
 6. **Builds the resume**: one full page, docx + pdf.
-7. **Recruiter critique + ATS self-check**: `ats_check.py` checks section headings, contact details, font sizes, margins, tables/text boxes, document properties, PDF text extraction and JD keyword coverage.
+7. **Recruiter critique + ATS self-check**: `ats_check.py` checks section headings, contact details, font sizes, margins, tables/text boxes, document properties, PDF text extraction, empty space at the bottom, typos such as "Al" for "AI", and JD keyword coverage. If you gave it an old resume, it compares the two side by side, and the new one must not be worse on any point.
 8. **Delivers**:
    - docx + pdf, with what was included, what was left out, which skills to learn, and an honest view of your interview chances
    - **Interview cheat sheet**: every number in this version and its basis, how each conclusion was reached, honest answers for "list now, learn fast" skills, and how this version differs from your others
