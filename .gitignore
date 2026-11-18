@@ -15,6 +15,7 @@ out/
 preview_*.png
 /*.docx
 *.notes.md
+*_体检.md
 ~$*.docx
 __pycache__/
 .DS_Store

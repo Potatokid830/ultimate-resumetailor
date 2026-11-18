@@ -35,11 +35,11 @@ FIELDS = {
     'display_name_en': 'Resume Tailor',
     'description_zh': ('按 JD 定制能过机筛的一页中英文简历：资格核查、从全部真实经历里重新选材、按目标行业改写、'
                        'JD 技能先写后学并附速成清单、机筛自检和 HR 挑刺，一页 Word 和 PDF 直接交付，'
-                       '附面试速查卡和网申纯文本。不编造经历，每句话都能在你的素材库里找到出处。'),
+                       '附面试速查卡和网申纯文本；不想建素材库也能先做简历体检，逐句拆解夸大风险。不编造经历，每句话都能在你的素材库里找到出处。'),
     'description_en': ('Tailor a one-page Chinese or English resume to a job description: eligibility check, '
                        'selection from your full real experience, industry-specific rewriting, ATS self-check '
                        'and recruiter critique. Outputs Word and PDF plus an interview cheat sheet and '
-                       'form-ready plain text. Never fabricates experience.'),
+                       'form-ready plain text. A quick resume check-up flags overstated claims line by line. Never fabricates experience.'),
     'category': '求职招聘',
 }
 
