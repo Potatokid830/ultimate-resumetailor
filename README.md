@@ -24,27 +24,13 @@
 
 ## 安装
 
-需要：Python 3、`zip/unzip`；转 PDF 需要 **LibreOffice** 或（macOS 上）**Microsoft Word**；检查页数和预览图建议装 PyMuPDF：
+1. 点页面上方绿色的 **Code → Download ZIP**，下载后解压。
+2. 把解压出来的文件夹交给 Claude：
+   - **Claude Code**：放进 `~/.claude/skills/`（文件夹名改成 `resume-tailor`）。
+   - **Claude.ai / Claude 桌面版**：在 Settings → Capabilities → Skills 里上传这个 zip。
+3. 对 Claude 说："用 resume-tailor 帮我改简历"。
 
-```bash
-pip install pymupdf
-```
-
-**Claude Code**：把仓库放到 skills 目录（个人级或项目级都可以）：
-
-```bash
-git clone https://github.com/<you>/resume-tailor.git ~/.claude/skills/resume-tailor
-```
-
-**Claude.ai**：把整个文件夹打包成 zip，在 Settings → Capabilities → Skills 上传。
-
-然后准备你自己的两份文件（都已在 `.gitignore` 里，不会被提交）：
-
-```bash
-cd ~/.claude/skills/resume-tailor
-cp profile.example.json profile.json          # 姓名、电话、邮箱、LinkedIn、网站、照片、毕业时间
-cp materials.example.md materials.md          # 经历素材库(也可以让 Claude 一段段问你来建)
-```
+就这样。第一次使用时，Claude 会读完 skill，检查你的电脑还缺什么（Python、PDF 转换工具等），征得你同意后帮你装好，再一段段问你的经历，帮你建好个人信息和素材库。你不需要自己敲任何命令。
 
 ## 使用流程
 
@@ -58,18 +44,6 @@ cp materials.example.md materials.md          # 经历素材库(也可以让 Cla
 6. **出稿**：一页 docx + pdf，一页写满。
 7. **HR 挑刺 + 机筛自检**：`ats_check.py` 检查板块标题、联系方式、字号、页边距、表格/文本框、文档属性、PDF 可解析性和 JD 关键词覆盖。
 8. **交付**：附文件，并说明选了什么、没选什么、哪些技能要补、能不能拿面试的坦白评价。
-
-自己手动出一份（在任意工作目录）：
-
-```bash
-bash ~/.claude/skills/resume-tailor/scripts/build.sh ~/.claude/skills/resume-tailor/examples/example_cn.py 李明远_简历_商分版 cn photo
-```
-
-```bash
-bash ~/.claude/skills/resume-tailor/scripts/build.sh ~/.claude/skills/resume-tailor/examples/example_en.py Mingyuan_Li_Resume_Strategy en
-```
-
-没有 `profile.json` 时会用虚构的示例人物，方便先跑通。macOS 用 Word 转 PDF 时，工作目录放在 `~/Documents` 或 `~/Desktop` 下最稳（Word 有沙盒）。
 
 ## 目录结构
 
@@ -121,4 +95,4 @@ What makes it different from asking an AI to "polish my resume":
 - **Clear line between framing and fabrication**: grades, roles, results and certificates must be real.
 - **One full page**, fixed template, docx + pdf, then an **ATS self-check** (section headings, contact info, font sizes, margins, tables/text boxes, document properties, PDF text extraction, JD keyword coverage) and an **HR-style critique**.
 
-Setup: clone into your skills folder, `pip install pymupdf`, copy `profile.example.json` → `profile.json` and `materials.example.md` → `materials.md`, then ask Claude to tailor your resume to a JD. PDF export uses LibreOffice, or Microsoft Word on macOS. The example people, schools, companies and numbers are fictional.
+Setup: click **Code → Download ZIP**, put the folder in your Claude skills folder (or upload the zip in Claude.ai Settings → Skills), and ask Claude to tailor your resume. On first use Claude checks for missing tools (Python, a PDF converter), installs them with your OK, and interviews you to build your profile and experience bank. The example people, schools, companies and numbers are fictional.

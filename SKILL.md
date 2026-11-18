@@ -11,8 +11,25 @@ description: 按 JD 给用户定制能过机筛（ATS / AI 筛简历）的一页
 
 | 文件 | 内容 | 没有时怎么办 |
 |---|---|---|
-| `profile.json` | 姓名、电话、邮箱、LinkedIn、个人网站、照片路径、毕业时间、文件名、个人红线词 | 复制 `profile.example.json`，问用户逐项填好 |
+| `profile.json` | 姓名、电话、邮箱、LinkedIn、个人网站、照片路径、毕业时间、文件名、个人红线词 | 按「首次使用」一节，问用户逐项填好 |
 | `materials.md` | 经历素材库（第 5 节）：每段经历的真实细节、数字、能写/不能写、可到岗时间、真实技能水平 | 复制 `materials.example.md`，按第 5 节"首次建库"和用户一起填 |
+
+---
+
+## 首次使用：帮用户把环境和资料准备好
+
+用户只负责下载这个文件夹，**其余都由你来做**，不要让用户自己敲命令。第一次用（或出稿前发现缺东西）时：
+
+1. **检查依赖**，缺什么就说清楚要装什么、为什么，**征得用户同意后再装**：
+   - `python3`（必需）：macOS 一般自带；没有时引导用户从 python.org 安装，或用系统包管理器。
+   - `zip` / `unzip`（必需）：macOS、Linux 一般自带。
+   - PyMuPDF（推荐，用来数页数、出预览图、检查 PDF）：`python3 -m pip install --user pymupdf`。
+   - PDF 转换（二选一）：已装 Microsoft Word（macOS）就直接用；否则装 LibreOffice（有 Homebrew 时 `brew install --cask libreoffice`，没有就引导用户到 libreoffice.org 下载）。Claude.ai 的沙盒里一般已有 `soffice`。
+   - 装完跑一次示例，确认能出一页 PDF：在一个工作目录里运行 `bash <skill>/scripts/build.sh <skill>/examples/example_cn.py 示例 cn`。
+2. **建 `profile.json`**：按 `profile.example.json` 的字段逐项问用户（没有的字段删掉），写好后给用户确认。
+3. **建 `materials.md`**：按第 5 节"首次建库"和用户一起填。
+
+做完再进入下面的流程。以后每次使用只需快速确认依赖还在。
 
 ---
 
