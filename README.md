@@ -1,16 +1,10 @@
-# resume-tailor · 你的专属 AI 求职顾问
+# resume-tailor · 把你的 AI 变成专属求职顾问
 
 [English](#english) · 中文
 
-> 别把 AI 当一次性改简历流水线。建好你的经历档案，它就成了懂你全部底牌、陪你打完整个求职季的专属求职顾问：记得你的每段经历、红线和投递记录，先判断该不该投、打哪几张牌，再按 JD 写一页简历。
+用 AI 改简历，每次都得重新解释一遍自己是谁，改出来满篇空话，缺数字还会顺手编一个，面试官一追问就露馅。报求职陪跑，动辄几千块，一个顾问同时带很多人，未必记得你每段经历的细节。这个 skill 换了个思路：一次建好你的经历档案，你自己的 AI 就成了只服务你、越用越懂你的求职顾问。
 
-**海投几十家没回音？用 AI 改简历，满篇"赋能、抓手"，面试一问就露馅？**
-
-把 JD 丢给它：它从你**全部的真实经历**里重新挑材料，用目标行业的语言重写，做成**刚好一页**的 Word + PDF，交付前先过一遍机筛（ATS / AI 筛简历）自检和 HR 挑刺。要投、要填网申、接到面试时说一声，就给你这一版的**面试速查卡**和**网申纯文本**，投完不忘写过什么，填网申表直接复制。
-
-`不编造` · `一页写满` · `按行业翻译经历` · `先写后学 + 速成清单` · `机筛自检 + HR 挑刺` · `⚡ 快投模式` · `🩺 简历体检`
-
-**不想先建素材库？** 对 AI 说"帮我体检这份简历"，发一份现成简历和 JD，就能拿到一页体检报告：每句话会被面试官怎么追问、哪里有夸大风险、JD 关键词漏了哪些。
+> 我是一个正在找实习的大学生，自己用这套流程改了 50 多份简历。之前做过一个 AI 改简历网站，后来发现连我自己都不用：它每次都从零开始，不记得我是谁。所以做了这个。
 
 Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，Windows、macOS、Linux 都支持，[安装](#安装)只要把一句话发给你的 AI。
 
@@ -20,9 +14,46 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 </p>
 <p align="center"><sub>示例简历里的人物、学校、公司、数字都是虚构的。</sub></p>
 
-## 和"让 AI 帮我改简历"有什么不一样
+## 它像顾问，不像工具
 
-| ❌ 普通 AI 改简历 | ✅ resume-tailor |
+**记得你。** 经历档案存在你自己的电脑上：哪段能写、哪段只能怎么写、哪段永远不写，哪个数字被你纠正过，它都记着。换一个对话也不用重讲。第一次多回答几个问题，之后越用越快。
+
+**先判断，再动笔。** 每个 JD 先查你够不够格：届别、地点、到岗时间、签证、这家公司的投递限制。再从你的全部经历里挑最能打的几段，用这个行业看重的逻辑来写。够不上或者胜算不大，它会直说。
+
+**替你守底线。** 不编经历，不编数字。每句话都拆成面试官会追问的小问题：你是主导还是参与？这个数字是团队的还是你个人的？已经上线还是还在规划？站不住的就改到站得住。
+
+**陪你打完整个求职季。** 每次投递都记进投递记录：投了哪家、用的哪版简历、走到哪一步、这家有什么投递限制。你随口说一句“XX 约面了”，它就更新；再投同一家时，它会先提醒你。同一个方向认真改过一版之后，后面的同类岗位可以快投，越投越快。
+
+还没准备好建档案？说“帮我体检这份简历”，发一份现成简历和 JD，先拿一页体检报告：每句话会被怎么追问、哪里有夸大风险、JD 关键词漏了哪些。
+
+## 和普通 AI、付费求职陪跑比
+
+| | 普通 AI 改简历 | 付费求职陪跑 | 这个 skill |
+|---|---|---|---|
+| 价格 | 看你用哪个 AI，有免费的 | 动辄几千块 | skill 免费开源，用你已有的 AI |
+| 懂不懂你的全部经历 | 只看你这次贴进来的 | 看顾问的精力，带的人多时未必记得细节 | 档案里有你的全部经历、红线和纠正记录 |
+| 随叫随到 | 是 | 按约好的时间 | 是，半夜改简历也行 |
+| 会不会编 | 缺数字容易编一个 | 看顾问的尺度 | 不编，每句话按面试官的追问核查 |
+| 换个岗位要不要重讲 | 新对话就得重讲 | 一般不用 | 不用，它先读档案 |
+| 能不能帮你判断值不值得投 | 一般拿到就写 | 能，还有行业经验 | 先查资格、挑经历，不合适会直说 |
+
+陪跑也有这个 skill 给不了的东西：真人的行业经验、人脉和内推。需要这些的话，陪跑值得考虑；这个 skill 帮你把简历和投递这部分做扎实。
+
+## 同一段经历，投不同岗位怎么写
+
+素材库里的一段真实经历（虚构示例）：*在券商研究所互联网传媒组实习，跟踪 8 家平台 20 个季度的月活和广告收入，写了短视频广告行业报告的一章。*
+
+| | 写法 |
+|---|---|
+| ❌ 普通 AI | 负责行业研究工作，协助撰写行业报告，助力团队决策，大幅提升工作效率。 |
+| ✅ 投券商 / 投研 | 搭建 8 家平台、20 个季度的月活与广告收入跟踪表，发现某平台广告收入增速连续两个季度低于用户增速，提示商业化效率下滑，支持组内调低盈利预测。 |
+| ✅ 投互联网商分 / 战略 | 拆解短视频平台广告变现链路（日活 × 广告加载率 × 单价），判断信息流广告增速将放缓、本地生活佣金成为新增量，观点被组长采纳进对外路演材料。 |
+
+两版的数字和结论都来自同一段经历的真实细节，只是换成了对方行业看重的逻辑：券商看**判断和预测**，互联网看**变现和增长**。素材库里没有的数字和结论，它会先问你，不会替你编。
+
+## 它具体会做什么
+
+| 常见的坑 | 它怎么做 |
 |---|---|
 | 只看你这次贴进来的那版简历 | 先把你的**全部经历素材库**过一遍，按 JD 重新选材；AI 有记忆时，会把记忆里的新经历经你确认后补进素材库 |
 | 拿到就写，缺数字就编一个 | **先问再写**：先列"放什么、不放什么、为什么"，你确认后才动手；缺细节就追问，不猜 |
@@ -36,18 +67,6 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 | 只说"写得不错"，不告诉你哪句会被追问穿帮 | **逐句拆解核查**：每句话拆成能核实的小问题（主导还是参与？团队的数字还是个人的？已经上线还是还在规划？），对照 6 类常见夸大逐个标出风险，尽量交给没参与写作的独立审稿代理来审 |
 | 不知道你投过哪里、走到哪一步 | 每次投递都记进**投递记录**（公司、岗位、简历版本、状态、公司限制），你随口说"XX 约面了"它就更新；资格核查时自动提醒"这家已有流程在走""这家被拒后 6 个月不能再投" |
 | 每投一家都要聊好几轮 | **⚡ 快投模式**：同方向已经精修过一版后，说"快投"就直接出稿，取舍在交付时说明 |
-
-## 同一段经历，投不同岗位怎么写
-
-素材库里的一段真实经历（虚构示例）：*在券商研究所互联网传媒组实习，跟踪 8 家平台 20 个季度的月活和广告收入，写了短视频广告行业报告的一章。*
-
-| | 写法 |
-|---|---|
-| ❌ 普通 AI | 负责行业研究工作，协助撰写行业报告，赋能团队决策，大幅提升工作效率。 |
-| ✅ 投券商 / 投研 | 搭建 8 家平台、20 个季度的月活与广告收入跟踪表，发现某平台广告收入增速连续两个季度低于用户增速，提示商业化效率下滑，支持组内调低盈利预测。 |
-| ✅ 投互联网商分 / 战略 | 拆解短视频平台广告变现链路（日活 × 广告加载率 × 单价），判断信息流广告增速将放缓、本地生活佣金成为新增量，观点被组长采纳进对外路演材料。 |
-
-两版的数字和结论都来自同一段经历的真实细节，只是换成了对方行业看重的逻辑：券商看**判断和预测**，互联网看**变现和增长**。素材库里没有的数字和结论，它会先问你，不会替你编。
 
 ## 安装
 
@@ -170,23 +189,54 @@ resume-tailor/
 
 ## English
 
-> Stop treating AI as a one-off resume rewriter. Build your experience bank once, and your agent becomes a career consultant that knows your full background and tailors every application: it remembers your experiences, red lines and application history, decides whether a role is worth applying for and which strengths to lead with, then writes a one-page resume for the JD.
+**resume-tailor: turn your AI into your own career consultant**
 
-**Sent out dozens of applications and heard nothing back? Asked an AI to fix your resume and got buzzwords that fall apart the moment an interviewer asks a follow-up?**
+Using AI on your resume usually means explaining who you are all over again, getting back vague filler, and sometimes a number it simply made up, which falls apart the first time an interviewer asks about it. Paid career coaching costs a lot, and a coach juggling many clients may not remember the details of every role you've had. This skill takes a different route: build your experience file once, and the AI you already use becomes a consultant that works only for you and knows you better every time.
 
-Give **resume-tailor** a job description. It picks material from **your entire real experience**, rewrites it in the language of the target industry, and builds a resume that fills **exactly one page** (Word + PDF). Before handing it over, it runs an ATS / AI-screening self-check and critiques the draft the way a recruiter would. When you're about to apply, fill in a form or got an interview, ask and it gives you that version's **interview cheat sheet** and **plain text for online application forms**, so you remember what you sent and can paste straight into the form.
+> I'm a university student looking for internships, and I've tailored more than 50 resumes with this process. I once built an AI resume website, then realised I didn't use it myself: it started from zero every time and never remembered who I was. So I built this instead.
 
-`No fabrication` · `One full page` · `Rewritten for each industry` · `List now, learn fast + crash course` · `ATS check + recruiter critique` · `⚡ Quick mode` · `🩺 Resume check-up`
+Works with Claude, ChatGPT / Codex, Cursor, GitHub Copilot, Gemini CLI and more, on Windows, macOS and Linux. To [install](#install), send one sentence to your AI. The example resumes above use a fictional person; every school, company and number in them is made up.
 
-**Not ready to build an experience bank?** Say "check up this resume" and send an existing resume plus the JD. You get a one-page report: how an interviewer would probe each line, where you risk overstating, and which JD keywords are missing.
+### A consultant, not a tool
 
-Works with Claude, ChatGPT / Codex, Cursor, GitHub Copilot, Gemini CLI and more, on Windows, macOS and Linux. To [install](#install), send one sentence to your AI.
+**It remembers you.** Your experience file lives on your own computer: which roles can go on a resume, which only in a certain way, which never, and every number you've corrected. Start a new conversation and you don't have to explain yourself again. The first session takes a few more questions; after that it gets faster.
 
-The examples above use a fictional person; every school, company and number in them is made up.
+**It judges before it writes.** Every JD starts with an eligibility check: graduation year, location, start date, visa, and any application rules at that company. Then it picks your strongest experiences from everything you've done and writes them the way that industry thinks. If you don't qualify, or the odds look poor, it tells you plainly.
 
-### How it differs from "AI, polish my resume"
+**It keeps you honest.** No invented experience, no invented numbers. Every line is broken into the questions an interviewer would ask: did you lead it or take part? Is that number the team's or yours? Did it launch, or is it still a plan? Anything that wouldn't survive the question gets rewritten until it would.
 
-| ❌ Typical AI resume edit | ✅ resume-tailor |
+**It stays with you for the whole season.** Each application goes into a log: the company, the resume version you sent, where it stands, and any rules that company has. Mention "X invited me to interview" and it updates the log; apply to the same company again and it warns you first. Once you've carefully tailored one version for a direction, similar roles can go through quick mode, so each application is faster than the last.
+
+Not ready to build a file yet? Say "check up this resume" and send an existing resume plus the JD. You get a one-page report on how an interviewer would probe each line, where you risk overstating, and which JD keywords are missing.
+
+### Compared with a regular AI chat and paid career coaching
+
+| | Regular AI chat | Paid career coaching | This skill |
+|---|---|---|---|
+| Cost | Depends on the AI; some are free | Often a lot | The skill is free and open source; you use the AI you already have |
+| Knows your full background | Only what you paste this time | Depends on the coach's bandwidth | Your file holds every experience, red line and correction |
+| Available whenever you need it | Yes | At booked times | Yes, even at 2 a.m. |
+| Makes things up | Tends to invent missing numbers | Depends on the coach | No; every line is checked against likely interview questions |
+| Re-explaining yourself for a new role | Every new chat | Usually not | No; it reads your file first |
+| Tells you whether a role is worth it | Usually just starts writing | Yes, with industry experience | Checks eligibility and picks experiences first, and says so if it's a poor fit |
+
+Career coaching does offer things this skill can't: a real person's industry experience, a network, and referrals. If you need those, coaching is worth considering; this skill makes sure your resume and applications are solid.
+
+### One experience, written for two different jobs
+
+A real experience from the bank (fictional example): *intern in a brokerage research team covering internet and media; tracked monthly users and ad revenue for 8 platforms over 20 quarters; wrote one chapter of a short-video advertising report.*
+
+| | Bullet |
+|---|---|
+| ❌ Typical AI | Responsible for industry research, assisted with industry reports, supported team decision-making and greatly improved efficiency. |
+| ✅ For equity research / banking | Built a tracker of monthly users and ad revenue for 8 platforms over 20 quarters; flagged one platform whose ad revenue grew slower than its user base for two straight quarters, supporting the team's cut to its earnings forecast. |
+| ✅ For tech strategy / business analysis | Broke down short-video ad monetisation (DAU × ad load × price); concluded feed-ad growth would slow and local-services commission would be the next driver, a view the team lead adopted for client roadshow materials. |
+
+Both versions use the same real numbers and conclusions; only the logic changes to what each industry values: research cares about **calls and forecasts**, tech cares about **monetisation and growth**. If a number or conclusion isn't in your bank, it asks you instead of making one up.
+
+### What it actually does
+
+| The usual problem | What it does |
 |---|---|
 | Only looks at the resume you pasted this time | Reviews your **whole experience bank** (`materials.md`) and re-selects for each JD; if your AI has memory, new facts from memory are added to the bank after you confirm |
 | Writes straight away and invents numbers it doesn't have | **Asks before writing**: proposes what goes in, what stays out and why, and waits for your OK; asks for missing details instead of guessing |
@@ -200,18 +250,6 @@ The examples above use a fictional person; every school, company and number in t
 | Says "looks good" without telling you which line will fall apart under questioning | **Claim-by-claim audit**: each line is split into checkable claims (led or took part? team number or yours? launched or still planned?) and checked against 6 common kinds of overstatement, ideally by a separate reviewer agent that didn't write it |
 | Has no idea where you've applied or how far you got | Every application goes into an **application log** (company, role, resume version, status, company rules); say "X invited me to interview" and it updates; the eligibility check warns you when a process is already running there or a cooling-off period applies |
 | Several rounds of back-and-forth for every application | **⚡ Quick mode**: once you have polished one version for a direction, say "quick mode" and it builds straight away, explaining its choices at delivery |
-
-### One experience, written for two different jobs
-
-A real experience from the bank (fictional example): *intern in a brokerage research team covering internet and media; tracked monthly users and ad revenue for 8 platforms over 20 quarters; wrote one chapter of a short-video advertising report.*
-
-| | Bullet |
-|---|---|
-| ❌ Typical AI | Responsible for industry research, assisted with industry reports, empowered team decision-making and greatly improved efficiency. |
-| ✅ For equity research / banking | Built a tracker of monthly users and ad revenue for 8 platforms over 20 quarters; flagged one platform whose ad revenue grew slower than its user base for two straight quarters, supporting the team's cut to its earnings forecast. |
-| ✅ For tech strategy / business analysis | Broke down short-video ad monetisation (DAU × ad load × price); concluded feed-ad growth would slow and local-services commission would be the next driver, a view the team lead adopted for client roadshow materials. |
-
-Both versions use the same real numbers and conclusions; only the logic changes to what each industry values: research cares about **calls and forecasts**, tech cares about **monetisation and growth**. If a number or conclusion isn't in your bank, it asks you instead of making one up.
 
 ### Install
 
