@@ -2,6 +2,8 @@
 profile.json
 materials.md
 photo.*
+投递/
+applications/
 !examples/photo_example.jpg
 
 # build outputs / scratch

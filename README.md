@@ -99,7 +99,7 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，[
 对 AI 说："用 resume-tailor 帮我按这个 JD 改简历"，并贴上 JD。有两种模式：
 
 - **精修模式**（默认）：第一次投某个方向、冲刺最想去的公司时用。选材和缺的细节都会先问你。
-- **⚡ 快投模式**：说"快投""海投""直接出稿"，或一次贴好几个 JD。不再等你确认选材，直接按素材库出稿，交付时说明自动做了哪些取舍。它只用你标了 ✅ 的内容，不编数字、不加你没同意过的新技能；资格核查照做，不过的会单独停下来问你。建议同一个方向先精修一版，之后同类岗位用快投。
+- **⚡ 快投模式**：说"快投""海投""直接出稿"，或一次贴好几个 JD。不再等你确认选材，直接按素材库出稿，交付时说明自动做了哪些取舍。它只用你标了 ✅ 的内容，不编数字、不加你没同意过的新技能；资格核查照做，不过的会单独停下来问你。每个方向第一次投时，那一份会先走精修模式和你确认选材，记进素材库后，同方向的岗位就能直接快投。一次贴多个 JD 时，每份放在单独的文件夹里，对话里只给一张汇总表，完整的速查卡和网申文本都在各自的文件里。
 
 完整流程：
 
@@ -247,7 +247,7 @@ New versions keep using your existing `profile.json` and `materials.md`; you don
 Say "Use resume-tailor to tailor my resume for this JD" and paste the job description. There are two modes:
 
 - **Polish mode** (default): for the first application in a direction or a company you really want. It asks you about selection and missing details first.
-- **⚡ Quick mode**: say "quick mode", "mass apply" or "just build it", or paste several JDs at once. It skips waiting for your OK on selection, builds from your bank, and explains its choices at delivery. It only uses items you marked ✅, never invents numbers and never adds new skills you haven't approved; the eligibility check still runs, and any JD that fails it is paused for you. Polish one version per direction first, then use quick mode for similar roles.
+- **⚡ Quick mode**: say "quick mode", "mass apply" or "just build it", or paste several JDs at once. It skips waiting for your OK on selection, builds from your bank, and explains its choices at delivery. It only uses items you marked ✅, never invents numbers and never adds new skills you haven't approved; the eligibility check still runs, and any JD that fails it is paused for you. The first application in a new direction goes through polish mode so you can confirm the selection; once it is saved in your bank, later roles in that direction go straight through. With several JDs, each gets its own folder, the chat shows one summary table, and the full cheat sheets and form text are in each folder's notes file.
 
 The full process:
 
