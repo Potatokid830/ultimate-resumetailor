@@ -310,7 +310,7 @@ python <skill>/scripts/build.py build_xx.py ... --jd jd_公司_岗位.txt       
 - PDF 转换：Windows 依次试 Microsoft Word → WPS → LibreOffice；macOS / Linux 依次试 LibreOffice → Microsoft Word for Mac（Word for Mac 有沙盒，工作目录放在 ~/Documents 或 ~/Desktop 下最稳）。都失败时，让用户用 Word / WPS 打开 docx 另存为 PDF，再单独跑 `python <skill>/scripts/ats_check.py xx.docx xx.pdf`。
 - 文本文件（JD 关键词、profile.json）按 UTF-8 读，Windows 记事本存的带 BOM 文件也能读。
 - 页数、预览图、PDF 文本检查用 PyMuPDF（`pip install pymupdf`）或 poppler。
-- **检查**：页数必须是 **1**；看 `preview_*.png`，底部不能留白，也不能溢出到第 2 页。溢出就删字，留白就补用户真实的内容（`ats_check.py` 在底部空白超过约 2 cm 时会报 ⚠️，这条要当成必须改）。优先补定级信息和与 JD 相关的内容：相关课程、编程语言、竞赛奖项、校园经历。
+- **检查**：页数必须是 **1**；看 `preview_*.png`，底部不能留白，也不能溢出到第 2 页。溢出或留白时**先看 `fit_report.py` 的输出**（build.py 会自动打印；也可以单独跑 `python <skill>/scripts/fit_report.py xx.pdf --docx xx.docx`）：它报出溢出几行、还能放几行，并列出"短尾行"（某条要点最后一行只有几个字，删掉就少一行）。按短尾行清单删字，不要一点一点试。留白就补用户真实的内容（`ats_check.py` 在底部空白超过约 2 cm 时会报 ⚠️，这条要当成必须改）。优先补定级信息和与 JD 相关的内容：相关课程、编程语言、竞赛奖项、校园经历。
 - **JD 关键词文件**：每行一个词，`必须:` 开头是硬性要求，同义词用 `/` 隔开（例 `必须:SQL`、`数据分析/data analysis`）。
 - **中英合并成一个文档**（第 1 页中文、第 2 页英文）：去掉 w14:paraId；在英文第一段的 pPr 里插入 `<w:pageBreakBefore/>`；不要单独插一个分页段落，否则会多出空白页。
 

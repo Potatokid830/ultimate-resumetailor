@@ -139,6 +139,7 @@ resume-tailor/
 │   ├── helpers_en.py        # 英文积木(Calibri,标题大写)
 │   ├── ats_fix.py           # 自动补"预计/Expected"、修页边距
 │   ├── ats_check.py         # 机筛自检 + JD 关键词覆盖
+│   ├── fit_report.py        # 一页压不下 / 留白时:差几行、删哪几个字最省事
 │   ├── addphoto.py          # 可选证件照
 │   └── pdf_tools.py         # 转 PDF(LibreOffice / Word)、页数、预览图
 ├── examples/

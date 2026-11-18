@@ -123,6 +123,7 @@ if not pdf_tools.convert(docx, pdf):
     sys.exit(0)
 print('%s -> %s  pages: %s   # 必须是 1' % (docx, pdf, pdf_tools.pages(pdf)))
 pdf_tools.png(pdf, 'preview_' + pdf_name)  # 看图:底部不能留白,也不能溢出
+py(os.path.join(HERE, 'fit_report.py'), pdf, '--docx', docx, '--auto', quiet=False)  # 溢出或留白时才输出
 check = [os.path.join(HERE, 'ats_check.py'), docx, pdf] + (['--jd', jd] if jd else [])
 if py(*check, quiet=False):
     print('⚠️ 机筛自检没通过,按上面的 ❌ 逐条改完再交付')
