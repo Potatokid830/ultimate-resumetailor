@@ -4,7 +4,7 @@
 
 **海投几十家没回音？用 AI 改简历，满篇"赋能、抓手"，面试一问就露馅？**
 
-把 JD 丢给它：它从你**全部的真实经历**里重新挑材料，用目标行业的语言重写，做成**刚好一页**的 Word + PDF，交付前先过一遍机筛（ATS / AI 筛简历）自检和 HR 挑刺。每一版还附**面试速查卡**和**网申纯文本**，投完不忘写过什么，填网申表直接复制。
+把 JD 丢给它：它从你**全部的真实经历**里重新挑材料，用目标行业的语言重写，做成**刚好一页**的 Word + PDF，交付前先过一遍机筛（ATS / AI 筛简历）自检和 HR 挑刺。要投、要填网申、接到面试时说一声，就给你这一版的**面试速查卡**和**网申纯文本**，投完不忘写过什么，填网申表直接复制。
 
 `不编造` · `一页写满` · `按行业翻译经历` · `先写后学 + 速成清单` · `机筛自检 + HR 挑刺` · `⚡ 快投模式` · `🩺 简历体检`
 
@@ -25,12 +25,12 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 | 只看你这次贴进来的那版简历 | 先把你的**全部经历素材库**过一遍，按 JD 重新选材；AI 有记忆时，会把记忆里的新经历经你确认后补进素材库 |
 | 拿到就写，缺数字就编一个 | **先问再写**：先列"放什么、不放什么、为什么"，你确认后才动手；缺细节就追问，不猜 |
 | 润色措辞，"负责""协助""参与" | **按目标行业翻译经历**：分析 → 判断 → 建议 → 结果，用券商 / 互联网 / 咨询各自的语言写（见下面的例子） |
-| 要么不敢写 JD 技能，要么乱写"精通" | **先写后学**：只写 1 天到 1 周能上手的技能，用词实诚，并附**速成清单**（学习路线、练手项目、面试题） |
+| 要么不敢写 JD 技能，要么乱写"精通" | **先写后学**：只写 1 天到 1 周能上手的技能，用词实诚，要时附**速成清单**（学习路线、练手项目、面试题） |
 | 包装和编造没有边界 | 明确的**红线**：GPA、经历、结果、证书必须真实；你标过 ❌ 的内容任何版本都不写 |
 | 不在乎排版 | 固定模版，**一页写满**，不溢出、不留白 |
 | 交付就结束 | 先查**资格**（届别、地点、到岗时间、签证），交付前跑 **ATS 自检** + **JD 关键词覆盖**，再站在 HR 角度挑刺 |
-| 投了十几个版本，面试时忘了这家写的是什么 | 每版附**面试速查卡**：写了哪些数字、依据是什么、结论怎么来的、新技能怎么答 |
-| 网申还要一格一格从 PDF 里复制 | 每版附**网申纯文本**：按北森、Moka、Workday 等表单的字段排好，日期统一，直接粘贴 |
+| 投了十几个版本，面试时忘了这家写的是什么 | 接到面试说一声，就给你这一版的**面试速查卡**：写了哪些数字、依据是什么、结论怎么来的、新技能怎么答 |
+| 网申还要一格一格从 PDF 里复制 | 要填网申时说一声，就给你**网申纯文本**：按北森、Moka、Workday 等表单的字段排好，日期统一，直接粘贴 |
 | 只说"写得不错"，不告诉你哪句会被追问穿帮 | **逐句拆解核查**：每句话拆成能核实的小问题（主导还是参与？团队的数字还是个人的？已经上线还是还在规划？），对照 6 类常见夸大逐个标出风险，尽量交给没参与写作的独立审稿代理来审 |
 | 每投一家都要聊好几轮 | **⚡ 快投模式**：同方向已经精修过一版后，说"快投"就直接出稿，取舍在交付时说明 |
 
@@ -103,7 +103,7 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 
 - **🩺 简历体检**：说"帮我体检这份简历"，发一份现成简历（最好带上 JD）。不用建素材库，也不改写，直接给一页体检报告：总评和最该先改的 3 件事；拆出多少个主张、几个站得住、几个要准备、几个有夸大风险；JD 关键词覆盖率；逐条写出面试官会怎么追问、建议怎么改。报告里不写你的联系方式，要截图分享时还可以把公司和学校名换成泛称。体检时你确认过的事实，以后直接作为素材库初稿。
 - **精修模式**（默认）：第一次投某个方向、冲刺最想去的公司时用。选材和缺的细节都会先问你。
-- **⚡ 快投模式**：说"快投""海投""直接出稿"，或一次贴好几个 JD。不再等你确认选材，直接按素材库出稿，交付时说明自动做了哪些取舍。它只用你标了 ✅ 的内容，不编数字、不加你没同意过的新技能；资格核查照做，不过的会单独停下来问你。每个方向第一次投时，那一份会先走精修模式和你确认选材，记进素材库后，同方向的岗位就能直接快投。一次贴多个 JD 时，每份放在单独的文件夹里，对话里只给一张汇总表，完整的速查卡和网申文本都在各自的文件里。
+- **⚡ 快投模式**：说"快投""海投""直接出稿"，或一次贴好几个 JD。不再等你确认选材，直接按素材库出稿，交付时说明自动做了哪些取舍。它只用你标了 ✅ 的内容，不编数字、不加你没同意过的新技能；资格核查照做，不过的会单独停下来问你。每个方向第一次投时，那一份会先走精修模式和你确认选材，记进素材库后，同方向的岗位就能直接快投。一次贴多个 JD 时，每份放在单独的文件夹里，对话里只给一张汇总表，要哪几份的速查卡或网申文本再说。
 
 完整流程：
 
@@ -111,14 +111,16 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 2. **回顾全部经历**：把 `materials.md` 整份过一遍，按 JD 挑出最相关的。整份读、按需确认：只有这份 JD 要用、还没确认过的条目才问你。如果你的 AI 有记忆功能，它也会查记忆里有没有素材库还没收录的经历、数字或更正，这份 JD 要用的给你确认，其余存成待确认。
 3. **先问再写**：列出"放哪些、每段写什么角度、哪些不放及原因"，等你确认（快投模式跳过）。
 4. **缺细节就追问**：只有你知道的数字和反馈，直接问你（快投模式不问，缺的不写，交付时列出来）。
-5. **技能对齐 JD**：短期能学会的先写上，附速成清单。
+5. **技能对齐 JD**：短期能学会的先写上，要速成清单时说一声。
 6. **写稿，先审文字**：先出纯文字稿，做逐句拆解核查（每条要点拆成能核实的小主张，在素材库里找出处，有夸大风险的改到站得住）和 HR 挑刺；有旧简历时，新旧两版逐项对比，新版不能在任何一项上输给旧版。文字定稿后才排版，省得反复重压一页。
 7. **排版出稿 + 机筛自检**：一页 docx + pdf，一页写满；`ats_check.py` 检查板块标题、联系方式、字号、页边距、表格/文本框、文档属性、PDF 可解析性、底部留白、AI/Al 这类拼写和 JD 关键词覆盖。
 8. **交付**（交付后自动记进投递记录 `applications.md`；你说"XX 约面了""XX 拒了"，它会顺手更新状态）：
-   - docx + pdf，并说明选了什么、没选什么、哪些技能要补、能不能拿面试的坦白评价
-   - **面试速查卡**：这一版写的每个数字和依据、每个结论是怎么分析出来的、"先写后学"技能怎么如实回答、和其他版本差在哪
-   - **网申纯文本**：按网申表字段排好的教育、经历、项目、技能，日期统一成 `2025-07` 格式，没有项目符号和粗体，直接粘贴
-   - 速查卡和网申纯文本会同时存成和简历同名的 `.notes.md`，以后接到面试电话翻出来就行
+   - 默认：docx + pdf，加一张短交付表：选了什么、没选什么、哪些技能要补、机筛结果、能不能拿面试的坦白评价
+   - 按需（说"要投了""要填网申""接到面试了"时再生成）：
+     - **面试速查卡**：这一版写的每个数字和依据、每个结论是怎么分析出来的、"先写后学"技能怎么如实回答、和其他版本差在哪
+     - **网申纯文本**：按网申表字段排好的教育、经历、项目、技能，日期统一成 `2025-07` 格式，没有项目符号和粗体，直接粘贴
+     - **速成清单**：每个"先写后学"技能的学习路线、练手项目和面试题
+   - 按需生成的内容存成和简历同名的 `.notes.md`，以后接到面试电话翻出来就行
 
 ## 目录结构
 
@@ -163,7 +165,7 @@ resume-tailor/
 
 **Sent out dozens of applications and heard nothing back? Asked an AI to fix your resume and got buzzwords that fall apart the moment an interviewer asks a follow-up?**
 
-Give **resume-tailor** a job description. It picks material from **your entire real experience**, rewrites it in the language of the target industry, and builds a resume that fills **exactly one page** (Word + PDF). Before handing it over, it runs an ATS / AI-screening self-check and critiques the draft the way a recruiter would. Every version also comes with an **interview cheat sheet** and **plain text for online application forms**, so you remember what you sent and can paste straight into the form.
+Give **resume-tailor** a job description. It picks material from **your entire real experience**, rewrites it in the language of the target industry, and builds a resume that fills **exactly one page** (Word + PDF). Before handing it over, it runs an ATS / AI-screening self-check and critiques the draft the way a recruiter would. When you're about to apply, fill in a form or got an interview, ask and it gives you that version's **interview cheat sheet** and **plain text for online application forms**, so you remember what you sent and can paste straight into the form.
 
 `No fabrication` · `One full page` · `Rewritten for each industry` · `List now, learn fast + crash course` · `ATS check + recruiter critique` · `⚡ Quick mode` · `🩺 Resume check-up`
 
@@ -180,12 +182,12 @@ The examples above use a fictional person; every school, company and number in t
 | Only looks at the resume you pasted this time | Reviews your **whole experience bank** (`materials.md`) and re-selects for each JD; if your AI has memory, new facts from memory are added to the bank after you confirm |
 | Writes straight away and invents numbers it doesn't have | **Asks before writing**: proposes what goes in, what stays out and why, and waits for your OK; asks for missing details instead of guessing |
 | Polishes wording ("responsible for", "assisted with") | **Translates each experience into the target industry's logic**: analysis → judgement → recommendation → result, in the language of banking, tech, consulting and so on (example below) |
-| Either skips JD skills you lack or claims "expert" | **List now, learn fast**: only skills you can pick up in a day to a week, worded honestly ("familiar with"), each with a **crash-course plan** (learning route, small portfolio project, likely interview questions) |
+| Either skips JD skills you lack or claims "expert" | **List now, learn fast**: only skills you can pick up in a day to a week, worded honestly ("familiar with"), with a **crash-course plan** when you ask (learning route, small portfolio project, likely interview questions) |
 | No line between framing and fabrication | Clear **red lines**: grades, roles, results and certificates must be real; anything you mark ❌ never appears in any version |
 | Ignores layout | Fixed template, **one full page**: no overflow, no empty space at the bottom |
 | Done once the text is written | Checks **eligibility** first (graduation year, location, start date, visa), then runs the **ATS self-check** and **JD keyword coverage**, then a recruiter-style critique |
-| Fifteen versions later, you can't remember what you told this company | Each version comes with an **interview cheat sheet**: every number and where it came from, how each conclusion was reached, how to answer honestly about new skills |
-| Online forms mean copying from your PDF box by box | Each version comes with **form-ready plain text** laid out by the usual fields (Workday, company career sites and so on), with consistent dates and no bullets |
+| Fifteen versions later, you can't remember what you told this company | Got an interview? Ask for that version's **interview cheat sheet**: every number and where it came from, how each conclusion was reached, how to answer honestly about new skills |
+| Online forms mean copying from your PDF box by box | Ask for **form-ready plain text** laid out by the usual fields (Workday, company career sites and so on), with consistent dates and no bullets |
 | Says "looks good" without telling you which line will fall apart under questioning | **Claim-by-claim audit**: each line is split into checkable claims (led or took part? team number or yours? launched or still planned?) and checked against 6 common kinds of overstatement, ideally by a separate reviewer agent that didn't write it |
 | Several rounds of back-and-forth for every application | **⚡ Quick mode**: once you have polished one version for a direction, say "quick mode" and it builds straight away, explaining its choices at delivery |
 
@@ -258,7 +260,7 @@ Say "Use resume-tailor to tailor my resume for this JD" and paste the job descri
 
 - **🩺 Resume check-up**: say "check up this resume" and send an existing resume (ideally with the JD). No experience bank and no rewriting: you get a one-page report with an overall verdict and the top 3 fixes; how many claims were found and how many hold up, need preparation or risk overstating; JD keyword coverage; and, line by line, how an interviewer would probe it and how to fix it. The report leaves out your contact details and can swap company and school names for generic ones if you want to share a screenshot. Facts you confirm during the check-up become the first draft of your experience bank.
 - **Polish mode** (default): for the first application in a direction or a company you really want. It asks you about selection and missing details first.
-- **⚡ Quick mode**: say "quick mode", "mass apply" or "just build it", or paste several JDs at once. It skips waiting for your OK on selection, builds from your bank, and explains its choices at delivery. It only uses items you marked ✅, never invents numbers and never adds new skills you haven't approved; the eligibility check still runs, and any JD that fails it is paused for you. The first application in a new direction goes through polish mode so you can confirm the selection; once it is saved in your bank, later roles in that direction go straight through. With several JDs, each gets its own folder, the chat shows one summary table, and the full cheat sheets and form text are in each folder's notes file.
+- **⚡ Quick mode**: say "quick mode", "mass apply" or "just build it", or paste several JDs at once. It skips waiting for your OK on selection, builds from your bank, and explains its choices at delivery. It only uses items you marked ✅, never invents numbers and never adds new skills you haven't approved; the eligibility check still runs, and any JD that fails it is paused for you. The first application in a new direction goes through polish mode so you can confirm the selection; once it is saved in your bank, later roles in that direction go straight through. With several JDs, each gets its own folder, the chat shows one summary table, and you ask for whichever cheat sheets or form text you need.
 
 The full process:
 
@@ -266,14 +268,16 @@ The full process:
 2. **Reviews your whole experience bank** in `materials.md` and picks what fits the JD best. It reads everything but only asks about unconfirmed items this JD needs. If your AI has memory, it also checks memory for experiences, numbers or corrections the bank is missing; the ones this JD needs go to you for confirmation, the rest are saved as "to confirm".
 3. **Asks before writing**: lists what goes in, the angle for each item, and what stays out and why, then waits for your OK (skipped in quick mode).
 4. **Asks for missing details**: numbers and feedback only you know; it never guesses (in quick mode it leaves them out and lists them at delivery).
-5. **Aligns skills with the JD**: adds skills you can learn quickly, each with a crash-course plan.
+5. **Aligns skills with the JD**: adds skills you can learn quickly; ask for a crash-course plan when you want one.
 6. **Writes and reviews the text first**: a plain-text draft goes through the claim-by-claim audit (each bullet split into checkable claims, matched to your bank, anything overstated fixed) and a recruiter critique; if you gave it an old resume, the two are compared side by side and the new one must not be worse on any point. Layout only starts once the text is final, so the page isn't squeezed again and again.
 7. **Lays it out + ATS self-check**: one full page, docx + pdf; `ats_check.py` checks section headings, contact details, font sizes, margins, tables/text boxes, document properties, PDF text extraction, empty space at the bottom, typos such as "Al" for "AI", and JD keyword coverage.
 8. **Delivers** (and logs the application in `applications.md`; say "X invited me to interview" or "X rejected me" and it updates the status):
-   - docx + pdf, with what was included, what was left out, which skills to learn, and an honest view of your interview chances
-   - **Interview cheat sheet**: every number in this version and its basis, how each conclusion was reached, honest answers for "list now, learn fast" skills, and how this version differs from your others
-   - **Form-ready plain text**: education, experience, projects and skills laid out by the usual form fields, dates as `2025-07`, no bullets or bold, ready to paste
-   - The cheat sheet and form text are also saved next to the resume as `<file name>.notes.md`, so you can pull them up when an interviewer calls
+   - By default: docx + pdf, plus a short delivery table: what was included, what was left out, which skills to learn, the ATS result, and an honest view of your interview chances
+   - On request (say "I'm applying", "I need to fill in the form" or "I got an interview"):
+     - **Interview cheat sheet**: every number in this version and its basis, how each conclusion was reached, honest answers for "list now, learn fast" skills, and how this version differs from your others
+     - **Form-ready plain text**: education, experience, projects and skills laid out by the usual form fields, dates as `2025-07`, no bullets or bold, ready to paste
+     - **Crash-course plan**: learning route, practice project and likely interview questions for each "list now, learn fast" skill
+   - Anything generated on request is saved next to the resume as `<file name>.notes.md`, so you can pull it up when an interviewer calls
 
 ### Your data
 
