@@ -46,7 +46,7 @@ FIELDS = {
 # 不进 zip 的跟踪文件:仓库维护用的东西
 EXCLUDE = ('.gitignore', 'tools/')  # docs/ 留着:README 里的示例图在里面
 # 绝不能出现在 zip 里的文件名(个人数据)
-PERSONAL = re.compile(r'(^|/)(profile\.json|materials\.md|photo\.[a-z]+|.*\.notes\.md)$', re.I)
+PERSONAL = re.compile(r'(^|/)(profile\.json|materials\.md|applications\.md|photo\.[a-z]+|.*\.notes\.md)$', re.I)
 # 示例里允许出现的虚构联系方式
 OK_EMAIL = re.compile(r'@example\.com$', re.I)
 OK_PHONE = {'+86 138 0000 0000', '+65 8000 0000'}

@@ -107,14 +107,14 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 
 完整流程：
 
-1. **资格核查**：届别、地点、到岗时间、签证、成绩门槛、投递数量限制。有不过的先告诉你。
+1. **资格核查**：届别、地点、到岗时间、签证、成绩门槛、投递数量限制，并查你的投递记录：这家公司有没有正在走的流程、有没有冷却期。有不过的先告诉你。
 2. **回顾全部经历**：把 `materials.md` 整份过一遍，按 JD 挑出最相关的。如果你的 AI 有记忆功能，它会先查记忆里有没有素材库还没收录的经历、数字或更正，列给你确认后再并入素材库。
 3. **先问再写**：列出"放哪些、每段写什么角度、哪些不放及原因"，等你确认（快投模式跳过）。
 4. **缺细节就追问**：只有你知道的数字和反馈，直接问你（快投模式不问，缺的不写，交付时列出来）。
 5. **技能对齐 JD**：短期能学会的先写上，附速成清单。
 6. **出稿**：一页 docx + pdf，一页写满。
 7. **HR 挑刺 + 逐句拆解核查 + 机筛自检**：每条要点拆成能核实的小主张，在素材库里找出处，有夸大风险的改到站得住；`ats_check.py` 检查板块标题、联系方式、字号、页边距、表格/文本框、文档属性、PDF 可解析性、底部留白、AI/Al 这类拼写和 JD 关键词覆盖；有旧简历时，新旧两版逐项对比，新版不能在任何一项上输给旧版。
-8. **交付**：
+8. **交付**（交付后自动记进投递记录 `applications.md`；你说"XX 约面了""XX 拒了"，它会顺手更新状态）：
    - docx + pdf，并说明选了什么、没选什么、哪些技能要补、能不能拿面试的坦白评价
    - **面试速查卡**：这一版写的每个数字和依据、每个结论是怎么分析出来的、"先写后学"技能怎么如实回答、和其他版本差在哪
    - **网申纯文本**：按网申表字段排好的教育、经历、项目、技能，日期统一成 `2025-07` 格式，没有项目符号和粗体，直接粘贴
@@ -127,6 +127,7 @@ resume-tailor/
 ├── SKILL.md                 # skill 本体:流程、三种模式(体检/精修/快投)、逐句核查、包装与编造的边界、行业翻译、先写后学、模版规则
 ├── profile.example.json     # 个人信息配置示例(虚构)→ 复制成 profile.json
 ├── materials.example.md     # 经历素材库模版 + 填写说明 → 复制成 materials.md
+├── applications.example.md  # 投递记录模版(虚构示例)→ 复制成 applications.md
 ├── assets/
 │   ├── template_cn.docx     # 中文空白模版(占位符)
 │   └── template_en.docx     # 英文空白模版(占位符)
@@ -149,7 +150,7 @@ resume-tailor/
 
 ## 隐私
 
-你的 `profile.json`、`materials.md`、照片、生成的简历和 `.notes.md` 都在 `.gitignore` 里。个人内容只放这两份文件，不要写进 `SKILL.md`，这样 skill 可以放心更新和分享。
+你的 `profile.json`、`materials.md`、`applications.md`、照片、生成的简历和 `.notes.md` 都在 `.gitignore` 里。个人内容只放这三份档案，不要写进 `SKILL.md`，这样 skill 可以放心更新和分享。
 
 ## License
 
@@ -260,14 +261,14 @@ Say "Use resume-tailor to tailor my resume for this JD" and paste the job descri
 
 The full process:
 
-1. **Checks eligibility**: graduation year, location, start date and duration, visa, GPA cut-offs, application limits. Anything that fails is raised first.
+1. **Checks eligibility**: graduation year, location, start date and duration, visa, GPA cut-offs, application limits, plus your application log: any process already running at this company, or a cooling-off period. Anything that fails is raised first.
 2. **Reviews your whole experience bank** in `materials.md` and picks what fits the JD best. If your AI has memory, it first checks memory for experiences, numbers or corrections the bank is missing, shows them to you, and adds them only after you confirm.
 3. **Asks before writing**: lists what goes in, the angle for each item, and what stays out and why, then waits for your OK (skipped in quick mode).
 4. **Asks for missing details**: numbers and feedback only you know; it never guesses (in quick mode it leaves them out and lists them at delivery).
 5. **Aligns skills with the JD**: adds skills you can learn quickly, each with a crash-course plan.
 6. **Builds the resume**: one full page, docx + pdf.
 7. **Recruiter critique + claim-by-claim audit + ATS self-check**: each bullet is split into checkable claims, matched to your bank, and anything overstated is fixed; `ats_check.py` checks section headings, contact details, font sizes, margins, tables/text boxes, document properties, PDF text extraction, empty space at the bottom, typos such as "Al" for "AI", and JD keyword coverage. If you gave it an old resume, it compares the two side by side, and the new one must not be worse on any point.
-8. **Delivers**:
+8. **Delivers** (and logs the application in `applications.md`; say "X invited me to interview" or "X rejected me" and it updates the status):
    - docx + pdf, with what was included, what was left out, which skills to learn, and an honest view of your interview chances
    - **Interview cheat sheet**: every number in this version and its basis, how each conclusion was reached, honest answers for "list now, learn fast" skills, and how this version differs from your others
    - **Form-ready plain text**: education, experience, projects and skills laid out by the usual form fields, dates as `2025-07`, no bullets or bold, ready to paste
@@ -275,7 +276,7 @@ The full process:
 
 ### Your data
 
-Your personal details live in `profile.json` (name, phone, email, links, optional photo) and your experiences in `materials.md`. Both files, your photo, every generated resume and the `.notes.md` files are in `.gitignore`, so they are never committed. Keep personal content out of `SKILL.md`, so the skill itself can be updated and shared safely.
+Your personal details live in `profile.json` (name, phone, email, links, optional photo) your experiences in `materials.md` and your applications in `applications.md`. All three files, your photo, every generated resume and the `.notes.md` files are in `.gitignore`, so they are never committed. Keep personal content out of `SKILL.md`, so the skill itself can be updated and shared safely.
 
 ### Folder structure
 
