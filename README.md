@@ -1,6 +1,8 @@
-# resume-tailor · 按 JD 定制一页简历的 AI Skill
+# resume-tailor · 你的专属 AI 求职顾问
 
 [English](#english) · 中文
+
+> 别把 AI 当一次性改简历流水线。建好你的经历档案，它就成了懂你全部底牌、陪你打完整个求职季的专属求职顾问：记得你的每段经历、红线和投递记录，先判断该不该投、打哪几张牌，再按 JD 写一页简历。
 
 **海投几十家没回音？用 AI 改简历，满篇"赋能、抓手"，面试一问就露馅？**
 
@@ -32,6 +34,7 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 | 投了十几个版本，面试时忘了这家写的是什么 | 接到面试说一声，就给你这一版的**面试速查卡**：写了哪些数字、依据是什么、结论怎么来的、新技能怎么答 |
 | 网申还要一格一格从 PDF 里复制 | 要填网申时说一声，就给你**网申纯文本**：按北森、Moka、Workday 等表单的字段排好，日期统一，直接粘贴 |
 | 只说"写得不错"，不告诉你哪句会被追问穿帮 | **逐句拆解核查**：每句话拆成能核实的小问题（主导还是参与？团队的数字还是个人的？已经上线还是还在规划？），对照 6 类常见夸大逐个标出风险，尽量交给没参与写作的独立审稿代理来审 |
+| 不知道你投过哪里、走到哪一步 | 每次投递都记进**投递记录**（公司、岗位、简历版本、状态、公司限制），你随口说"XX 约面了"它就更新；资格核查时自动提醒"这家已有流程在走""这家被拒后 6 个月不能再投" |
 | 每投一家都要聊好几轮 | **⚡ 快投模式**：同方向已经精修过一版后，说"快投"就直接出稿，取舍在交付时说明 |
 
 ## 同一段经历，投不同岗位怎么写
@@ -148,12 +151,16 @@ resume-tailor/
 │   ├── example_cn.py        # 虚构人物中文示例(互联网商分)
 │   ├── example_en.py        # 虚构人物英文示例(strategy / business analyst)
 │   └── photo_example.jpg    # 占位头像
-└── docs/                    # README 用的示例截图和 PDF
+├── docs/                    # README 用的示例截图和 PDF
+└── tools/
+    └── package_workbuddy.py # 打包上传 WorkBuddy 用的 zip(维护者用,改简历用不到)
 ```
 
 ## 隐私
 
-你的 `profile.json`、`materials.md`、`applications.md`、照片、生成的简历和 `.notes.md` 都在 `.gitignore` 里。个人内容只放这三份档案，不要写进 `SKILL.md`，这样 skill 可以放心更新和分享。
+- **存在哪**：你的档案（`profile.json`、`materials.md`、`applications.md`）、照片、生成的简历、`.notes.md` 和体检报告都存在你自己的电脑上（或你用的 AI 的沙盒里），都在 `.gitignore` 里，不会被提交到 GitHub。
+- **对话内容**：你发给 AI 的简历、经历和 JD，会按你所用 AI 服务（Claude、ChatGPT、Codex、WorkBuddy 等）的隐私政策处理。这个 skill 管不了平台怎么存对话，介意的话先看一下所用平台的说明。
+- 个人内容只放这三份档案，不要写进 `SKILL.md`，这样 skill 可以放心更新和分享。
 
 ## License
 
@@ -162,6 +169,8 @@ resume-tailor/
 ---
 
 ## English
+
+> Stop treating AI as a one-off resume rewriter. Build your experience bank once, and your agent becomes a career consultant that knows your full background and tailors every application: it remembers your experiences, red lines and application history, decides whether a role is worth applying for and which strengths to lead with, then writes a one-page resume for the JD.
 
 **Sent out dozens of applications and heard nothing back? Asked an AI to fix your resume and got buzzwords that fall apart the moment an interviewer asks a follow-up?**
 
@@ -189,6 +198,7 @@ The examples above use a fictional person; every school, company and number in t
 | Fifteen versions later, you can't remember what you told this company | Got an interview? Ask for that version's **interview cheat sheet**: every number and where it came from, how each conclusion was reached, how to answer honestly about new skills |
 | Online forms mean copying from your PDF box by box | Ask for **form-ready plain text** laid out by the usual fields (Workday, company career sites and so on), with consistent dates and no bullets |
 | Says "looks good" without telling you which line will fall apart under questioning | **Claim-by-claim audit**: each line is split into checkable claims (led or took part? team number or yours? launched or still planned?) and checked against 6 common kinds of overstatement, ideally by a separate reviewer agent that didn't write it |
+| Has no idea where you've applied or how far you got | Every application goes into an **application log** (company, role, resume version, status, company rules); say "X invited me to interview" and it updates; the eligibility check warns you when a process is already running there or a cooling-off period applies |
 | Several rounds of back-and-forth for every application | **⚡ Quick mode**: once you have polished one version for a direction, say "quick mode" and it builds straight away, explaining its choices at delivery |
 
 ### One experience, written for two different jobs
@@ -281,11 +291,13 @@ The full process:
 
 ### Your data
 
-Your personal details live in `profile.json` (name, phone, email, links, optional photo) your experiences in `materials.md` and your applications in `applications.md`. All three files, your photo, every generated resume and the `.notes.md` files are in `.gitignore`, so they are never committed. Keep personal content out of `SKILL.md`, so the skill itself can be updated and shared safely.
+- **Where it lives**: your files (`profile.json` for your details, `materials.md` for your experiences, `applications.md` for your applications), your photo, every generated resume, the `.notes.md` files and check-up reports stay on your own computer (or in your AI's sandbox). They are all in `.gitignore`, so they are never committed to GitHub.
+- **Your conversations**: the resume, experiences and JDs you send are handled under the privacy policy of the AI service you use (Claude, ChatGPT, Codex, WorkBuddy and so on). This skill has no control over how a platform stores conversations, so check its policy if that matters to you.
+- Keep personal content out of `SKILL.md`, so the skill itself can be updated and shared safely.
 
 ### Folder structure
 
-See the [directory tree above](#目录结构): `SKILL.md` (the workflow), `profile.example.json` and `materials.example.md` (templates you copy), `assets/` (blank Chinese and English templates), `scripts/` (build, ATS check, PDF export) and `examples/` (fictional sample builds).
+See the [directory tree above](#目录结构): `SKILL.md` (the workflow), `profile.example.json`, `materials.example.md` and `applications.example.md` (templates you copy), `assets/` (blank Chinese and English templates), `scripts/` (build, ATS check, PDF export) and `examples/` (fictional sample builds).
 
 ### License
 
