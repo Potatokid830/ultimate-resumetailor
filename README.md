@@ -167,6 +167,7 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 ```
 resume-tailor/
 ├── SKILL.md                 # skill 本体:流程、三种模式(体检/精修/快投)、逐句核查、包装与编造的边界、行业翻译、先写后学、模版规则
+├── references/              # 按需读的细节:体检步骤和报告格式、装依赖、速查卡/网申纯文本格式、出稿流水线
 ├── profile.example.json     # 个人信息配置示例(虚构)→ 复制成 profile.json
 ├── materials.example.md     # 经历档案模版 + 填写说明 → 复制成 materials.md
 ├── applications.example.md  # 投递记录模版(虚构示例)→ 复制成 applications.md

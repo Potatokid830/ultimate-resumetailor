@@ -167,7 +167,7 @@ The full process:
 
 ## Folder structure
 
-See the [directory tree](README.md#目录结构) (comments in Chinese): `SKILL.md` (the workflow), `profile.example.json`, `materials.example.md` and `applications.example.md` (templates you copy), `assets/` (blank Chinese and English templates), `scripts/` (build, ATS check, PDF export), `examples/` (fictional sample builds), plus `tests/` and `tools/` for maintainers.
+See the [directory tree](README.md#目录结构) (comments in Chinese): `SKILL.md` (the workflow), `references/` (details read on demand: check-up, setup, cheat sheet formats, build pipeline), `profile.example.json`, `materials.example.md` and `applications.example.md` (templates you copy), `assets/` (blank Chinese and English templates), `scripts/` (build, ATS check, PDF export), `examples/` (fictional sample builds), plus `tests/` and `tools/` for maintainers.
 
 ## License
 
