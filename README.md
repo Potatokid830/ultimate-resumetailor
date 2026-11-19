@@ -22,6 +22,16 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 
 还没准备好建档案？说“帮我体检这份简历”，发一份现成简历和 JD，先拿一页体检报告：每句话会被怎么追问、哪里有夸大风险、JD 关键词漏了哪些。
 
+### 在哪能记住你
+
+“记得你”靠的是三份档案文件能跨对话保存下来，所以和你用哪种 AI 有关：
+
+| 你用的 AI | 能直接出 Word / PDF | 换个对话还记得你 |
+|---|---|---|
+| Claude Code、Codex、Cursor、Copilot、Gemini CLI 等本地 agent | ✅ | ✅ 档案存在你自己的电脑上 |
+| WorkBuddy | ✅ | ✅ 档案存在你自己的电脑上（待实测确认） |
+| Claude.ai、ChatGPT 网页版 / App | ✅ 在它的沙盒里出 | ⚠️ 沙盒一般不跨对话保留文件：每次对话结束前把更新后的档案下载下来（它会主动发给你），下次开头再发给它；或者把 `materials.md` 打包进上传的 zip |
+| 只能聊天、不能运行命令的 AI | ❌ 要自己把文字贴进 `assets/` 的模版 | ❌ 每次开头发一份 `materials.md` |
 ## 和普通 AI、付费求职陪跑比
 
 | | 普通 AI 改简历 | 付费求职陪跑 | 这个 skill |
@@ -218,6 +228,16 @@ Works with Claude, ChatGPT / Codex, Cursor, GitHub Copilot, Gemini CLI and more,
 
 Not ready to build a file yet? Say "check up this resume" and send an existing resume plus the JD. You get a one-page report on how an interviewer would probe each line, where you risk overstating, and which JD keywords are missing.
 
+#### Where it can remember you
+
+"It remembers you" depends on your three files surviving between conversations, so it depends on which AI you use:
+
+| Your AI | Makes the Word / PDF itself | Remembers you in a new conversation |
+|---|---|---|
+| Local agents: Claude Code, Codex, Cursor, Copilot, Gemini CLI and similar | ✅ | ✅ Your files live on your own computer |
+| WorkBuddy | ✅ | ✅ Your files live on your own computer (still being confirmed) |
+| Claude.ai, ChatGPT web / app | ✅ In its sandbox | ⚠️ Sandboxes usually don't keep files between conversations. Download the updated files at the end of each conversation (it sends them to you) and send them back at the start of the next; or pack `materials.md` into the zip you upload |
+| Chat-only AI that can't run commands | ❌ Paste the text into the template in `assets/` yourself | ❌ Send `materials.md` at the start of every conversation |
 ### Compared with a regular AI chat and paid career coaching
 
 | | Regular AI chat | Paid career coaching | This skill |
