@@ -1,0 +1,57 @@
+name: Bug 报告 / Bug report
+description: 脚本报错、出不了 PDF、机筛自检误报等 · Script errors, PDF export, false ATS warnings
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        贴输出前先把里面的**姓名、电话、邮箱、学校和公司名**换成"某某"，这里是公开的。
+        Before pasting output, replace **names, phone numbers, emails, schools and companies** with placeholders: this page is public.
+  - type: dropdown
+    id: os
+    attributes:
+      label: 系统 / OS
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - 网页版沙盒（Claude.ai / ChatGPT 等）/ Web sandbox
+    validations:
+      required: true
+  - type: input
+    id: ai
+    attributes:
+      label: AI 工具 / AI tool
+      placeholder: 例：Claude Code、Codex、Cursor、WorkBuddy、Claude.ai
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: 出错的命令 / The command that failed
+      placeholder: 例：python scripts/build.py build_xx.py 张三_简历 cn photo
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: 完整输出 / Full output
+      description: 从命令开始到报错结束，全部贴上 / Everything from the command to the end of the error
+      render: text
+    validations:
+      required: true
+  - type: dropdown
+    id: template
+    attributes:
+      label: 有没有动过模版 / Did you change the templates?
+      options:
+        - 没动过 assets/ 里的模版 / No
+        - 改过模版或 scripts/ / Yes
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: 其他补充 / Anything else

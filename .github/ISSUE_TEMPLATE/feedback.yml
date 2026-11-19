@@ -1,0 +1,57 @@
+name: 使用反馈 / Feedback
+description: 用得好或者不好都欢迎告诉我 · Tell me how it went, good or bad
+title: "[反馈] "
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        谢谢你愿意花几分钟反馈。**请不要贴姓名、电话、邮箱、简历原文或公司内部信息**，这里是公开的。
+        Thanks for taking a few minutes. **Please don't paste your name, contact details, resume text or anything confidential**: this page is public.
+  - type: input
+    id: ai
+    attributes:
+      label: 用的哪个 AI、在哪个平台 / Which AI and where
+      placeholder: 例：Claude Code（macOS）、Claude.ai 网页版、ChatGPT App、WorkBuddy、Cursor（Windows）
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: 用了哪个模式 / Which mode(s)
+      multiple: true
+      options:
+        - 简历体检 / Check-up
+        - 精修 / Polish
+        - 快投 / Quick
+    validations:
+      required: true
+  - type: input
+    id: applied
+    attributes:
+      label: 用它投了几家 / How many applications
+      placeholder: 例：12
+  - type: input
+    id: interviews
+    attributes:
+      label: 约了几个面试 / How many interviews so far
+      placeholder: 例：3（还在等的也可以写"等结果中"）
+  - type: textarea
+    id: useful
+    attributes:
+      label: 哪一步最有用 / Most useful step
+      placeholder: 例：资格核查提醒了我投递冲突；逐句核查找出了两处夸大
+  - type: textarea
+    id: stuck
+    attributes:
+      label: 哪一步最卡 / Where you got stuck
+      placeholder: 例：第一次装 Python；出 PDF 时报错；问的问题太多
+  - type: dropdown
+    id: quote
+    attributes:
+      label: 愿不愿意让我匿名引用这条反馈 / May I quote this anonymously?
+      options:
+        - 可以匿名引用 / Yes, anonymously
+        - 不要引用 / No
+    validations:
+      required: true

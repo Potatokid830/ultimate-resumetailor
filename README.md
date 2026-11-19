@@ -203,6 +203,10 @@ resume-tailor/
 - **对话内容**：你发给 AI 的简历、经历和 JD，会按你所用 AI 服务（Claude、ChatGPT、Codex、WorkBuddy 等）的隐私政策处理。这个 skill 管不了平台怎么存对话，介意的话先看一下所用平台的说明。
 - 个人内容只放这三份档案，不要写进 `SKILL.md`，这样 skill 可以放心更新和分享。
 
+## 反馈
+
+用得好或者不好都欢迎告诉我：[填一份使用反馈](https://github.com/Potatokid830/ultimate-resumetailor/issues/new?template=feedback.yml)（投了几家、约了几个面、哪一步最卡）。脚本报错请用 [Bug 报告](https://github.com/Potatokid830/ultimate-resumetailor/issues/new?template=bug.yml)。
+
 ## License
 
 [MIT](LICENSE)
