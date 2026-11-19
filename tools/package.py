@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""把这个 skill 打包成上传 WorkBuddy 开放平台用的 zip。
+"""把这个 skill 打包成能直接上传的 zip。
 
-    python tools/package_workbuddy.py                    # 输出 dist/ultimate-resume-tailor-workbuddy-<版本>.zip
-    python tools/package_workbuddy.py --name resume-tailor-ats   # 名字被占时换一个
-    python tools/package_workbuddy.py --version 1.1.0 --author 你的名字
+    python tools/package.py                               # WorkBuddy:dist/ultimate-resume-tailor-workbuddy-<版本>.zip
+    python tools/package.py --name resume-tailor-ats      # WorkBuddy 上名字被占时换一个
+    python tools/package.py --version 1.1.0 --author 你的名字
+    python tools/package.py --target claude               # Claude.ai / 桌面版:dist/resume-tailor-claude.zip
 
 为什么单独打包,而不是直接压缩文件夹:
 - 只打包 git 跟踪的文件(git ls-files),你本地的 profile.json、materials.md、照片、
@@ -11,6 +12,9 @@
 - WorkBuddy 要求 SKILL.md 在 zip 根目录(不能多套一层文件夹),并读取 display_name、
   description_zh / description_en、category、version、author 等字段。这些字段只写进
   zip 里的 SKILL.md,仓库里的 SKILL.md 保持 Agent Skills 标准格式,不影响其他 AI 工具。
+- Claude(support.claude.com「How to create custom skills」):zip 里要有一层和 skill 名字相同的
+  文件夹(resume-tailor/SKILL.md),description 最多 200 个字符。仓库里的 description 更长,
+  只在 zip 里换成 CLAUDE_DESCRIPTION。不放 docs/(README 截图)、tools/、tests/、.github/。
 - 打包后自动检查:没有个人文件、联系方式只有示例里的虚构值、头部格式正确、大小不超过 10 MB。
 """
 import argparse
@@ -43,8 +47,15 @@ FIELDS = {
     'category': '求职招聘',
 }
 
+# Claude.ai 上传时的 description(官方上限 200 个字符;保留主要触发词)
+CLAUDE_DESCRIPTION = ('土豆简历顾问：记住你的全部经历和投递记录，按 JD 定制能过机筛的一页中英文简历，不编经历和数字。'
+                      '改简历、简历体检、网申、海投、投实习/校招/社招、过机筛时用。Tailor a one-page resume to a JD.')
+
 # 不进 zip 的跟踪文件:仓库维护用的东西
-EXCLUDE = ('.gitignore', 'tools/', 'tests/')  # docs/ 留着:README 里的示例图在里面
+EXCLUDE = {
+    'workbuddy': ('.gitignore', 'tools/', 'tests/', '.github/'),  # docs/ 留着:平台详情页会展示 README 里的示例图
+    'claude': ('.gitignore', 'tools/', 'tests/', '.github/', 'docs/'),  # 运行时用不到截图
+}
 # 绝不能出现在 zip 里的文件名(个人数据)
 PERSONAL = re.compile(r'(^|/)(profile\.json|materials\.md|applications\.md|photo\.[a-z]+|.*\.notes\.md)$', re.I)
 # 示例里允许出现的虚构联系方式
@@ -68,7 +79,13 @@ def add_fields(skill_md, extra):
     return '---\n' + '\n'.join(lines) + '\n---\n' + skill_md[m.end():]
 
 
-def check_head(skill_md):
+def set_description(skill_md, desc):
+    m = re.match(r'---\n(.*?)\n---\n', skill_md, re.S)
+    head = re.sub(r'^description: .*$', lambda _: 'description: ' + desc, m.group(1), count=1, flags=re.M)
+    return '---\n' + head + '\n---\n' + skill_md[m.end():]
+
+
+def check_head(skill_md, target='workbuddy'):
     head = re.match(r'---\n(.*?)\n---\n', skill_md, re.S).group(1)
     errs = []
     for ln in head.split('\n'):
@@ -76,31 +93,44 @@ def check_head(skill_md):
             errs.append('头部这一行格式不对(要 "key: value",冒号后一个空格):' + ln[:40])
         elif re.search(r'[“”‘’]', ln.split(': ', 1)[1][:1]):
             errs.append('值用了中文引号:' + ln[:40])
-    for k in ('name', 'description', 'display_name', 'display_name_en', 'description_zh', 'description_en',
-              'category', 'version', 'author'):
+    need = ('name', 'description') if target == 'claude' else (
+        'name', 'description', 'display_name', 'display_name_en', 'description_zh', 'description_en',
+        'category', 'version', 'author')
+    for k in need:
         if not re.search(r'^%s: ' % k, head, re.M):
             errs.append('缺字段 ' + k)
     nm = re.search(r'^name: (.*)$', head, re.M)
     if nm and not re.fullmatch(r'[a-z0-9]+(-[a-z0-9]+)*', nm.group(1)):
         errs.append('name 只能用小写字母、数字和连字符:' + nm.group(1))
+    ds = re.search(r'^description: (.*)$', head, re.M)
+    if target == 'claude' and ds and len(ds.group(1)) > 200:
+        errs.append('description 超过 200 个字符(%d)' % len(ds.group(1)))
     return errs
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--name', default='ultimate-resume-tailor',
-                    help='WorkBuddy 上的唯一标识;仓库和其他 AI 工具里仍叫 resume-tailor')
+    ap.add_argument('--target', choices=('workbuddy', 'claude'), default='workbuddy')
+    ap.add_argument('--name', default=None,
+                    help='WorkBuddy 默认 ultimate-resume-tailor(resume-tailor 已被别人注册);Claude 默认 resume-tailor')
     ap.add_argument('--version', default='1.0.0')
     ap.add_argument('--author', default='Potatokid830')
     ap.add_argument('--category', default=FIELDS['category'])
     ap.add_argument('--out', default=None)
     a = ap.parse_args()
 
-    files = subprocess.run(['git', 'ls-files'], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split()
-    files = [f for f in files if not f.startswith(EXCLUDE)]
+    claude = a.target == 'claude'
+    a.name = a.name or ('resume-tailor' if claude else 'ultimate-resume-tailor')
+    if not re.fullmatch(r'[a-z0-9]+(-[a-z0-9]+)*', a.name):
+        sys.exit('--name 只能用小写字母、数字和连字符')
+    files = subprocess.run(['git', 'ls-files', '-z'], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split('\0')
+    files = [f for f in files if f and not f.startswith(EXCLUDE[a.target])]
 
     extra = dict(FIELDS, name=a.name, category=a.category, version=a.version, author=a.author)
-    out = a.out or os.path.join(ROOT, 'dist', '%s-workbuddy-%s.zip' % (a.name, a.version))
+    if claude:  # 固定文件名,README 可以直接链到 releases/latest/download/resume-tailor-claude.zip
+        out = a.out or os.path.join(ROOT, 'dist', '%s-claude.zip' % a.name)
+    else:
+        out = a.out or os.path.join(ROOT, 'dist', '%s-workbuddy-%s.zip' % (a.name, a.version))
     os.makedirs(os.path.dirname(out), exist_ok=True)
 
     problems = []
@@ -112,8 +142,13 @@ def main():
                 continue
             data = open(os.path.join(ROOT, f), 'rb').read()
             if f == 'SKILL.md':
-                data = add_fields(data.decode('utf-8'), extra).encode('utf-8')
-                problems += check_head(data.decode('utf-8'))
+                if claude:
+                    txt = add_fields(data.decode('utf-8'), {'name': a.name})
+                    txt = set_description(txt, CLAUDE_DESCRIPTION)
+                else:
+                    txt = add_fields(data.decode('utf-8'), extra)
+                data = txt.encode('utf-8')
+                problems += check_head(txt, a.target)
             if f.endswith(('.md', '.py', '.json', '.sh')):
                 txt = data.decode('utf-8', 'replace')
                 for em in set(re.findall(r'[\w.+-]+@[\w-]+\.[\w.]+', txt)):
@@ -122,7 +157,8 @@ def main():
                 for ph in set(re.findall(r'\+\d{2,3}[ \d]{8,14}\d', txt)):
                     if ph.strip() not in OK_PHONE:
                         problems.append('%s 里有真实电话?%s' % (f, ph))
-            z.writestr(f, data)  # SKILL.md 在根目录,不套外层文件夹
+            # WorkBuddy:SKILL.md 在根目录;Claude:套一层和 name 同名的文件夹
+            z.writestr(a.name + '/' + f if claude else f, data)
 
     size = len(buf.getvalue())
     if size > 10 * 1024 * 1024:
@@ -134,8 +170,12 @@ def main():
         sys.exit(1)
     open(out, 'wb').write(buf.getvalue())
     print('已生成 %s(%d 个文件,%.0f KB)' % (os.path.relpath(out, ROOT), len(files), size / 1024))
-    print('头部字段:name=%s version=%s author=%s category=%s' % (a.name, a.version, a.author, a.category))
-    print('上传前再解压看一遍;分类以后台下拉框为准,不一致就在后台改。')
+    if claude:
+        print('结构:%s/SKILL.md;description %d 个字符' % (a.name, len(CLAUDE_DESCRIPTION)))
+        print('在 Claude.ai:Customize → Skills → + → Create skill → Upload a skill。')
+    else:
+        print('头部字段:name=%s version=%s author=%s category=%s' % (a.name, a.version, a.author, a.category))
+        print('上传前再解压看一遍;分类以后台下拉框为准,不一致就在后台改。')
 
 
 if __name__ == '__main__':

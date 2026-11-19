@@ -85,9 +85,13 @@ Claude、ChatGPT / Codex、Cursor、GitHub Copilot、Gemini CLI 等都能用，W
 
 ### 手动安装
 
+**Claude.ai / Claude 桌面版**：到 [Releases](https://github.com/Potatokid830/ultimate-resumetailor/releases/latest) 下载 [`resume-tailor-claude.zip`](https://github.com/Potatokid830/ultimate-resumetailor/releases/latest/download/resume-tailor-claude.zip)，不用解压，在 Customize → Skills → “+” → Upload a skill 上传（先在 Settings → Capabilities 打开“代码执行和文件创建”）。
+
+其他 AI：
+
 1. 点页面上方绿色的 **Code → Download ZIP**，下载后解压，把文件夹名改成 `resume-tailor`。
 2. 把文件夹交给你用的 AI：
-   - **Claude.ai / Claude 桌面版**：在 Settings → Capabilities → Skills 上传这个 zip。ChatGPT 等其他应用按 [agentskills.io 名单](https://agentskills.io/clients) 里该应用的 "Setup instructions" 操作。
+   - **ChatGPT 等其他应用**：按 [agentskills.io 名单](https://agentskills.io/clients) 里该应用的 "Setup instructions" 操作。
    - **Claude Code、Codex、Copilot、Cursor、Gemini CLI 等编程工具**：放进它的 skills 文件夹。Claude Code 是 `~/.claude/skills/`（Windows 上是 `C:\Users\你的用户名\.claude\skills\`）；很多工具也认通用位置 `~/.agents/skills/`；各工具的具体位置见 [agentskills.io 名单](https://agentskills.io/clients) 里的 "Setup instructions"。
    - **其他 AI**（不支持 skill 的）：把文件夹放在 AI 能读到的地方，对它说"读 `resume-tailor/SKILL.md`，按里面的流程帮我改简历"。
 3. 对 AI 说："用 resume-tailor 帮我改简历"。
@@ -187,7 +191,7 @@ resume-tailor/
 ├── docs/                    # README 用的示例截图和 PDF
 ├── tests/                   # 体检模式的回归测试(维护者用,需要 python-docx)
 └── tools/
-    └── package_workbuddy.py # 打包上传 WorkBuddy 用的 zip(维护者用,改简历用不到)
+    └── package.py           # 打包上传 WorkBuddy / Claude.ai 用的 zip(维护者用,改简历用不到)
 ```
 
 </details>

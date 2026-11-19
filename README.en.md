@@ -85,9 +85,13 @@ It downloads the skill, puts it in the right place, installs Python and a PDF co
 
 ### Manual install
 
+**Claude.ai / Claude desktop**: download [`resume-tailor-claude.zip`](https://github.com/Potatokid830/ultimate-resumetailor/releases/latest/download/resume-tailor-claude.zip) from [Releases](https://github.com/Potatokid830/ultimate-resumetailor/releases/latest) and upload it as is (no unzipping) under Customize → Skills → "+" → Upload a skill. Turn on "Code execution and file creation" in Settings → Capabilities first.
+
+Other AIs:
+
 1. Click the green **Code → Download ZIP** button above, unzip it, and rename the folder to `resume-tailor`.
 2. Give the folder to your AI:
-   - **Claude.ai / Claude desktop**: upload the zip under Settings → Capabilities → Skills. For ChatGPT and other apps, follow that app's "Setup instructions" on the [client list](https://agentskills.io/clients).
+   - **ChatGPT and other apps**: follow that app's "Setup instructions" on the [client list](https://agentskills.io/clients).
    - **Claude Code, Codex, Copilot, Cursor, Gemini CLI and other coding agents**: put the folder in the agent's skills folder. For Claude Code that is `~/.claude/skills/` (on Windows, `C:\Users\<you>\.claude\skills\`); many agents also read the shared location `~/.agents/skills/`.
    - **Any other AI** without skill support: put the folder somewhere it can read and say "Read `resume-tailor/SKILL.md` and follow it to tailor my resume".
 3. Say: "Use resume-tailor to tailor my resume."
