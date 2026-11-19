@@ -44,7 +44,7 @@ FIELDS = {
 }
 
 # 不进 zip 的跟踪文件:仓库维护用的东西
-EXCLUDE = ('.gitignore', 'tools/')  # docs/ 留着:README 里的示例图在里面
+EXCLUDE = ('.gitignore', 'tools/', 'tests/')  # docs/ 留着:README 里的示例图在里面
 # 绝不能出现在 zip 里的文件名(个人数据)
 PERSONAL = re.compile(r'(^|/)(profile\.json|materials\.md|applications\.md|photo\.[a-z]+|.*\.notes\.md)$', re.I)
 # 示例里允许出现的虚构联系方式

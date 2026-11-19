@@ -175,6 +175,7 @@ resume-tailor/
 │   ├── example_en.py        # 虚构人物英文示例(strategy / business analyst)
 │   └── photo_example.jpg    # 占位头像
 ├── docs/                    # README 用的示例截图和 PDF
+├── tests/                   # 体检模式的回归测试(维护者用,需要 python-docx)
 └── tools/
     └── package_workbuddy.py # 打包上传 WorkBuddy 用的 zip(维护者用,改简历用不到)
 ```

@@ -9,7 +9,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from core import P  # noqa: E402
 
-p = 'un/word/document.xml'
+p = '.resume_tailor_build/word/document.xml'
 d = open(p, encoding='utf-8').read()
 
 g_cn, g_en = P.get('graduation_cn'), P.get('graduation_en')

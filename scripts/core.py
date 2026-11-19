@@ -1,6 +1,6 @@
 """Shared plumbing for helpers_cn.py / helpers_en.py.
 
-- Loads the unzipped template from ./un/ (build.py unzips it there).
+- Loads the unzipped template from ./.resume_tailor_build/ (build.py unzips it there).
 - Loads the user's profile (name, contact, optional photo) from JSON.
 - Provides finish(body) which writes document.xml and clean docProps.
 
@@ -37,7 +37,8 @@ P = json.load(open(PROFILE_PATH, encoding='utf-8-sig'))
 if os.environ.get('PHONE'):
     P['phone'] = os.environ['PHONE']
 
-DOC = 'un/word/document.xml'
+WORK = '.resume_tailor_build'  # build.py unzips the template here
+DOC = WORK + '/word/document.xml'
 src = open(DOC, encoding='utf-8').read()
 paras = re.findall(r'<w:p[ >].*?</w:p>', src, re.S)
 head = src[:src.find('<w:body>') + len('<w:body>')]
@@ -101,7 +102,7 @@ def finish(body, ts=None):
     open(DOC, 'w', encoding='utf-8').write(head + ''.join(body) + sect)
     author = P.get('author') or P.get('name_en') or P.get('name_cn') or ''
     ts = ts or datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
-    cp = 'un/docProps/core.xml'
+    cp = WORK + '/docProps/core.xml'
     core = open(cp, encoding='utf-8').read()
     core = re.sub(r'<dc:creator>.*?</dc:creator>|<dc:creator/>', '<dc:creator>%s</dc:creator>' % esc(author), core)
     core = re.sub(r'<cp:lastModifiedBy>.*?</cp:lastModifiedBy>|<cp:lastModifiedBy/>', '<cp:lastModifiedBy>%s</cp:lastModifiedBy>' % esc(author), core)

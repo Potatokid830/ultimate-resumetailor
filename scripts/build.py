@@ -74,6 +74,13 @@ def profile():
     return None, {}
 
 
+ppath, P = profile()
+if ppath:
+    # ats_check.py 只认这个变量指向的示例档案;直接体检别人的简历时不会拿示例档案去查
+    env['RESUME_PROFILE'] = os.path.abspath(ppath)
+    if os.path.basename(ppath) == 'profile.example.json':
+        print('[resume-tailor] 没找到 profile.json,用的是虚构的 profile.example.json')
+
 tpl = os.path.join(SKILL_DIR, 'assets', 'template_%s.docx' % lang)
 if not os.path.isfile(tpl):
     sys.exit('no template: ' + tpl)
@@ -81,14 +88,15 @@ if not os.path.isfile(build):
     sys.exit('no build script: ' + build)
 
 # 1. 解开模版 → 跑 build 脚本 → 自动修正
-shutil.rmtree('un', ignore_errors=True)
-zipfile.ZipFile(tpl).extractall('un')
+# 临时目录起一个不容易和用户文件夹撞名的名字(以前叫 un/,用户自己的 un 文件夹会被删)
+WORK = '.resume_tailor_build'
+shutil.rmtree(WORK, ignore_errors=True)
+zipfile.ZipFile(tpl).extractall(WORK)
 if py(build):
     sys.exit('build 脚本出错,看上面的报错')
 py(os.path.join(HERE, 'ats_fix.py'))
 
 # 2. 可选证件照
-ppath, P = profile()
 if photo:
     ph = P.get('photo') or ''
     if ph and not os.path.isabs(ph):
@@ -104,14 +112,14 @@ docx = out + '.docx'
 if os.path.exists(docx):
     os.remove(docx)
 with zipfile.ZipFile(docx, 'w', zipfile.ZIP_DEFLATED) as z:
-    z.write(os.path.join('un', '[Content_Types].xml'), '[Content_Types].xml')
-    for root, _, files in os.walk('un'):
+    z.write(os.path.join(WORK, '[Content_Types].xml'), '[Content_Types].xml')
+    for root, _, files in os.walk(WORK):
         for f in sorted(files):
             full = os.path.join(root, f)
-            arc = os.path.relpath(full, 'un').replace(os.sep, '/')
+            arc = os.path.relpath(full, WORK).replace(os.sep, '/')
             if arc != '[Content_Types].xml':
                 z.write(full, arc)
-shutil.rmtree('un', ignore_errors=True)
+shutil.rmtree(WORK, ignore_errors=True)
 
 # 4. 转 PDF → 页数 → 预览图 → 机筛自检
 sys.path.insert(0, HERE)

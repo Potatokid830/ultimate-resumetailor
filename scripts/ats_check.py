@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """简历机筛(ATS / AI 筛简历)自检。
 
-    python scripts/ats_check.py 简历.docx [简历.pdf] [--jd jd_keywords.txt]
+    python scripts/ats_check.py 简历.docx [简历.pdf] [--jd jd_keywords.txt] [--external]
+
+--external:体检别人做的 / 不是用本 skill 模版做的简历。不读任何 profile,跳过依赖 profile 的检查
+(个人网站、LinkedIn、毕业时间"预计"、作者名、个人红线词),板块认不出时只给 ⚠️。
+不加 --external 又找不到 profile.json 时,也按 --external 处理(示例档案只在 build.py 跑示例时才用)。
 
 jd_keywords.txt:每行一个关键词;以"必须:"开头的是必须项,其余是加分项;同义词用 / 隔开(任一命中即算)。
 个人红线词:写在 profile.json 的 "banned_words" 里(例如你确认过"不能这么写"的说法),命中即 ❌。
@@ -28,20 +32,33 @@ os.environ.setdefault('SKILL_DIR', os.path.dirname(os.path.dirname(os.path.abspa
 
 
 def load_profile():
+    """只找真正的 profile:$RESUME_PROFILE(build.py 会传,跑示例时指向示例档案)→ ./profile.json → <skill>/profile.json。
+    不会自己退回到虚构的 profile.example.json,否则会拿示例人物的网站、作者名去查别人的简历。"""
     import json
     sd = os.environ['SKILL_DIR']
-    for c in (os.environ.get('RESUME_PROFILE'), 'profile.json', os.path.join(sd, 'profile.json'), os.path.join(sd, 'profile.example.json')):
+    for c in (os.environ.get('RESUME_PROFILE'), 'profile.json', os.path.join(sd, 'profile.json')):
         if c and os.path.isfile(c):
             return json.load(open(c, encoding='utf-8-sig'))
-    return {}
+    return None
 
-
-P = load_profile()
 
 args = sys.argv[1:]
 jd = None
 if '--jd' in args:
     i = args.index('--jd'); jd = args[i + 1]; del args[i:i + 2]
+external = '--external' in args
+if external:
+    args.remove('--external')
+if not args:
+    print(__doc__); sys.exit(2)
+notes = []  # 开头的说明行
+P = None if external else load_profile()
+if P is None:
+    if not external:
+        notes.append('没找到 profile.json,按 --external 处理(体检模式)')
+    external = True
+    P = {}
+    notes.append('--external:不读 profile,跳过这些检查:个人网站、LinkedIn、毕业时间"预计"、作者名、个人红线词')
 docx_path = args[0]
 pdf_path = args[1] if len(args) > 1 else None
 fails, warns = [], []
@@ -68,16 +85,53 @@ OK_CN = {'教育背景', '实习经历', '工作经历', '项目经历', '校园
 OK_EN = {'EDUCATION', 'EXPERIENCE', 'WORK EXPERIENCE', 'PROFESSIONAL EXPERIENCE', 'INTERNSHIP EXPERIENCE', 'PROJECTS', 'LEADERSHIP',
          'LEADERSHIP & ACTIVITIES', 'ACTIVITIES', 'SKILLS', 'SKILLS & CERTIFICATIONS', 'SKILLS & INTERESTS', 'CERTIFICATIONS',
          'AWARDS', 'SUMMARY', 'RESEARCH EXPERIENCE', 'PUBLICATIONS', 'OTHER EXPERIENCE'}
+def sec_key(s):
+    """去掉空格、冒号和常见的全半角符号,英文转大写:'教育背景：' → '教育背景','Work Experience' → 'WORKEXPERIENCE'"""
+    return re.sub(r'[\s:：|｜·•・\-—–_/、,，.。【】\[\]()（）<>《》「」]+', '', s).upper()
+
+
+STD = {sec_key(s) for s in OK_CN | OK_EN}
+# Heading 1/2/… 样式的 styleId(中文版 Word 里常常就叫 "1" "2")
+heading_ids = set()
+if 'word/styles.xml' in z.namelist():
+    sx = z.read('word/styles.xml').decode('utf-8', 'ignore')
+    for sid, body in re.findall(r'<w:style [^>]*w:styleId="([^"]+)"[^>]*>(.*?)</w:style>', sx, re.S):
+        if re.search(r'<w:name w:val="(heading \d|Heading \d|标题 \d)"', body):
+            heading_ids.add(sid)
+
+
+def is_heading(p, tx):
+    t = tx.strip()
+    if not t or len(t) > 40:
+        return False
+    if 'w:pBdr' in p and 'w:bottom' in p:  # 本 skill 模版:标题下面一条横线
+        return True
+    if sec_key(t) in STD:  # 整段就是一个标准板块名
+        return True
+    st = re.search(r'<w:pStyle w:val="([^"]+)"', p)
+    return bool(st and (st.group(1) in heading_ids or re.fullmatch(r'Heading\d', st.group(1))))
+
+
 sections, sec_of = [], []
 cur = '(页首)'
 for p, tx in zip(paras, texts):
-    if 'w:pBdr' in p and 'w:bottom' in p and tx.strip():
-        cur = tx.strip(); sections.append(cur)
+    if is_heading(p, tx):
+        cur = re.sub(r'[\s:：]+$', '', tx.strip()); sections.append(cur)
     sec_of.append(cur)
-bad = [s for s in sections if s not in OK_CN and s.upper() not in OK_EN]
-if bad: F('非标准板块标题(系统可能认不出):' + '、'.join(bad) + ' → 只用 ' + '/'.join(sorted(OK_CN)) + ' 或英文标准标题')
-if not any(s == '教育背景' or s.upper() == 'EDUCATION' for s in sections): F('缺少"教育背景 / Education"板块')
-if not any(s in ('实习经历', '工作经历') or 'EXPERIENCE' in s.upper() for s in sections): F('缺少"实习经历 / Experience"板块')
+
+
+def is_edu_sec(s):
+    return sec_key(s) in ('教育背景', '教育经历', 'EDUCATION')
+
+
+bad = [s for s in sections if sec_key(s) not in STD]
+SF = W if external else F  # 别人的简历:板块问题只提醒
+if external and not sections:
+    W('没能识别板块标题(没有横线、没用标题样式,也不是标准板块名),板块相关的检查跳过了')
+else:
+    if bad: SF('非标准板块标题(系统可能认不出):' + '、'.join(bad) + ' → 只用 ' + '/'.join(sorted(OK_CN)) + ' 或英文标准标题')
+    if not any(is_edu_sec(s) for s in sections): SF('缺少"教育背景 / Education"板块')
+    if not any(sec_key(s) in ('实习经历', '工作经历') or 'EXPERIENCE' in sec_key(s) for s in sections): SF('缺少"实习经历 / Experience"板块')
 
 # ---------- 2. 口语词、红线、第一人称 ----------
 COLLOQUIAL = ['果断', '砍掉', '砍了', '拉人', '拉群', '搞定', '谈下来', '地盘', '牛逼', '巨大提升', '赋能', '抓手', '闭环打法']
@@ -86,7 +140,8 @@ for w in COLLOQUIAL:
 for w in P.get('banned_words', []):
     if w and w.lower() in full.lower(): F('个人红线词(profile.banned_words):"%s"' % w)
 if re.search(r'精通|expert in|mastery of', full, re.I): W('出现"精通 / expert":确认真的精通,否则改成"熟悉 / 掌握基础 / familiar with"')
-if re.search(r'我', full): F('中文第一人称"我/我们":%d 处' % len(re.findall(r'我', full)))
+fp_cn = re.findall(r'(?<![自忘本超])我(?!国)', full)  # "自我驱动""忘我""我国"不算
+if fp_cn: F('中文第一人称"我/我们":%d 处' % len(fp_cn))
 en_fp = re.findall(r'(?<!Level )\b(I|my|me|we|our)\b', full)
 if en_fp: F('英文第一人称(I/my/me/we/our):%d 处——英文简历省略主语,动词开头' % len(en_fp))
 
@@ -103,7 +158,7 @@ if al: W('疑似把 AI 打成了 Al(小写 L)%d 处,例:%s' % (len(al), ' / '.jo
 # 经历要点里的"粗体 + 冒号"标签 → 像模板;技能栏里可以用
 lab_b, emph_b = [], []
 for p_, tx, sec in zip(paras, texts, sec_of):
-    if 'w:numPr' not in p_ or '技能' in sec or 'SKILL' in sec.upper() or sec in ('教育背景',) or sec.upper() == 'EDUCATION':
+    if 'w:numPr' not in p_ or '技能' in sec or 'SKILL' in sec.upper() or is_edu_sec(sec):
         continue
     for r_ in re.findall(r'<w:r>.*?</w:r>', p_, re.S):
         rpr = re.search(r'<w:rPr>(.*?)</w:rPr>', r_, re.S)
@@ -124,19 +179,37 @@ if is_cn:
     if hw:
         W('中文正文里有半角标点 %d 处(中文简历用全角,:;"" 等),例:%s' % (len(hw), ' / '.join(hw[:3])))
 
-# 经历的结束时间不能晚于今天(教育背景、写了"预计 / Expected / 至今 / Present"的不算)
+# 经历的结束时间不能晚于今天(教育经历、写了"预计 / Expected / 至今 / Present"的不算)
 import datetime as _dt
 _today = _dt.date.today()
 _now = _today.year * 12 + _today.month
-for tx, sec in zip(texts, sec_of):
-    if sec == '教育背景' or sec.upper() == 'EDUCATION' or re.search(r'预计|Expected|至今|Present|Now', tx, re.I):
-        continue
+DEGREE = re.compile(r'本科|硕士|博士|学士|大学|学院|University|College|Bachelor|Master|MBA|PhD|BSc|\bBA\b|MSc', re.I)
+MON = {m: i + 1 for i, m in enumerate('jan feb mar apr may jun jul aug sep oct nov dec'.split())}
+_mon = r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+(\d{4})'
+
+
+def end_months(tx):
+    """(原文, 结束年*12+月):2025.07-2025.12 / 2025年7月-2025年12月 / Jul 2025 - Dec 2025"""
     for m_ in re.finditer(r'(\d{4})[.\-/年](\d{1,2})月?\s*[–—\-~～至到]+\s*(\d{4})[.\-/年](\d{1,2})', tx):
-        end = int(m_.group(3)) * 12 + int(m_.group(4))
+        yield m_.group(0), int(m_.group(3)) * 12 + int(m_.group(4))
+    for m_ in re.finditer(_mon + r'\s*[–—\-~]+\s*' + _mon, tx, re.I):
+        yield m_.group(0), int(m_.group(4)) * 12 + MON[m_.group(3)[:3].lower()]
+
+
+for tx, sec in zip(texts, sec_of):
+    edu = is_edu_sec(sec) or DEGREE.search(tx)
+    if re.search(r'预计|Expected|至今|Present|Now', tx, re.I):
+        continue
+    for raw, end in end_months(tx):
+        if edu:
+            # 有 profile 时由下面的"毕业时间"检查负责;别人的简历在这里提醒
+            if external and end > _now:
+                W('教育经历的结束时间 %s 还没到,没写"预计 / Expected"——HR 可能以为已经毕业' % raw)
+            continue
         if end > _now:
-            F('经历结束时间晚于今天:%s——还没结束的经历写"至今 / Present"' % m_.group(0))
+            F('经历结束时间晚于今天:%s——还没结束的经历写"至今 / Present"' % raw)
         elif end == _now:
-            W('经历结束时间就是这个月:%s——确认是否已经结束,没结束就写"至今 / Present"' % m_.group(0))
+            W('经历结束时间就是这个月:%s——确认是否已经结束,没结束就写"至今 / Present"' % raw)
 
 # ---------- 4. 必备信息 ----------
 if not re.search(r'[\w.+-]+@[\w-]+\.[\w.]+', full): F('读不到邮箱')
@@ -273,7 +346,8 @@ if jd:
     if miss_plus: W('漏掉加分关键词:' + '、'.join(miss_plus))
     if only_skill: W('这些词只出现在技能栏、经历里没有证据:' + '、'.join(only_skill))
 
-print('板块:', ' → '.join(sections))
+for n_ in notes: print('ℹ️', n_)
+print('板块:', ' → '.join(sections) if sections else '(没识别出来)')
 for m_ in fails: print('❌', m_)
 for m_ in warns: print('⚠️', m_)
 print('结果:%s(❌ %d,⚠️ %d)' % ('不通过' if fails else '通过', len(fails), len(warns)))

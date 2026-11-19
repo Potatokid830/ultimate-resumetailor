@@ -9,7 +9,7 @@ photo = sys.argv[1]
 ext = os.path.splitext(photo)[1].lower().lstrip('.') or 'jpg'
 ext = 'jpeg' if ext == 'jpg' else ext
 ctype = {'jpeg': 'image/jpeg', 'png': 'image/png'}[ext]
-base = 'un/'
+base = '.resume_tailor_build/'
 os.makedirs(base + 'word/media', exist_ok=True)
 target = 'photo1.' + ext
 shutil.copy(photo, base + 'word/media/' + target)

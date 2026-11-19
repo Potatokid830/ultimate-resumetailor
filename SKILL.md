@@ -35,7 +35,7 @@ description: 土豆简历顾问（Potato Resume Consultant）：把你的 AI 变
 用户说"帮我体检 / 审一下 / 看看这份简历"，或上传一份现成简历（加或不加 JD）只想知道问题在哪时，用这个模式。**不需要 `profile.json` 和 `materials.md`，不需要先走「首次使用」**，也不改写、不出新简历。
 
 1. 拿到简历（docx、pdf、图片或直接粘贴的文字都行）和 JD。没有 JD 就按用户说的目标方向审，并说明没有 JD 时算不了关键词覆盖率。
-2. 有 Python 时顺带跑机筛自检：有 docx 就跑 `python <skill>/scripts/ats_check.py 简历.docx [简历.pdf] [--jd jd.txt]`；只有 PDF 或图片时，自己按 `ats_check.py` 的标准查（板块标题、联系方式、表格和文本框、字号、页数、口语和第一人称、AI/Al 这类拼写）。没有 Python 也能体检，**不要为了体检让用户装东西**。
+2. 有 Python 时顺带跑机筛自检：有 docx 就跑 `python <skill>/scripts/ats_check.py 简历.docx [简历.pdf] [--jd jd.txt] --external`（`--external`：不读 profile，不拿你的档案去查别人的简历，板块认不出只给 ⚠️）；只有 PDF 或图片时，自己按 `ats_check.py` 的标准查（板块标题、联系方式、表格和文本框、字号、页数、口语和第一人称、AI/Al 这类拼写）。没有 Python 也能体检，**不要为了体检让用户装东西**。
 3. 按第 0 节第 1 步做资格核查，只用简历上看得到的信息，看不出来的列成问题。
 4. 按第 1.6 节**逐句拆解核查**，尽量交给独立审稿的子代理做。
 5. 出一份**一页体检报告**（格式见下），在对话里给出，并存成 `<简历文件名>_体检.md`。

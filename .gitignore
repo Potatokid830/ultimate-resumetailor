@@ -8,7 +8,7 @@ applications/
 !examples/photo_example.jpg
 
 # build outputs / scratch
-un/
+.resume_tailor_build/
 _try/
 out/
 *.pdf
